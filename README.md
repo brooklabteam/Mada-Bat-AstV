@@ -3,12 +3,12 @@ Pipeline for astrovirus detection, annotation, and phylogenetic analysis.
 
 Broadly following the Mada-Bat-CoV pipeline, found [here](https://github.com/brooklabteam/Mada-Bat-CoV).
 
-DETECTION
+## Detection
 
 
-ANNOTATION
+## Annotation
 
 
-FIGURES
+## Figures
 
 Figure 1: Mada presence map
