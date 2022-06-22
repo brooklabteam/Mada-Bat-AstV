@@ -1,0 +1,30 @@
+sampleid,Sample_type,aa or nt,CZID,Length_kb,Frame,%,Result,Species,Date,Age,Sex,Site,Notes,indl #
+AMB137,Feces,aa,RR034B_016,408,Frame 2,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Pteropus rufus,3/1/18,J,female,Ambakoana,,1
+KEL198,Feces,aa,RR034B_198,6456,?,Almost full genome,"ORF1a partial, ORF1b full, ORF2 partial",Eidolon dupreanum,4/10/18,A,male,AngavoKely,,2
+KEL198,Feces,aa,RR034B_198,6593,?,Almost full genome,"ORF1a partial, ORF1b full, ORF2 full",Eidolon dupreanum,4/10/18,A,male,AngavoKely,,2
+KEL200,Feces,aa,RR034B_130,370,Frame 2 reverse,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,4/10/18,NL,female,AngavoKely,,3
+KEL200,Feces,aa,RR034B_130,475,Frame 1 reverse,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,4/10/18,NL,female,AngavoKely,,3
+KEL200,Feces,aa,RR034B_130,493,Frame 2 reverse,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,4/10/18,NL,female,AngavoKely,,3
+KEL200,Feces,aa,RR034B_130,781,Frame 3,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,4/10/18,NL,female,AngavoKely,,3
+KEL200,Feces,nt,RR034B_130,267,Frame 3,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,4/10/18,NL,female,AngavoKely,,3
+KEL200,Feces,nt,RR034B_130,493,Frame 2 reverse,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,4/10/18,NL,female,AngavoKely,,3
+KEL233,Feces,aa,RR034B_163,7685,Frame 3,Full genome,"ORF1a full, ORF1b full, ORF2 full",Eidolon dupreanum,7/27/18,A,male,AngavoKely,,4
+KEL236,Feces,aa,RR034B_165,345,Frame 2,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,7/27/18,J,male,AngavoKely,,5
+KEL236,Feces,aa,RR034B_165,412,Frame 3,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,7/27/18,J,male,AngavoKely,,5
+KEL236,Feces,aa,RR034B_165,463,Frame 1 reverse,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,7/27/18,J,male,AngavoKely,,5
+KEL236,Feces,aa,RR034B_165,627,Frame 3,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,7/27/18,J,male,AngavoKely,,5
+KEL236,Feces,aa,RR034B_165,643,Frame 3 reverse,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,7/27/18,J,male,AngavoKely,,5
+KEL236,Feces,aa,RR034B_165,691,Frame 3,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,7/27/18,J,male,AngavoKely,,5
+KEL236,Feces,nt,RR034B_165,463,Frame 1 reverse,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,7/27/18,J,male,AngavoKely,,5
+KEL236,Feces,nt,RR034B_165,643,Frame 3 reverse,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,7/27/18,J,male,AngavoKely,,5
+KEL272,Feces,aa,RR034B_189,7751,?,Full genome?,"ORF1a partial, ORF1b full, ORF2 full",Eidolon dupreanum,1/7/19,A,male,AngavoKely,,6
+KEL273,Feces,aa,RR034B_190,1177,?,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,1/7/19,A,male,AngavoKely,,7
+MIZ141,Feces,nt,RR034B_198,6456,Frame 2?,Almost full genome,"ORF1a partial, ORF1b full, ORF2 partial",Rousettus madagascariensis,2/18/18,J,male,Maromizaha,Baby to MIZ140,14
+MIZ141,Feces,nt,RR034B_198,6593,?,Almost full genome,"ORF1a partial, ORF1b full, ORF2 full",Rousettus madagascariensis,2/18/18,J,male,Maromizaha,Baby to MIZ140,14
+KEL275B,Urine,aa,RR034B_393,405,Frame 3,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,3/14/19,NL,female,AngavoKely,,8
+KEL283B,Urine,nt,RR034B_400,2424,Frame 1,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,3/14/19,NL,female,AngavoKely,,9
+KEL285,Urine,nt,RR034B_401,1894,Frame 3 reverse,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,2/5/19,A,male,AngavoKely,,10
+KEL286B,Urine,nt,RR034B_403,2616,Frame 2,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,3/15/19,NL,female,AngavoKely,,11
+KEL290,Urine,nt,RR034B_406,4419,Frame 1,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,2/6/19,A,male,AngavoKely,,12
+KEL299B,Urine,nt,RR034B_414,885,Frame 1,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,3/15/19,NL,female,AngavoKely,,13
+MIZ408,Urine,nt,RR034B_496,686,?,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Rousettus madagascariensis,4/9/19,A,male,Maromizaha,,15

@@ -30,9 +30,9 @@ library(ggrepel)
 #####################################################################
 # Set wd to data on this computer. Also ID homewd, assuming that 
 # Mada-GIS is cloned to the same series of sub-folders
-homewd = "/Users/carabrook/Developer/Mada-Bat-CoV/" 
+homewd = "/Users/sophiahorigan/Documents/GitHub/Mada-Bat-Astro"
 #should be wherever "Mada-Bat-CoV" is stored on your home computer
-basewd = paste(strsplit(homewd, "/")[[1]][1:6], collapse = "/")
+basewd = "/Users/sophiahorigan/Documents/GitHub"
 mapwd = paste0(basewd, "/", "Mada-GIS")
 setwd(paste0(homewd, "/", "Fig1/"))
 
@@ -59,20 +59,20 @@ p1<-ggplot() +
   theme(plot.margin = unit(c(-1,.5,-1.5,.1),"cm"))+
   xlab("Longitude") + ylab("Latitude") 
 #print(p1)
-# # 
-#   ggsave(file = paste0(homewd, "final-figures/tmp1.pdf"),
-#          plot = p1,
-#          units="mm",  
-#          width=60, 
-#          height=55, 
-#          scale=3, 
-#          dpi=300)
-# 
+#
+  ggsave(file = paste0(homewd, "final-figures/tmp1.pdf"),
+         plot = p1,
+         units="mm",
+         width=60,
+         height=55,
+         scale=3,
+         dpi=300)
+
   
   
 
 #import CoV data
-dat <- read.csv(file = paste0(homewd,"/metadata/all_NGS_8_3_2021_distribute.csv"), header = T, stringsAsFactors = F )
+dat <- read.csv(file = paste0(homewd,"/astro_fecal_meta.csv"), header = T, stringsAsFactors = F )
 head(dat)
 names(dat)
 
@@ -94,7 +94,7 @@ dat$age_class[dat$young_of_year=="yes"] <- "J"
 
 dat <- dplyr::select(dat,roost_site,latitude_s, longitude_e,
                        collection_date, age_class, bat_sex,
-                       species, sampleid, CoV)
+                       species, sampleid, Ast)
 
 head(dat)
 unique(dat$roost_site)
@@ -179,10 +179,10 @@ dat$latitude_s[dat$roost_site=="Maromizaha"] <- coordinate$latitude_s[coordinate
 
 ###Grouping data for scatterpie
 dat$plot_class <- NA
-dat$plot_class[dat$age_class=="J" & dat$CoV==1] <- "juvenile: CoV pos"
-dat$plot_class[dat$age_class=="J" & dat$CoV==0] <- "juvenile: CoV neg"
-dat$plot_class[dat$age_class=="A" & dat$CoV==1] <- "adult: CoV pos"
-dat$plot_class[dat$age_class=="A" & dat$CoV==0] <- "adult: CoV neg"
+dat$plot_class[dat$age_class=="J" & dat$Ast==1] <- "juvenile: Ast pos"
+dat$plot_class[dat$age_class=="J" & dat$Ast==0] <- "juvenile: Ast neg"
+dat$plot_class[dat$age_class=="A" & dat$Ast==1] <- "adult: Ast pos"
+dat$plot_class[dat$age_class=="A" & dat$Ast==0] <- "adult: Ast neg"
 
 pies <- ddply(dat, .(species, roost_site, latitude_s, longitude_e, age_class, plot_class), summarise, value=length(sampleid))
 
@@ -192,7 +192,7 @@ tot_sum = ddply(pies,.(species, age_class), summarise,N=sum(value))
 
 pies <- merge(pies, tot_sum, by=c("species", "age_class"), all.x=T)
 
-pies$plot_class <- factor(pies$plot_class, levels=c( "juvenile: CoV neg", "adult: CoV neg", "juvenile: CoV pos", "adult: CoV pos"))
+pies$plot_class <- factor(pies$plot_class, levels=c( "juvenile: Ast neg", "adult: Ast neg", "juvenile: Ast pos", "adult: Ast pos"))
 
 #now split into two pies
 piesJ = subset(pies, age_class=="J")
@@ -200,7 +200,7 @@ piesA = subset(pies, age_class=="A")
 
 
 ###Get the pie data in the right format###
-colz = c('adult: CoV neg' ="dodgerblue4", 'adult: CoV pos' ="firebrick4", 'juvenile: CoV neg' ="dodgerblue", 'juvenile: CoV pos' ="firebrick1")
+colz = c('adult: Ast neg' ="dodgerblue4", 'adult: Ast pos' ="firebrick4", 'juvenile: Ast neg' ="dodgerblue", 'juvenile: Ast pos' ="firebrick1")
 
 
 p3<-ggplot() + 
@@ -299,9 +299,9 @@ dat$epiwk <- cut(dat$collection_date, "week")
 dat$epiwk <- as.Date(as.character(dat$epiwk))
 
 #change CoV to numeric
-dat$CoV[dat$CoV=="N"] <- 0
-dat$CoV[dat$CoV=="Y"] <- 1
-dat$CoV <- as.numeric(dat$CoV)
+dat$Ast[dat$Ast=="N"] <- 0
+dat$Ast[dat$Ast=="Y"] <- 1
+dat$Ast <- as.numeric(dat$Ast)
 
 names(dat)[names(dat)=="bat_species"] <- "species"
 
@@ -320,9 +320,9 @@ slim.down <- function(df){
   if(nrow(df)==1){
     return(df)
   }else if (nrow(df)>1){
-    max_CoV = max(df$CoV)
+    max_Ast = max(df$Ast)
     df = df[1,]
-    df$CoV = max_CoV
+    df$Ast = max_Ast
     return(df) 
   }
   
@@ -341,7 +341,7 @@ length(dat$sample_type[dat$sample_type=="urine"])#2
 #okay to go.
 
 #summarize into prevalence by species and epiwk
-dat.sum <- ddply(dat, .(species, age_class,epiwk), summarise, N=length(CoV), pos=sum(CoV))
+dat.sum <- ddply(dat, .(species, age_class,epiwk), summarise, N=length(Ast), pos=sum(Ast))
 
 #get negatives and prevalence
 dat.sum$neg= dat.sum$N-dat.sum$pos
@@ -378,7 +378,7 @@ shapez = c("juvenile" = 17, "adult" = 16)
 p1 <- ggplot(data=dat.sum) + #here is the dataset
   geom_errorbar(aes(x=epiwk, ymin=lci, ymax=uci, color=species, group=age), size=.1) + #here we plot the uci and lci for prevalence, with lines colored by species
   geom_point(aes(x=epiwk, y= prevalence, color=species,shape=age, size=N)) + #here we plot the mean prevalence, with dot colored by species and sized based on sample size per date
-  ylab("CoV Prevalence") + #change the name of the y-axis
+  ylab("Ast Prevalence") + #change the name of the y-axis
   scale_color_manual(values=colz) + #assign the colors manually using the vector above
   scale_shape_manual(values=shapez) +
   facet_grid(age~.) +
@@ -408,7 +408,7 @@ Fig1b <-  ggplot(data=dat.sum) +
   geom_ribbon(data=seas.dat2, aes(x=x, ymin=ymin, ymax=ymax), fill="lightgoldenrod1", alpha=.3) +
   geom_errorbar(aes(x=epiwk_jitter, ymin=lci, ymax=uci, color=species,  group=age), size=.2) + #here we plot the uci and lci for prevalence, with lines colored by species
   geom_point(aes(x=epiwk_jitter, y= prevalence, color=species, shape=age, size=N)) + #here we plot the mean prevalence, with dot colored by species and sized based on sample size per date
-  ylab("CoV Prevalence") + #change the name of the y-axis
+  ylab("Ast Prevalence") + #change the name of the y-axis
   geom_text(data=text.dat, aes(x=date,y=y, label=label), size=3) +
   #geom_text(data=text.dat, aes(x=as.Date("2018-04-24"),y=.95, label="late-stage juveniles"), size=3) +
   scale_color_manual(values=colz) + #assign the colors manually using the vector above
