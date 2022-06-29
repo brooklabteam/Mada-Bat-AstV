@@ -60,7 +60,7 @@ p1<-ggplot() +
   xlab("Longitude") + ylab("Latitude") 
 #print(p1)
 #
-  ggsave(file = paste0(homewd, "final-figures/tmp1.pdf"),
+  ggsave(file = paste0(homewd, "/final-figures/tmp1.pdf"),
          plot = p1,
          units="mm",
          width=60,
@@ -72,12 +72,12 @@ p1<-ggplot() +
   
 
 #import CoV data
-dat <- read.csv(file = paste0(homewd,"/astro_fecal_meta.csv"), header = T, stringsAsFactors = F )
+dat <- read.csv(file = paste0(homewd,"/astro_all_meta.csv"), header = T, stringsAsFactors = F )
 head(dat)
 names(dat)
 
-#only plot feces
-dat = subset(dat, sample_type=="feces")
+#only plot feces or only urine
+#dat = subset(dat, sample_type=="feces")
 
 #add age class
 #clean class
@@ -112,19 +112,20 @@ p2<-p1+geom_point(aes(x=longitude_e, y=latitude_s),color="#97B5CC",size=1,data=d
                          pad_x = unit(0.02, "cm"), 
                          pad_y = unit(0.2, "cm"),        
                          style = north_arrow_fancy_orienteering)
-#print(p2)
+print(p2)
 
-#  ggsave(file = "tmp_map_2.pdf",
-#         plot = p2,
-#          units="mm",  
-#          width=40, 
-#          height=60, 
-#          scale=3, 
-#          dpi=300)
-# # 
+ ggsave(file = "tmp_map_2.pdf",
+        plot = p2,
+         units="mm",
+         width=40,
+         height=60,
+         scale=3,
+         dpi=300)
+#
 coordinate$label <- coordinate$species
 coordinate$label[coordinate$label=="Rousettus madagascariensis"] <- "Rousettus\nmadagascariensis"
 coordinate$label[coordinate$label=="Eidolon dupreanum"] <- "Eidolon\ndupreanum"
+
 #load GPS point and label
 p2b<-p1+geom_point(aes(x=longitude_e, y=latitude_s),color="black",size=1,data=coordinate)+
   geom_text(data= coordinate,                       #### Labeling
@@ -150,16 +151,16 @@ p2b<-p1+geom_point(aes(x=longitude_e, y=latitude_s),color="black",size=1,data=co
                     legend.title=element_blank(),
                     legend.background = element_rect(color="gray",size = .1),
                     legend.text = element_text(size = 9,face = "italic"))
-#print(p2b)
+print(p2b)
 # # # 
-#     ggsave(file = "tmp_map_2b.pdf",
-#            plot = p2b,
-#            units="mm",  
-#            width=40, 
-#            height=60, 
-#            scale=3, 
-#            dpi=300)
-# # # 
+    ggsave(file = "tmp_map_2b.pdf",
+           plot = p2b,
+           units="mm",
+           width=40,
+           height=60,
+           scale=3,
+           dpi=300)
+# #
 
 
 #plot one site per species
@@ -275,10 +276,19 @@ p4 <- p2b+
                          n=2,
                          labeller = function(x) paste(10^(x)*1.2,"indiv"))
 
-#print(p4)
+print(p4)
+
+ggsave(file = "Fig1a.pdf",
+       plot = p4,
+       units="mm",
+       width=40,
+       height=60,
+       scale=3,
+       dpi=300)
 
 Fig1a <- p4
 
+# #
 
 #and this is Fig 1B
 
@@ -332,6 +342,7 @@ dat.list<- lapply(dat.list, slim.down)
 
 dat.new <- data.table::rbindlist(dat.list)
 out = c(unlist(lapply(dat.list, nrow)))
+
 out[out>1] #none
 
 dat <- dat.new
@@ -431,10 +442,12 @@ Fig1b
 
 
 
-Fig1all <- cowplot::plot_grid(Fig1a, Fig1b, nrow=1, ncol=2, labels = c("(A)", "(B)"), label_x = -.01, label_y = .99)
+Fig1all <- cowplot::plot_grid(Fig1a, p1, nrow=1, ncol=2, labels = c("(A)", "(B)"), label_x = -.01, label_y = .99)
 
+Fig1all
 
-ggsave(file = paste0(homewd, "final-figures/Fig1.pdf"),
+#change name of file if using just fecal, just urine, or all
+ggsave(file = paste0(homewd, "/final-figures/Fig1_all.pdf"),
        plot=Fig1all,
        units="mm",  
        width=150, 
