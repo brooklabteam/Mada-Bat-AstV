@@ -114,7 +114,7 @@ p2<-p1+geom_point(aes(x=longitude_e, y=latitude_s),color="#97B5CC",size=1,data=d
                          style = north_arrow_fancy_orienteering)
 print(p2)
 
- ggsave(file = "tmp_map_2.pdf",
+ ggsave(file = "tmp_map_3.pdf",
         plot = p2,
          units="mm",
          width=40,
@@ -153,7 +153,7 @@ p2b<-p1+geom_point(aes(x=longitude_e, y=latitude_s),color="black",size=1,data=co
                     legend.text = element_text(size = 9,face = "italic"))
 print(p2b)
 # # # 
-    ggsave(file = "tmp_map_2b.pdf",
+    ggsave(file = "tmp_map_3b.pdf",
            plot = p2b,
            units="mm",
            width=40,
