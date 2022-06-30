@@ -11,8 +11,6 @@ KEL236,Feces,aa,RR034B_165,NODE_1051_length_627_cov_1.809441,627,Frame 3,Partial
 KEL236,Feces,aa,RR034B_165,NODE_1024_length_643_cov_3.117347,643,Frame 3 reverse,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,7/27/18,J,male,AngavoKely,,3
 KEL236,Feces,aa,RR034B_165,NODE_933_length_691_cov_2.216981,691,Frame 3,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,7/27/18,J,male,AngavoKely,,3
 KEL236,Feces,nt,RR034B_165,NODE_1562_length_463_cov_1.223039,463,Frame 1 reverse,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,7/27/18,J,male,AngavoKely,,3
-KEL272,Feces,aa,RR034B_189,NODE_1_length_7751_cov_15.700754,7751,?,Full genome?,"ORF1a partial, ORF1b full, ORF2 full",Eidolon dupreanum,1/7/19,A,male,AngavoKely,,4
-KEL273,Feces,aa,RR034B_190,NODE_884_length_1177_cov_2.594474,1177,?,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,1/7/19,A,male,AngavoKely,,5
 KEL275B,Urine,aa,RR034B_393,NODE_405_length_471_cov_1.528846,471,Frame 3,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,3/14/19,NL,female,AngavoKely,,6
 KEL283B,Urine,nt,RR034B_400,NODE_2424_length_215_cov_1.137500,215,Frame 1,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,3/14/19,NL,female,AngavoKely,,7
 KEL285,Urine,nt,RR034B_401,NODE_1894_length_213_cov_1.151899,213,Frame 3 reverse,Partial genome,"ORF1a partial, ORF1b partial, ORF2 partial",Eidolon dupreanum,2/5/19,A,male,AngavoKely,,8

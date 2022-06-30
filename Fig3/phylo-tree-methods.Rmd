@@ -1,0 +1,124 @@
+---
+title: "Phylo tree methods"
+author: "Sophia Horigan"
+date: "6/30/2022"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+## Building a phylogenetic tree
+
+This tutorial outlines methods for building a maximum-likelihood phylogenetic tree using the program RAxML.
+
+### Full-genome Astrovirus phylogeny
+
+1. I scraped full genome non-bat host **reference** nucleotide sequences from  NCBI-virus (https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/).
+Search:
+* Astroviridae (tax id 39733)
+* unclassified Astroviridae (tax id 352926)
+
+with selections Sequence Type = RefSeq, RefSeq Genome Completeness = complete.
+Total = 49
+
+2. I scraped full genome bat nucleotide sequences from NCBI-virus (https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/).
+Search:
+* Astroviridae (tax id 39733)
+* unclassified Astroviridae (tax id 352926)
+
+with selections Nucleotide Completeness = complete, Host = Chiroptera (tax id 30560)
+Total = 10
+
+49 + 10 + 1 (my full) = 60 sequences
+ 
+Curiously, some of these did not say 'complete genome' and were rather small. The entire group including these is now in a folder called full_genome_tree_allhits
+
+I deleted the ones that did not say 'complete genome', (so they said partial cds or something) and they are in the folder full_genome_tree_complete.
+
+For now, going forward with the 'complete' ones only-- so now that's 49 sequences.
+
+3. How to choose an outgroup?
+?? need to reconcile mamastrivirus and avastrovirus
+-make only mamastrovirus tree with avastrovirus as an outgroup? I think having my Avastroviruses in there will work.
+
+4. I aligned the 49 complete sequences in Genious using Multiple Alignment -> Clusal Omega (because the Genious video online said it was the same as MAFFT?) using the default settings.
+
+5. I annotated gaps by using the Mask alignment function under the Tools menu.This will allow me to optionally remove the gaps when making a phylogeny.
+
+
+5. Next, I used the MSA to compare nucleotide substitution models in the program [ModelTest-NG](https://github.com/ddarriba/modeltest). I ran this on the command line. See GitHub documentation for how to set it up on your computing cluster or personal computer (Note: these phylogenies are sufficiently large that running it on your desktop/laptop is not advisable). After uploading this file to the Berkeley computing cluster, Savio, I kicked off ModelTest-NG using the following batch script:
+
+```
+#!/bin/bash
+#SBATCH --job-name=batCoV
+#SBATCH --account=fc_sirmodel
+#SBATCH --partition=savio3
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --cpus-per-task=1
+#SBATCH --time=24:00:00
+
+
+module load vim/7.4 
+module load java/1.8.0_121
+module load emacs/25.1 
+module load cmake/3.15.1
+module load python/3.6 
+module load gcc/7.4.0
+module load openmpi/4.0.1-gcc
+
+export CC=`which gcc`
+export CXX=`which c++`
+
+
+./modeltest-ng -i batCoV/alignment_fullgenomeCoVs_8_7.fasta -t ml -p 8
+```
+
+Note that if you want to **test** this process on your home computer, you can do so by simply reducing the number of genomes in the alignment. I recommend 20 or fewer in this case!
+
+6. Once ModelTest-NG finishes (it will take several hours), it is time to build a maximum likelihood tree using [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/). See documentation on their website for how to get this running on your home computer and/or computing cluster. In my case, ModelTest-NG told me that the best support was recovered for a "GTR+I+G4" nt substitution model, so that is what I ran in raxml. I followed the [RAxML tutorial](https://github.com/amkozlov/raxml-ng/wiki/Tutorial) to build a tree from my MSA, first checking that RAxML could read the alignment:
+
+```
+/global/home/users/cbrook/raxml-ng/raxml-ng-mpi --check --msa alignment_fullgenomeCoVs_8_7_rename.fasta --model GTR+I+G4 --prefix T1
+```
+
+...then parsing the alignment to find the appropriate number of threads (12) with which to run RAxML:
+
+```
+/global/home/users/cbrook/raxml-ng/raxml-ng-mpi --parse --msa alignment_fullgenomeCoVs_8_7_rename.fasta --model GTR+I+G4 --prefix T2
+```
+
+Finally, I kicked off RAxML (including bootstraps) with the following script:
+
+```
+#!/bin/bash
+#SBATCH --job-name=batcov
+#SBATCH --account=fc_sirmodel
+#SBATCH --partition=savio3
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=2
+#SBATCH --cpus-per-task=1
+#SBATCH --time=48:00:00
+
+module load vim/7.4
+module load emacs/25.1
+module load python/3.6
+module load java/1.8.0_121
+module load cmake/3.15.1
+module load gcc/7.4.0
+module load openmpi/4.0.1-gcc
+
+/global/home/users/cbrook/raxml-ng/raxml-ng-mpi --all --msa alignment_fullgenomeCoVs_8_7_rename.fasta --model GTR+I+G4 --prefix T3  --seed 12 --threads 12 --bs-metric fbp,tbe
+```
+
+Once RAxML finished (>12 hours later), I imported the resulting tree into R and built a phylogenetic tree for Fig3A. Note that for quick viewing, you can easily view the tree in the opensource program, [FigTree](http://tree.bio.ed.ac.uk/software/figtree/).
+
+
+
+### Partial genome RdRp from positive samples
+
+To make Fig3b, I did the following:
+1. Downloaded all the non-host reads off of IDseq from all 30 positive bats in our dataset (actually all 27 for which we did not already have full genome).
+2. Re-uploaded these into IDseq, checking the appropriate species as the host.
+3. Clicked on the "consensus genome" option after upload
+2. Loaded into Geneious and did a multi-sequence alignment to get an idea of what we were looking at.

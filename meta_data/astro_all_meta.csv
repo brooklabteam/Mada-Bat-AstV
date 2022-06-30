@@ -1,8 +1,8 @@
 ﻿czb_id,sampleid,sample_type,Ast,roost_site,latitude_s,longitude_e,collection_date,species,bat_sex,unique_tag_id,recap,bat_age_class,young_of_year
 RR034B_016_fecRa,AMB137,feces,1,Ambakoana,-18.513,48.1665,3/1/18,Pteropus rufus,female,1346,no,J,yes
 RR034B_130_fecRa,KEL200,feces,1,AngavoKely,-18.9327,47.7578,4/10/18,Eidolon dupreanum,female,1036,no,NL,no
-RR034B_189_fecRa,KEL272,feces,1,AngavoKely,-18.9327,47.7578,1/7/19,Eidolon dupreanum,male,1620,no,A,no
-RR034B_190_fecRa,KEL273,feces,1,AngavoKely,-18.9327,47.7578,1/7/19,Eidolon dupreanum,male,977,yes,A,no
+RR034B_189_fecRa,KEL272,feces,0,AngavoKely,-18.9327,47.7578,1/7/19,Eidolon dupreanum,male,1620,no,A,no
+RR034B_190_fecRa,KEL273,feces,0,AngavoKely,-18.9327,47.7578,1/7/19,Eidolon dupreanum,male,977,yes,A,no
 RR034B_198_fecRa,MIZ141,feces,1,Maromizaha,-18.9623,48.4525,2/18/18,Rousettus madagascariensis,male,M6,no,J,yes
 RR034B_379_uaRa,KEL236,urine,1,AngavoKely,-18.9327,47.7578,7/27/18,Eidolon dupreanum,male,987,no,J,
 RR034B_390_uaRa,KEL272B,urine,0,AngavoKely,-18.9327,47.7578,3/14/19,Eidolon dupreanum,female,393,no,NL,
