@@ -13,19 +13,19 @@ homewd= "/Users/SophiaHorigan/Documents/GitHub/Mada-Bat-Astro/"
 setwd(paste0(homewd, "/Fig3"))
 
 #load the fig3a tree
-treeA <-  read.tree(file = paste0(homewd, "Fig3/full_genome_tree.newick"))
+treeA <-  read.tree(file = paste0(homewd, "Fig3/mam_fg_500bs.newick"))
 
 #root it
 
 
-rooted.tree.A <- root(treeA, which(treeA$tip.label == "NC_034567"))
+rooted.tree.A <- root(treeA, which(treeA$tip.label == "NC_002470"))
 #take a quick look in base R
 plot(rooted.tree.A)
 
 #load tree data prepared from elsewhere
 dat <- read.csv(file=paste0(homewd,"Fig3/astro_meta_full.csv"), header = T, stringsAsFactors = F)
 head(dat)
-dat <- dat[-c(10:17)]
+#dat <- dat[-c(10:17)]
 #check subgroup names
 unique(dat$Genus)
 
@@ -70,15 +70,16 @@ head(dat)
 
 #for some reason there are quotations around our new samples, need to remove
 #SEE IF YOU CAN FIX THIS IN THE EXPORT FROM GENEIOUS
-tree.dat[2,1] = "F_MIZ141_RR034B_198_NODE_4_length_6593_cov_808.543744"
-tree.dat[3,1] = "F_MIZ141_RR034B_198_NODE_5_length_6456_cov_49.595532"
+## NEED TO SEE WHERE THE NAMES END UP IN TREE.DAT
+tree.dat[42,1] = "F_MIZ141_RR034B_198_NODE_4_length_6593_cov_808.543744"
+tree.dat[43,1] = "F_MIZ141_RR034B_198_NODE_5_length_6456_cov_49.595532"
 
 tree.dat <- merge(tree.dat, dat, by = "old_tip_label", all.x = T, sort = F)
 
 names(tree.dat)
 
 tree.dat$tip_label <- tree.dat$new_label
-tree.dat <- dplyr::select(tree.dat, tip_label, Accession, Strain, Host, Bat_host, Geo_Location, Year, Genus, novel, old_tip_label)
+tree.dat <- dplyr::select(tree.dat, tip_label, Accession, Strain, Host, Bat_host, Geo_Location, Year, Genus, novel, old_tip_label, Family, Animal)
 
 rooted.tree.A$tip.label <- tree.dat$tip_label
 
@@ -88,18 +89,54 @@ tree.dat$Bat_host <- as.factor(tree.dat$Bat_host)
 shapez = c("bat host" =  24, "non-bat host" = 21)
 colz2 = c('1' =  "yellow", '0' = "white")
 
-
+## Tree 1: Colored by genus, shape by bat/non-bat
 p1 <- ggtree(rooted.tree.A) %<+% tree.dat + geom_tippoint(aes(color=Genus, fill=Genus, shape=Bat_host)) +
-  geom_nodelab(size=.5,nudge_x = -.04, nudge_y = .7) +
+  geom_nodelab(size=1.5,nudge_x = -.05, nudge_y = .7) +
   scale_color_manual(values=colz) + 
   scale_fill_manual(values=colz) +
   scale_shape_manual(values=shapez) + 
   new_scale_fill() +
   geom_tiplab( aes(fill = novel), geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
   scale_fill_manual(values=colz2) + 
-  theme(legend.position = c(.2,.85), legend.title = element_blank()) +
-  xlim(c(0,25))
+  theme(legend.position = c(.1,.85), legend.title = element_blank()) +
+  xlim(c(0,5.6))
 p1
+
+## color tip by family name
+p1_family <- ggtree(rooted.tree.A) %<+% tree.dat + geom_tippoint(aes(color=Family, fill=Family, shape=Bat_host)) +
+  geom_nodelab(size=1.5,nudge_x = -.05, nudge_y = .7) +
+  #scale_color_manual(values=colz) + 
+  #scale_fill_manual(values=colz) +
+  scale_shape_manual(values=shapez) + 
+  new_scale_fill() +
+  geom_tiplab( aes(fill = novel), geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
+  scale_fill_manual(values=colz2) + 
+  theme(legend.position = c(.1,.6), legend.title = element_blank()) +
+  xlim(c(0,5.6))
+p1_family
+
+## color tip by common name
+p1_common <- ggtree(rooted.tree.A, size = 1) %<+% tree.dat + geom_tippoint(aes(color=Animal, fill=Animal, shape=Bat_host, size=1)) +
+  geom_nodelab(size=1.8,nudge_x = -0.11, nudge_y = .4) +
+  #scale_color_manual(values=colz) + 
+  #scale_fill_manual(values=colz) +
+  scale_shape_manual(values=shapez) + 
+  new_scale_fill() +
+  geom_tiplab( aes(fill = novel), geom = "label", label.size = 0, alpha=.3,size=3, show.legend=F) +
+  scale_fill_manual(values=colz2) + 
+  theme(legend.position = c(.05,.6), legend.title = element_blank()) +
+  xlim(c(0,10.5))
+p1_common
+
+
+ggsave(file = paste0(homewd, "/final-figures/Fig3_poster_3.png"),
+       plot = p1_common,
+       units="mm",  
+       width=150, 
+       height=100, 
+       #limitsize = F,
+       scale=4)#, 
+
 
 
 

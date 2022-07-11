@@ -36,18 +36,24 @@ To help alignment, I decided to cut any sequences that were less than 6kb (based
 This left 48 sequences.
 
 3. Outgroup
-I am including a few avastrovirus sequences in the tree to use as an outgroup. another paper does this for a gene tree, but I think it makes sense for a full genome tree as well. Might only need one though (other paper uses a few though)
+Inlcuding one turkey avastrovirus as the outgroup. thus, I removed all other avastrovirus sequences. so now I have 43 total sequences.
 
 4. Alignment
-I aligned the 48 complete sequences in Genious using Multiple Alignment -> MAFFT on default settings.
+I aligned the 43 complete sequences in Genious using Multiple Alignment -> MAFFT on default settings.
 
 5. I annotated areas with 50% or more gaps by using the Mask alignment function under the Tools menu.This will allow me to optionally remove the gaps when making a phylogeny. not going to do that with the first tree.
 
 5. I used PhyML online server to estimate the nucleotide substitution model
 http://www.atgc-montpellier.fr/phyml/
-Bayesian criterion model: GTR +R
-AIC model: 
+GTR is the default (gamma or gamma+I are the options) is R the same as gamma? am I dumb?
 
+RAxML tree (not RAxML-NG tree like Cara did--RAxML also used for taxon rich datasets primarily: https://academic.oup.com/bioinformatics/article/35/21/4453/5487384)
+-have to select the number of bootstraps (duh)
+-default is FPB (felenstein boostraps) vs TBE. according to this paper, TBE is only introduced when using a large dataset with thousands of taxa: https://www.biorxiv.org/content/10.1101/154542v1.full.pdf
+
+500 bootstrap on my laptop took ~48 hours. Need to install RAxML on the cluster.
+
+6. moved consensus tree file to R studio to make the figure.
 
 ### Partial genome RdRp from positive samples
 
