@@ -55,10 +55,40 @@ RAxML tree (not RAxML-NG tree like Cara did--RAxML also used for taxon rich data
 
 6. moved consensus tree file to R studio to make the figure.
 
-### Partial genome RdRp from positive samples
 
-To make Fig3b, I did the following:
-1. Downloaded all the non-host reads off of IDseq from all 30 positive bats in our dataset (actually all 27 for which we did not already have full genome).
-2. Re-uploaded these into IDseq, checking the appropriate species as the host.
-3. Clicked on the "consensus genome" option after upload
-2. Loaded into Geneious and did a multi-sequence alignment to get an idea of what we were looking at.
+
+############################################
+### Partial genome RdRp from positive samples
+############################################
+
+First attempt at a gene tree. The gene I idendified is RdRp (rna something polymerase protein). it is apparently highly conserved, and used in many phylogenetic analyses.
+
+1. determine how many of my samples have the complete RdRp gene
+- turns out it's just 2, the full genomes. all other hits are pretty small fragments, much smaller than the 1.5k bp RdRp, and in an alignment don't match up with any part of the RdRp from the full genomes.
+(PS: I annotated the full genomes from a reference mamastrovirus downloaded from within Geneious from NCBI virus)
+
+2. For this first tree, am using all of the same full genome seqs I used for the full genome tree (because I know they have RdRp by nature of being full). So I used Geneious to import the annotated version of all of them, went through and cleaned up the annotation, labeling ORF1b as 'RdRp', then extracted the RdRp gene from each genome and put them into a new folder called 'RdRp_tree'
+
+3. after this, I made an alignment using MAFFT default settings, and decided to delete the 2 bastrovirus seqs (what is that? online says some sort of henepavirus/astrovirus hybrid..) because it was so divergent. *may need/want to do this for the full-genome phylogeny also.
+
+4. Realigned. Visually trimmed the ends a bit.
+
+5. Exported alignment to PhyML online to determine nucleotide substition model (modeltest-ng still being installed on the cloud)
+
+6. Made RAxML tree in Geneious. Prelim tree for poster only 50 bootstraps (hopefully this finishes by tomorrow morning)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

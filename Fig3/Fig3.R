@@ -141,95 +141,131 @@ ggsave(file = paste0(homewd, "/final-figures/Fig3_poster_3.png"),
 
 
 
-#now add in details for the second panel
 
-#### And Fig 3 B
-#load the fig3b tree
-treeB <-  read.tree(file = paste0(homewd, "Fig3/B-RdRP-phylogeny/3-Fig3B-raxml-output/Fig3B.raxml.supportFBP"))
+#########################
+##### And Fig 3 B #####
+#########################
 
+#load the fig3a tree
+treeB <-  read.tree(file = paste0(homewd, "Fig3/mam_rdrp_100bs.newick"))
+
+#remove quotes
+treeB$tip.label <- gsub("'", '', treeB$tip.label)
+
+#root it
+rooted.tree.B <- root(treeB, which(treeB$tip.label == "NC_002470 - RdRp"))
 
 #take a quick look in base R
-plot(treeB)
-
-
-#root the tree in the outgroup
-rooted.tree.B <- root(treeB, which(treeB$tip.label == "GammaCoV_NC_010800_1_Turkey"))
-p3Broot <- ggtree(rooted.tree.B) + geom_tiplab() # rooted by the outgroup
-
+plot(rooted.tree.B)
 
 #load tree data prepared from elsewhere
-datB <- read.csv(file = paste0(homewd, "Fig3/B-RdRP-phylogeny/fig3b_metadata_manual.csv"), header = T, stringsAsFactors = F)
+datB <- read.csv(file=paste0(homewd,"Fig3/astro_meta_rdrp.csv"), header = T, stringsAsFactors = F)
 head(datB)
 
-
 #check subgroup names
-unique(datB$sub_group)
+unique(datB$Genus)
 
-
-colz = c("Sarbecovirus" = "darkorchid1", "unclassified-Betacoronavirus"= "magenta", "Embecovirus"="darkgoldenrod1", "Gammacoronavirus" = "black", "Hibecovirus" = "royalblue", "Nobecovirus" = "tomato", "Merbecovirus" = "mediumseagreen")
-
+colz = c("Mamastrovirus" = "royalblue", "Avastrovirus" = "tomato")
 
 #pick order for the labels
-datB$sub_group <- factor(datB$sub_group, levels = c("Embecovirus", "Sarbecovirus", "Hibecovirus", "Nobecovirus", "Merbecovirus", "Gammacoronavirus"))   
+datB$Genus <- factor(datB$Genus, levels = c("Mamastrovirus", "Avastrovirus"))   
 
+#and add a "novel" category
+datB$novel = 0
+datB$novel[datB$Geo_Location=="Madagascar"] <- 1
+datB$novel <- as.factor(datB$novel)
 
-#rooted.tree.B$node.label <- round(as.numeric(rooted.tree.B$node.label)*100, 0)
+#rooted.tree.A$node.label <- round(as.numeric(rooted.tree.A$node.label)*100, 0)
 
-#take a glance in the same manner as in A
-pB <- ggtree(rooted.tree.B) %<+% datB + geom_tippoint(aes(fill=sub_group)) +
+#take a glance
+p2 <- ggtree(rooted.tree.B) %<+% datB + geom_tippoint(aes(color=Genus)) +
   geom_tiplab(size=1) + geom_nodelab(size=1) +
-  scale_fill_manual(values=colz) + theme(legend.position = c(.2,.85), legend.title = element_blank())
-pB #looks great
+  scale_color_manual(values=colz) + theme(legend.position = c(.2,.85), legend.title = element_blank())
+p2 #why are some of the tips grey?
 
 #now get new tip labels
-datB$old_tip_label <- datB$tip_label
-datB$tip_label <- NA
-datB$tip_label[!is.na(datB$strain)] <-paste(datB$accession_num[!is.na(datB$strain)], " | ",
-                                            datB$strain[!is.na(datB$strain)], " | ",
-                                            datB$host[!is.na(datB$strain)], " | ", 
-                                            datB$country[!is.na(datB$strain)], " | ",
-                                            datB$collection_year[!is.na(datB$strain)])
+datB$old_tip_label <- datB$Accession
+datB$new_label <- NA
+datB$new_label[!is.na(datB$Strain)] <- paste(datB$Accession[!is.na(datB$Strain)], " | ", 
+                                           datB$Strain[!is.na(datB$Strain)], " | ", 
+                                           datB$Host[!is.na(datB$Strain)], " | ",
+                                           datB$Geo_Location[!is.na(datB$Strain)], " | ",
+                                           datB$Year[!is.na(datB$Strain)])
 
-datB$tip_label[is.na(datB$strain)] <-paste(datB$accession_num[is.na(datB$strain)], " | ",
-                                           datB$host[is.na(datB$strain)], " | ", 
-                                           datB$country[is.na(datB$strain)], " | ",
-                                           datB$collection_year[is.na(datB$strain)])
+#dat$new_label[is.na(dat$strain)] <- paste(dat$accession_num[is.na(dat$strain)], " | ", 
+#                                         dat$host[is.na(dat$strain)], " | ",
+#                                          dat$country[is.na(dat$strain)], " | ",
+#                                          dat$collection_year[is.na(dat$strain)])
 
 #after Gwen checks these, can later manually edit any that are "NA"
 
 #make sure to sort in order
 tree.datB <- data.frame(old_tip_label=rooted.tree.B$tip.label, num =1:length(rooted.tree.B$tip.label))
+head(tree.datB)
+head(datB)
+
 tree.datB <- merge(tree.datB, datB, by = "old_tip_label", all.x = T, sort = F)
+
+names(tree.datB)
+
+tree.datB$tip_label <- tree.datB$new_label
+tree.datB <- dplyr::select(tree.datB, tip_label, Accession, Strain, Host, Bat_host, Geo_Location, Year, Genus, novel, old_tip_label, Family, Animal)
+
 rooted.tree.B$tip.label <- tree.datB$tip_label
 
-datB$bat_host[datB$bat_host==0] <- "non-bat host"
-datB$bat_host[datB$bat_host==1] <- "bat host"
-datB$bat_host <- as.factor(datB$bat_host)
-
-datB$novel = 0
-datB$novel[datB$accession_num=="OK020086" |
-             datB$accession_num=="OK067321" |
-             datB$accession_num=="OK067320" | 
-             datB$accession_num=="OK020089" |
-             datB$accession_num=="OK067319" |
-             datB$accession_num=="OK020087" |
-             datB$accession_num=="OK020088" ] <- 1
-
-datB$novel <- as.factor(datB$novel)
+tree.datB$Bat_host[tree.datB$Bat_host==0] <- "non-bat host"
+tree.datB$Bat_host[tree.datB$Bat_host==1] <- "bat host"
+tree.datB$Bat_host <- as.factor(tree.datB$Bat_host)
+shapez = c("bat host" =  24, "non-bat host" = 21)
 colz2 = c('1' =  "yellow", '0' = "white")
 
-shapez = c("bat host" =  24, "non-bat host" = 21)
-
-p2 <- ggtree(rooted.tree.B) %<+% datB + geom_tippoint(aes(fill=sub_group, shape=bat_host)) +
-  geom_nodelab(size=1.5,nudge_x = -.02, nudge_y = .4) +
-  scale_fill_manual(values=colz) + 
-  scale_shape_manual(values=shapez) +
-  new_scale_fill()+
+## Tree 1: Colored by genus, shape by bat/non-bat
+pb <- ggtree(rooted.tree.B) %<+% tree.datB + geom_tippoint(aes(color=Genus, fill=Genus, shape=Bat_host)) +
+  geom_nodelab(size=1.5,nudge_x = -.05, nudge_y = .7) +
+  scale_color_manual(values=colz) + 
+  scale_fill_manual(values=colz) +
+  scale_shape_manual(values=shapez) + 
+  new_scale_fill() +
   geom_tiplab( aes(fill = novel), geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
   scale_fill_manual(values=colz2) + 
-  theme(legend.position = "right", legend.title = element_blank()) +
-  xlim(c(0,2))
-p2
+  theme(legend.position = c(.1,.85), legend.title = element_blank()) +
+  xlim(c(0,5.6))
+pb
+
+## color tip by family name
+pB_family <- ggtree(rooted.tree.B) %<+% tree.datB + geom_tippoint(aes(color=Family, fill=Family, shape=Bat_host)) +
+  geom_nodelab(size=1.5,nudge_x = -.05, nudge_y = .7) +
+  #scale_color_manual(values=colz) + 
+  #scale_fill_manual(values=colz) +
+  scale_shape_manual(values=shapez) + 
+  new_scale_fill() +
+  geom_tiplab( aes(fill = novel), geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
+  scale_fill_manual(values=colz2) + 
+  theme(legend.position = c(.1,.6), legend.title = element_blank()) +
+  xlim(c(0,5.6))
+pB_family
+
+## color tip by common name
+pB_common <- ggtree(rooted.tree.B, size = 1) %<+% tree.datB + geom_tippoint(aes(color=Animal, fill=Animal, shape=Bat_host, size=1)) +
+  geom_nodelab(size=1.8,nudge_x = -0.11, nudge_y = .4) +
+  #scale_color_manual(values=colz) + 
+  #scale_fill_manual(values=colz) +
+  scale_shape_manual(values=shapez) + 
+  new_scale_fill() +
+  geom_tiplab( aes(fill = novel), geom = "label", label.size = 0, alpha=.3,size=3, show.legend=F) +
+  scale_fill_manual(values=colz2) + 
+  theme(legend.position = c(.05,.6), legend.title = element_blank()) +
+  xlim(c(0,10.5))
+pB_common
+
+
+ggsave(file = paste0(homewd, "/final-figures/Fig3B_poster_3.png"),
+       plot = pB_common,
+       units="mm",  
+       width=150, 
+       height=100, 
+       #limitsize = F,
+       scale=4)#, 
 
 
 
