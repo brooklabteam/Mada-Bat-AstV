@@ -1,18 +1,7 @@
 ﻿czb_id,sampleid,sample_type,Ast,roost_site,latitude_s,longitude_e,collection_date,species,bat_sex,unique_tag_id,recap,bat_age_class,young_of_year
-RR034B_016_fecRa,AMB137,feces,1,Ambakoana,-18.513,48.1665,3/1/18,Pteropus rufus,female,1346,no,J,yes
-RR034B_130_fecRa,KEL200,feces,1,AngavoKely,-18.9327,47.7578,4/10/18,Eidolon dupreanum,female,1036,no,NL,no
 RR034B_189_fecRa,KEL272,feces,0,AngavoKely,-18.9327,47.7578,1/7/19,Eidolon dupreanum,male,1620,no,A,no
 RR034B_190_fecRa,KEL273,feces,0,AngavoKely,-18.9327,47.7578,1/7/19,Eidolon dupreanum,male,977,yes,A,no
-RR034B_198_fecRa,MIZ141,feces,1,Maromizaha,-18.9623,48.4525,2/18/18,Rousettus madagascariensis,male,M6,no,J,yes
-RR034B_379_uaRa,KEL236,urine,1,AngavoKely,-18.9327,47.7578,7/27/18,Eidolon dupreanum,male,987,no,J,
 RR034B_390_uaRa,KEL272B,urine,0,AngavoKely,-18.9327,47.7578,3/14/19,Eidolon dupreanum,female,393,no,NL,
-RR034B_393_uaRa,KEL275B,urine,1,AngavoKely,-18.9327,47.7578,3/14/19,Eidolon dupreanum,female,388,no,NL,
-RR034B_400_uaRa,KEL283B,urine,1,AngavoKely,-18.9327,47.7578,3/14/19,Eidolon dupreanum,female,9.56E+14,yes,NL,
-RR034B_401_uaRa,KEL285,urine,1,AngavoKely,-18.9327,47.7578,2/5/19,Eidolon dupreanum,male,9.56E+14,yes,A,
-RR034B_403_uaRa,KEL286B,urine,1,AngavoKely,-18.9327,47.7578,3/15/19,Eidolon dupreanum,female,1007,no,NL,
-RR034B_406_uaRa,KEL290,urine,1,AngavoKely,-18.9327,47.7578,2/6/19,Eidolon dupreanum,male,1650,no,A,
-RR034B_414_uaRa,KEL299B,urine,1,AngavoKely,-18.9327,47.7578,3/15/19,Eidolon dupreanum,female,1003,no,NL,
-RR034B_496_uaRa,MIZ408,urine,1,Maromizaha,-18.9623,48.4525,4/9/19,Rousettus madagascariensis,male,,no,A,
 RR034B_002_fecRa,AMB122,feces,0,Ambakoana,-18.513,48.1665,2/23/18,Pteropus rufus,male,442,no,A,no
 RR034B_003_fecRa,AMB123,feces,0,Ambakoana,-18.513,48.1665,2/23/18,Pteropus rufus,male,500,no,A,no
 RR034B_004_fecRa,AMB124,feces,0,Ambakoana,-18.513,48.1665,2/23/18,Pteropus rufus,female,1333,no,NL,yes
@@ -499,3 +488,14 @@ RR034B_498_uaRa,MLB004,urine,0,Mahialambo,-18.1102,48.2098,12/16/18,Pteropus ruf
 RR034B_499_uaRa,MLB005,urine,0,Mahialambo,-18.1102,48.2098,12/17/18,Pteropus rufus,male,1368,no,A,
 RR034B_500_uaRa,MLB006,urine,0,Mahialambo,-18.1102,48.2098,12/18/18,Pteropus rufus,female,1371,no,L,
 RR034B_501_uaRa,MLB009,urine,0,Mahialambo,-18.1102,48.2098,12/18/18,Pteropus rufus,male,1370,no,A,
+RR034B_016_fecRa,AMB137,feces,1,Ambakoana,-18.513,48.1665,3/1/18,Pteropus rufus,female,1346,no,J,yes
+RR034B_130_fecRa,KEL200,feces,1,AngavoKely,-18.9327,47.7578,4/10/18,Eidolon dupreanum,female,1036,no,NL,no
+RR034B_198_fecRa,MIZ141,feces,1,Maromizaha,-18.9623,48.4525,2/18/18,Rousettus madagascariensis,male,M6,no,J,yes
+RR034B_379_uaRa,KEL236,urine,1,AngavoKely,-18.9327,47.7578,7/27/18,Eidolon dupreanum,male,987,no,J,
+RR034B_393_uaRa,KEL275B,urine,1,AngavoKely,-18.9327,47.7578,3/14/19,Eidolon dupreanum,female,388,no,NL,
+RR034B_400_uaRa,KEL283B,urine,1,AngavoKely,-18.9327,47.7578,3/14/19,Eidolon dupreanum,female,9.56E+14,yes,NL,
+RR034B_401_uaRa,KEL285,urine,1,AngavoKely,-18.9327,47.7578,2/5/19,Eidolon dupreanum,male,9.56E+14,yes,A,
+RR034B_403_uaRa,KEL286B,urine,1,AngavoKely,-18.9327,47.7578,3/15/19,Eidolon dupreanum,female,1007,no,NL,
+RR034B_406_uaRa,KEL290,urine,1,AngavoKely,-18.9327,47.7578,2/6/19,Eidolon dupreanum,male,1650,no,A,
+RR034B_414_uaRa,KEL299B,urine,1,AngavoKely,-18.9327,47.7578,3/15/19,Eidolon dupreanum,female,1003,no,NL,
+RR034B_496_uaRa,MIZ408,urine,1,Maromizaha,-18.9623,48.4525,4/9/19,Rousettus madagascariensis,male,,no,A,

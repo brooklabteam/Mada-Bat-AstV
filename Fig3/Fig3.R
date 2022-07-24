@@ -7,6 +7,7 @@ library(ggplot2)
 library(ggtree)
 library(ape)
 library(ggnewscale)
+library(tidyverse)
 
 homewd= "/Users/SophiaHorigan/Documents/GitHub/Mada-Bat-Astro/"
 
@@ -101,7 +102,7 @@ p1 <- ggtree(rooted.tree.A) %<+% tree.dat + geom_tippoint(aes(color=Genus, fill=
   theme(legend.position = c(.1,.85), legend.title = element_blank()) +
   xlim(c(0,5.6))
 p1
-
+########FAMILY#############
 ## color tip by family name
 p1_family <- ggtree(rooted.tree.A) %<+% tree.dat + geom_tippoint(aes(color=Family, fill=Family, shape=Bat_host)) +
   geom_nodelab(size=1.5,nudge_x = -.05, nudge_y = .7) +
@@ -112,8 +113,27 @@ p1_family <- ggtree(rooted.tree.A) %<+% tree.dat + geom_tippoint(aes(color=Famil
   geom_tiplab( aes(fill = novel), geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
   scale_fill_manual(values=colz2) + 
   theme(legend.position = c(.1,.6), legend.title = element_blank()) +
-  xlim(c(0,5.6))
+  xlim(c(0,6))
 p1_family
+
+#collapsing branches by family where possible
+##need to match colors to color bar, or just remove color bar and label on the figure
+node1 <- MRCA(p1_family, 'NC_024297  |  Bovine astrovirus  |  Bos taurus  |  China  |  2014', 'NC_023629  |  Bovine astrovirus B76/HK  |  Bos taurus  |  Hong Kong  |  NA')
+c1 <- scaleClade(p1_family, node1, .3) %>% collapse(node1, 'max', fill='red')
+
+node2 <- MRCA(p1_family, 'NC_018702  |  Murine astrovirus  |  Mouse  |  USA  |  2011', 'NC_036583  |  Rodent astrovirus  |  Rattus norvegicus  |  China  |  NA')
+c2 <- collapse(c1, node2, 'max', fill='green')
+
+node3 <- MRCA(p1_family, 'NC_023675  |  Porcine astrovirus 4  |  Sus scrofa  |  USA  |  2010','NC_016896  |  Astrovirus wild boar/WBAstV-1/2011/HUN  |  Sus scrofa  |  Hungary  |  2011')
+c3 <- collapse(c2, node3, 'max', fill='purple')
+
+node4 <- MRCA(p1_family, 'NC_019027  |  Astrovirus VA4  |  Homo sapiens  |  Nepal  |  2008', 'NC_024472  |  Burkina Faso astrovirus  |  Homo sapiens  |  Burkina Faso  |  2010')
+c4 <- collapse(c3, node4, 'max', fill='darkgreen')
+
+scaleClade(c4, node4, .3)
+
+##try highlighting and shrinking instead
+h1 <- p1_family + geom_highlight(node1, 'red')
 
 ## color tip by common name
 p1_common <- ggtree(rooted.tree.A, size = 1) %<+% tree.dat + geom_tippoint(aes(color=Animal, fill=Animal, shape=Bat_host, size=1)) +
@@ -129,8 +149,8 @@ p1_common <- ggtree(rooted.tree.A, size = 1) %<+% tree.dat + geom_tippoint(aes(c
 p1_common
 
 
-ggsave(file = paste0(homewd, "/final-figures/Fig3_poster_3.png"),
-       plot = p1_common,
+ggsave(file = paste0(homewd, "/final-figures/Fig3_poster_4.png"),
+       plot = p1_family,
        units="mm",  
        width=150, 
        height=100, 

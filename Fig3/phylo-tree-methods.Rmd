@@ -74,8 +74,10 @@ First attempt at a gene tree. The gene I idendified is RdRp (rna something polym
 4. Realigned. Visually trimmed the ends a bit.
 
 5. Exported alignment to PhyML online to determine nucleotide substition model (modeltest-ng still being installed on the cloud)
+GTR + G + I
 
 6. Made RAxML tree in Geneious. Prelim tree for poster only 50 bootstraps (hopefully this finishes by tomorrow morning)
+-wow 50 was so fast! going to initiate 500 overnight.
 
 
 
