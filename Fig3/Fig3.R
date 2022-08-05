@@ -165,9 +165,9 @@ ggsave(file = paste0(homewd, "/final-figures/Fig3_poster_4.png"),
 #########################
 ##### And Fig 3 B #####
 #########################
-
+##Madabat tree
 #load the fig3a tree
-treeB <-  read.tree(file = paste0(homewd, "Fig3/mam_rdrp_100bs.newick"))
+treeB <-  read.tree(file = paste0(homewd, "Fig3/rdrp-madabat_1000bs.newick"))
 
 #remove quotes
 treeB$tip.label <- gsub("'", '', treeB$tip.label)
@@ -179,9 +179,12 @@ rooted.tree.B <- root(treeB, which(treeB$tip.label == "NC_002470 - RdRp"))
 plot(rooted.tree.B)
 
 #load tree data prepared from elsewhere
-datB <- read.csv(file=paste0(homewd,"Fig3/astro_meta_rdrp.csv"), header = T, stringsAsFactors = F)
+datB <- read.csv(file=paste0(homewd,"Fig3/astro_meta_rdrp_madabat.csv"), header = T, stringsAsFactors = F)
 head(datB)
 
+#manually change names to prevent errors
+datB[1,1] <- "F_MIZ141_RR034B_198_NODE_4_length_6593_cov_808.543744"
+datB[2,1] <- "F_MIZ141_RR034B_198_NODE_5_length_6456_cov_49.595532"
 #check subgroup names
 unique(datB$Genus)
 
@@ -191,9 +194,9 @@ colz = c("Mamastrovirus" = "royalblue", "Avastrovirus" = "tomato")
 datB$Genus <- factor(datB$Genus, levels = c("Mamastrovirus", "Avastrovirus"))   
 
 #and add a "novel" category
-datB$novel = 0
-datB$novel[datB$Geo_Location=="Madagascar"] <- 1
-datB$novel <- as.factor(datB$novel)
+#datB$novel = 0
+#datB$novel[datB$Geo_Location=="Madagascar"] <- 1
+#datB$novel <- as.factor(datB$novel)
 
 #rooted.tree.A$node.label <- round(as.numeric(rooted.tree.A$node.label)*100, 0)
 
@@ -207,11 +210,8 @@ p2 #why are some of the tips grey?
 datB$old_tip_label <- datB$Accession
 datB$new_label <- NA
 datB$new_label[!is.na(datB$Strain)] <- paste(datB$Accession[!is.na(datB$Strain)], " | ", 
-                                           datB$Strain[!is.na(datB$Strain)], " | ", 
-                                           datB$Host[!is.na(datB$Strain)], " | ",
-                                           datB$Geo_Location[!is.na(datB$Strain)], " | ",
-                                           datB$Year[!is.na(datB$Strain)])
-
+                                           datB$Host[!is.na(datB$Strain)])
+                                         
 #dat$new_label[is.na(dat$strain)] <- paste(dat$accession_num[is.na(dat$strain)], " | ", 
 #                                         dat$host[is.na(dat$strain)], " | ",
 #                                          dat$country[is.na(dat$strain)], " | ",
@@ -229,18 +229,18 @@ tree.datB <- merge(tree.datB, datB, by = "old_tip_label", all.x = T, sort = F)
 names(tree.datB)
 
 tree.datB$tip_label <- tree.datB$new_label
-tree.datB <- dplyr::select(tree.datB, tip_label, Accession, Strain, Host, Bat_host, Geo_Location, Year, Genus, novel, old_tip_label, Family, Animal)
+tree.datB <- dplyr::select(tree.datB, tip_label, Accession, Strain, Host, Geo_Location, Year, Genus, novel, old_tip_label, Family, Animal)
 
 rooted.tree.B$tip.label <- tree.datB$tip_label
 
-tree.datB$Bat_host[tree.datB$Bat_host==0] <- "non-bat host"
-tree.datB$Bat_host[tree.datB$Bat_host==1] <- "bat host"
-tree.datB$Bat_host <- as.factor(tree.datB$Bat_host)
-shapez = c("bat host" =  24, "non-bat host" = 21)
+tree.datB$novel[tree.datB$novel==0] <- "previously published"
+tree.datB$novel[tree.datB$novel==1] <- "novel"
+tree.datB$novel <- as.factor(tree.datB$novel)
+shapez = c("novel" =  24, "previously published" = 21)
 colz2 = c('1' =  "yellow", '0' = "white")
 
-## Tree 1: Colored by genus, shape by bat/non-bat
-pb <- ggtree(rooted.tree.B) %<+% tree.datB + geom_tippoint(aes(color=Genus, fill=Genus, shape=Bat_host)) +
+## Tree 1: Colored by family, shaped by novel or not novel
+pb <- ggtree(rooted.tree.B) %<+% tree.datB + geom_tippoint(aes(color=Family, fill=Family, shape=novel)) +
   geom_nodelab(size=1.5,nudge_x = -.05, nudge_y = .7) +
   scale_color_manual(values=colz) + 
   scale_fill_manual(values=colz) +
@@ -253,14 +253,14 @@ pb <- ggtree(rooted.tree.B) %<+% tree.datB + geom_tippoint(aes(color=Genus, fill
 pb
 
 ## color tip by family name
-pB_family <- ggtree(rooted.tree.B) %<+% tree.datB + geom_tippoint(aes(color=Family, fill=Family, shape=Bat_host)) +
+pB_family <- ggtree(rooted.tree.B) %<+% tree.datB + geom_tippoint(aes(color=Family, fill=Family, shape=novel)) +
   geom_nodelab(size=1.5,nudge_x = -.05, nudge_y = .7) +
   #scale_color_manual(values=colz) + 
   #scale_fill_manual(values=colz) +
   scale_shape_manual(values=shapez) + 
   new_scale_fill() +
-  geom_tiplab( aes(fill = novel), geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
-  scale_fill_manual(values=colz2) + 
+  geom_tiplab(geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
+  #scale_fill_manual(values=colz2) + 
   theme(legend.position = c(.1,.6), legend.title = element_blank()) +
   xlim(c(0,5.6))
 pB_family
@@ -279,8 +279,8 @@ pB_common <- ggtree(rooted.tree.B, size = 1) %<+% tree.datB + geom_tippoint(aes(
 pB_common
 
 
-ggsave(file = paste0(homewd, "/final-figures/Fig3B_poster_3.png"),
-       plot = pB_common,
+ggsave(file = paste0(homewd, "/final-figures/Mada-bat-RdRp.png"),
+       plot = pB_family,
        units="mm",  
        width=150, 
        height=100, 
