@@ -13,6 +13,11 @@ homewd= "/Users/SophiaHorigan/Documents/GitHub/Mada-Bat-Astro/"
 
 setwd(paste0(homewd, "/Fig3"))
 
+
+#########################
+##### ML Full Genome #####
+#########################
+
 #load the fig3a tree
 treeA <-  read.tree(file = paste0(homewd, "Fig3/mam_fg_500bs.newick"))
 
@@ -163,7 +168,7 @@ ggsave(file = paste0(homewd, "/final-figures/Fig3_poster_4.png"),
 
 
 #########################
-##### And Fig 3 B #####
+##### ML RdRp Mada Bat #####
 #########################
 ##Madabat tree
 #load the fig3a tree

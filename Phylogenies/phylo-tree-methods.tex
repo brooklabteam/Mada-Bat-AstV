@@ -1,0 +1,291 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Phylo tree methods},
+  pdfauthor={Sophia Horigan},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Phylo tree methods}
+\author{Sophia Horigan}
+\date{6/30/2022}
+
+\begin{document}
+\maketitle
+
+\hypertarget{building-a-phylogenetic-tree}{%
+\subsection{Building a phylogenetic
+tree}\label{building-a-phylogenetic-tree}}
+
+This tutorial outlines methods for building a maximum-likelihood
+phylogenetic tree using the program RAxML.
+
+\hypertarget{full-genome-astrovirus-phylogeny}{%
+\subsubsection{Full-genome Astrovirus
+phylogeny}\label{full-genome-astrovirus-phylogeny}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  I scraped full genome non-bat host \textbf{reference} nucleotide
+  sequences from NCBI-virus
+  (\url{https://www.ncbi.nlm.nih.gov/labs/virus/vssi/\#/}). Search:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Astroviridae (tax id 39733)
+\item
+  unclassified Astroviridae (tax id 352926)
+\end{itemize}
+
+with selections Sequence Type = RefSeq, RefSeq Genome Completeness =
+complete. Total = 49
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  I scraped full genome bat nucleotide sequences from NCBI-virus
+  (\url{https://www.ncbi.nlm.nih.gov/labs/virus/vssi/\#/}). Search:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Astroviridae (tax id 39733)
+\item
+  unclassified Astroviridae (tax id 352926)
+\end{itemize}
+
+with selections Nucleotide Completeness = complete, Host = Chiroptera
+(tax id 30560) Total = 10
+
+49 + 10 + 2 (my full) = 61 sequences
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\item
+  Cutoffs To help alignment, I decided to cut any sequences that were
+  less than 6kb (based on length) This left 48 sequences.
+\item
+  Outgroup Inlcuding one turkey avastrovirus as the outgroup. thus, I
+  removed all other avastrovirus sequences. so now I have 43 total
+  sequences.
+\item
+  Alignment I aligned the 43 complete sequences in Genious using
+  Multiple Alignment -\textgreater{} MAFFT on default settings.
+\item
+  I annotated areas with 50\% or more gaps by using the Mask alignment
+  function under the Tools menu.This will allow me to optionally remove
+  the gaps when making a phylogeny. not going to do that with the first
+  tree.
+\item
+  I used PhyML online server to estimate the nucleotide substitution
+  model \url{http://www.atgc-montpellier.fr/phyml/} GTR is the default
+  (gamma or gamma+I are the options) is R the same as gamma? am I dumb?
+\end{enumerate}
+
+RAxML tree (not RAxML-NG tree like Cara did--RAxML also used for taxon
+rich datasets primarily:
+\url{https://academic.oup.com/bioinformatics/article/35/21/4453/5487384})
+-have to select the number of bootstraps (duh) -default is FPB
+(felenstein boostraps) vs TBE. according to this paper, TBE is only
+introduced when using a large dataset with thousands of taxa:
+\url{https://www.biorxiv.org/content/10.1101/154542v1.full.pdf}
+
+500 bootstrap on my laptop took \textasciitilde48 hours. Need to install
+RAxML on the cluster.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  moved consensus tree file to R studio to make the figure.
+\end{enumerate}
+
+\hypertarget{ml-rdrp-tree---madagascar}{%
+\subsubsection{ML RdRp tree -
+Madagascar}\label{ml-rdrp-tree---madagascar}}
+
+Create an ML RdRp tree using all published Madagascar seqs and our new
+Mada seqs
+
+CREATE DATASET 1. determine how many of my samples have the complete
+RdRp gene -we only have 2, contained within the full genomes
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  get all published Madabat RdRp seqs -2 sources: -1: Hoarau et al 2021
+  :
+  \url{https://virologyj.biomedcentral.com/articles/10.1186/s12985-021-01673-2}
+  -2: Lebarbenchon et al 2017 :
+  \url{https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5520320/}
+\end{enumerate}
+
+total seqs (with my 2 novel = 67)
+
+ALIGNMENT 3. Align in Geneious prime using MAFFT default settings and
+trim alignment
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Export alignment as .fasta to modeltest-ng folder
+\end{enumerate}
+
+MODELTEST-NG 5. scp folder with alignment and batch script to midway
+\texttt{scp\ -r\ /Users/sophiahorigan/Documents/GitHub/Mada-Bat-Astro/modeltest-ng/\ shorigan@midway2.rcc.uchicago.edu:/home/shorigan/}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  execute batch script \texttt{chmod\ 0700\ modeltestbash.sbatch}
+  \texttt{./modeltestbash.sbatch} \#\# contents of modeltestbash.sbach:
+  \#!/bin/bash \#SBATCH --job-name=batAstro \#SBATCH --account=cbrook
+  \#SBATCH --partition=broadwl \#SBATCH --nodes=1 \#SBATCH
+  --ntasks-per-node=8 \#SBATCH --cpus-per-task=1 \#SBATCH
+  --time=36:00:00
+\end{enumerate}
+
+module load python
+
+conda activate /project2/cbrook/software/modeltest\_env
+
+modeltest-ng -i alignment.fasta -t ml -p 8
+
+scp -r
+\href{mailto:shorigan@midway2.rcc.uchicago.edu}{\nolinkurl{shorigan@midway2.rcc.uchicago.edu}}:/home/shorigan/modeltest-ng/alignment.fasta.out
+/Users/sophiahorigan/Documents/GitHub/Mada-Bat-Astro/modeltest-ng/
+
+conda deactivate \#\#
+
+output : Summary:
+
+Partition 1/1: Model Score Weight
+---------------------------------------------------------- BIC
+TPM2uf+I+G4 28051.7731 0.5345 AIC TVM+I+G4 27482.2826 0.7046 AICc
+TVM+I+G4 27617.2826 0.7088
+
+RAXML-NG 6. Export alignment as .phy to raxml-ng directory, and move
+directory to midway
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\item
+  load raxml-ng \texttt{module\ load\ openmpi/3.0.0+gcc-10.1.0}
+  \texttt{export\ PATH=/project2/cbrook/software/raxml-ng/bin:\$PATH}
+\item
+  make sure it will work with your specific model and alignment
+  \texttt{raxml-ng-mpi\ -\/-check\ -\/-msa\ alignment.phy\ -\/-model\ TPM2uf+I+G4\ -\/-prefix\ T1}
+\item
+  check for number of recommended threads
+  \texttt{raxml-ng-mpi\ -\/-parse\ -\/-msa\ alignment.phy\ -\/-model\ TPM2uf+I+G4\ -\/-prefix\ T2}
+  in this case, recommended threads/MPI processes = 1
+\item
+  modify sbatch script to include correct model and number of threads
+\end{enumerate}
+
+in this case, looks like this\ldots{} \#!/bin/bash \#SBATCH
+--job-name=raxml-ng \#SBATCH --account=cbrook \#SBATCH
+--partition=broadwl \#SBATCH --nodes=1 \#SBATCH --ntasks-per-node=8
+\#SBATCH --cpus-per-task=1 \#SBATCH --time=36:00:00 \#SBATCH
+--mail-type=ALL \#SBATCH
+--\href{mailto:mail-user=shorigan@uchicago.edu}{\nolinkurl{mail-user=shorigan@uchicago.edu}}
+
+\texttt{raxml-ng-mpi\ -\/-all\ -\/-msa\ alignment.phy\ -\/-model\ TPM2uf+I+G4\ -\/-prefix\ T3\ -\/-seed\ 2\ -\/-threads\ 1\ -\/-bs-metric\ fbp,tbe\ -\/-bs-trees\ 1000}
+
+Update: had to manually set the number of bootstraps at 1000, and it did
+not converge! but was close. going to add 200 more bootstraps
+
+Check convergence using
+\texttt{raxml-ng-mpi\ -\/-bsconverge\ -\/-bs-trees\ T3.raxml.bootstraps.TMP\ -\/-prefix\ T4\ -\/-seed\ 4\ -\/-threads\ 1}
+
+Run 200 more bootstraps
+\texttt{raxml-ng\ -\/-bootstrap\ -\/-msa\ alignment.phy\ -\/-model\ TPM2uf+I+G4\ -\/-prefix\ T5\ -\/-seed\ 333\ -\/-threads\ 1\ -\/-bs-trees\ 200\ -\/-bs-metric\ fbp,tbe}
+
+Concatenate bootstraps
+
+\hypertarget{bayesian-rdrp-tree---swio}{%
+\subsubsection{Bayesian RdRp tree -
+SWIO}\label{bayesian-rdrp-tree---swio}}
+
+Goal: make a bayesian tree including RdRp seqs from SWIO area to
+investigate some biogeographical patterns.
+
+GATHER SEQUENCES 1. To the file containing the Madagascar RdRp seqs from
+the previous tree (plus our two novel seqs), I added SWIO seqs that I
+found as a result of a lit search. I located seqs from Reunion Island
+and Mozambique. Altogether, there are now 125 sequences.
+
+\end{document}

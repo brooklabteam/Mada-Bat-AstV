@@ -9,9 +9,11 @@ output:
 
 ## Building a phylogenetic tree
 
-This tutorial outlines methods for building a maximum-likelihood phylogenetic tree using the program RAxML.
+This tutorial outlines methods for building a maximum-likelihood phylogenetic tree using the program RAxML, and time/phylogeography trees using BEAST1 and BEAST2
 
+############################################
 ### Full-genome Astrovirus phylogeny
+############################################
 
 1. I scraped full genome non-bat host **reference** nucleotide sequences from  NCBI-virus (https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/).
 Search:
@@ -148,10 +150,114 @@ in this case, looks like this...
 #SBATCH --mail-user=shorigan@uchicago.edu
 
 
-raxml-ng-mpi --all --msa alignment.phy --model TPM2uf+I+G4 --prefix T3 --seed 2 --threads 1 --bs-metric fbp,tbe
+`raxml-ng-mpi --all --msa alignment.phy --model TPM2uf+I+G4 --prefix T3 --seed 2 --threads 1 --bs-metric fbp,tbe --bs-trees 1000`
 
-11. change permissions and execute batch script
+Update: had to manually set the number of bootstraps at 1000, and it did not converge! but was close. going to add 200 more bootstraps 
 
+Check convergence using 
+`raxml-ng-mpi --bsconverge --bs-trees T3.raxml.bootstraps --prefix T4 --seed2 2 --threads 1`
+
+Run 200 more bootstraps
+`raxml-ng --bootstrap --msa alignment.phy --model TPM2uf+I+G4 --prefix T5 --seed 333 --threads 1 --bs-trees 200 --bs-metric fbp,tbe`
+
+Concatenate bootstraps
+`cat T3.raxml.bootstraps T5.raxml.bootstraps > allbootstraps`
+
+Re-assess convergence
+`raxml-ng-mpi --bsconverge --bs-trees allbootstraps --prefix T6 --seed 2 --threads 1 --bs-cutoff 0.03`
+
+Not converged yet! but still getting there. going to add 500 more bootstraps (T7 - T2)
+`raxml-ng --bootstrap --msa alignment.phy --model TPM2uf+I+G4 --prefix T7 --seed 666 --bs-trees 500 --bs-metric fbp,tbe`
+
+Hooray, converged after 1650 bootstraps!
+
+Map BS support values onto best-scoring/best-known ML tree, using .besttree generated in the original run
+`raxml-ng-mpi --support --tree T3.raxml.bestTree --bs-trees allbootstraps --prefix T13 --threads 1`
+
+Tree with support saved as
+`T3.raxml.supportFPB` and `T3.raxml.supportTBE`
+
+Scp back to local computer, import into R to use with phylogenies.R to make trees
+1. copy contents into new directory and save on Github (so I can delete and re-upload new empty version of raxml-ng)
+`cp -r raxml-ng/* raxml-ng-ML-RdRp-Mada`
+
+
+############################################
+### ML RdRp tree - SWIO 
+############################################
+Goal: make an ML tree including RdRp seqs from SWIO area to start investigating some biogeographical patterns 
+
+GATHER SEQUENCES
+1. To the file containing the Madagascar RdRp seqs from the previous tree (plus our two novel seqs), I added SWIO seqs that I found as a result of a lit search. I located seqs from Reunion Island and Mozambique. Altogether, there are now 125 sequences.
+
+ALIGNMENT
+1. In Geneious Prime, I aligned the RdRp sequences using default settings. (same turkey avastrovirus outgroup as other trees)
+
+2. Didn't even need to trim becuase all of the sequences were basically the same length, woohoo!
+
+MODEL TEST
+1. export alignment as a .fasta for model test
+
+2. put into modeltest-ng directory
+
+3. move directory to midway and run
+
+output: 
+AIC	  model              K            lnL          score          delta    $
+--------------------------------------------------------------------------------
+       1  GTR+I+G4          10     -7130.6432     14431.2864         0.0000    $
+       2  TIM2+I+G4          8     -7134.0639     14434.1277         2.8413    $
+       3  TVM+I+G4           9     -7133.2481     14434.4961         3.2097    $
+       4  TIM3+I+G4          8     -7134.7231     14435.4462         4.1599    $
+       5  TrN+I+G4           7     -7137.0093     14438.0185         6.7322    $
+       6  TIM1+I+G4          8     -7136.0322     14438.0644         6.7780    $
+       7  TPM2uf+I+G4        7     -7137.1020     14438.2040         6.9177    $
+       8  TIM2ef+I+G4        5     -7139.6317     14439.2633         7.9770    $
+       9  TPM3uf+I+G4        7     -7137.8550     14439.7099         8.4235    $
+      10  SYM+I+G4           7     -7138.6497     14441.2995        10.0131    $
+--------------------------------------------------------------------------------
+
+GTR+I+G4 is the winner!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BAYESIAN TIMETREE
+Going to make a tree using BEAST to infer MRCA of group of SWIO seqs. 
+*made a directory in the Github folder called beast
+
+Generate .xml for Bayesian timetree using the program BEAUti (Bayesian Evolutionary Analysis Utility)
+
+
+slurm script
+#!/bin/bash
+#SBATCH --job-name=beast
+#SBATCH --account=pi-cbrook
+#SBATCH --partition=broadwl
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --ntasks=8
+#SBATCH --time=36:00:00
+
+module load midway2
+module load java/1.8
+module load cuda/8.0
+module load beagle/trunk
+module load beast/2.6.2
+
+beast -beagle_CPU -seed 777 /home/shorigan/beast/rdrp_swio.xml
 
 
 
