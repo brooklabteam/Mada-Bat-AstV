@@ -43,19 +43,36 @@ Inlcuding one turkey avastrovirus as the outgroup. thus, I removed all other ava
 4. Alignment
 I aligned the 43 complete sequences in Genious using Multiple Alignment -> MAFFT on default settings.
 
-5. I annotated areas with 50% or more gaps by using the Mask alignment function under the Tools menu.This will allow me to optionally remove the gaps when making a phylogeny. not going to do that with the first tree.
 
-5. I used PhyML online server to estimate the nucleotide substitution model
-http://www.atgc-montpellier.fr/phyml/
-GTR is the default (gamma or gamma+I are the options) is R the same as gamma? am I dumb?
+5. export to modeltest-ng on midway
+AIC	  model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  TVM+I+G4           9   -265290.6794    530765.3587         0.0000    0.7123
+       2  GTR+I+G4          10   -265290.5861    530767.1722         1.8135    0.2877
+       3  SYM+I+G4           7   -265328.7775    530837.5550        72.1963    0.0000
+       4  TVMef+I+G4         6   -265333.3942    530844.7885        79.4298    0.0000
+       5  TVM+G4             8   -265374.0650    530930.1301	   164.7714    0.0000
+       6  GTR+G4             9   -265413.1442    531010.2884	   244.9297    0.0000
+       7  TPM2uf+I+G4        7   -265432.2169    531044.4337	   279.0750    0.0000
+       8  TIM2+I+G4          8   -265432.2250    531046.4500	   281.0913    0.0000
+       9  SYM+G4             6   -265453.0287    531084.0574	   318.6987    0.0000
+      10  TIM2ef+I+G4        5   -265468.2232    531112.4464	   347.0877    0.0000
+      
+winner is TVM+I+G4!
 
-RAxML tree (not RAxML-NG tree like Cara did--RAxML also used for taxon rich datasets primarily: https://academic.oup.com/bioinformatics/article/35/21/4453/5487384)
--have to select the number of bootstraps (duh)
--default is FPB (felenstein boostraps) vs TBE. according to this paper, TBE is only introduced when using a large dataset with thousands of taxa: https://www.biorxiv.org/content/10.1101/154542v1.full.pdf
+ML TREE
+1. upload onto midway2
 
-500 bootstrap on my laptop took ~48 hours. Need to install RAxML on the cluster.
+2. check alignment works
+raxml-ng-mpi --check --msa alignment.phy --model TVM+I+G4 --prefix T1
 
-6. moved consensus tree file to R studio to make the figure.
+3. compute threads
+raxml-ng-mpi --parse --msa alignment.phy --model TVM+I+G4 --prefix T2
+
+threads = 7
+
+4. run batch script -- here we go! hope the threads thing works
+
 
 
 
@@ -155,7 +172,7 @@ in this case, looks like this...
 Update: had to manually set the number of bootstraps at 1000, and it did not converge! but was close. going to add 200 more bootstraps 
 
 Check convergence using 
-`raxml-ng-mpi --bsconverge --bs-trees T3.raxml.bootstraps --prefix T4 --seed2 2 --threads 1`
+`raxml-ng-mpi --bsconverge --bs-trees T3.raxml.bootstraps --prefix T4 --seed 2 --threads 1`
 
 Run 200 more bootstraps
 `raxml-ng --bootstrap --msa alignment.phy --model TPM2uf+I+G4 --prefix T5 --seed 333 --threads 1 --bs-trees 200 --bs-metric fbp,tbe`
@@ -220,16 +237,31 @@ AIC	  model              K            lnL          score          delta    $
 GTR+I+G4 is the winner!
 
 
+ML TREE
+1. export alignment as phylip from geneious into copy of raxml-ng directory
 
+2. move directory to midway
 
+3. load raxml-ng
 
+4. test alignment
 
+5. determine threads
 
+6. modify sbatch : model, threads
 
+7. run sbatch
+1000 bootstraps
 
+8. see if it converged
+didn't!!! add 200 more bootstraps
+`raxml-ng-mpi --bootstrap --msa alignment.phy --model GTR+I+G4 --prefix T5 --seed 666 --bs-trees 200 --bs-metric fbp,tbe`
 
+didn't! add 500 more trees. check convergence
+`raxml-ng-mpi --bsconverge --bs-trees allbootstraps --prefix T8 --seed 2 --threads 1`
 
-
+still didn't! add 500 more trees.
+`raxml-ng-mpi --bootstrap --msa alignment.phy --model GTR+I+G4 --prefix T5 --seed 677 --bs-trees 500 --bs-metric fbp,tbe`
 
 
 
