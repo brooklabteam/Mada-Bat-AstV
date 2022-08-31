@@ -1,0 +1,166 @@
+
+RAxML-NG v. 1.1.0-master released on 22.06.2022 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+System: Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz, 28 cores, 62 GB RAM
+
+RAxML-NG was called at 25-Aug-2022 09:36:42 as follows:
+
+raxml-ng-mpi --bootstrap --msa alignment.phy --model TPM2uf+I+G4 --prefix T10 --seed 7 --threads 1 --bs-trees 100 --bs-metric fbp,tbe
+
+Analysis options:
+  run mode: Bootstrapping
+  start tree(s): 
+  bootstrap replicates: 100
+  random seed: 7
+  tip-inner: OFF
+  pattern compression: ON
+  per-rate scalers: OFF
+  site repeats: ON
+  branch lengths: proportional (ML estimate, algorithm: NR-FAST)
+  SIMD kernels: AVX2
+  parallelization: coarse-grained (auto), NONE/sequential
+
+[00:00:00] Reading alignment from file: alignment.phy
+[00:00:00] Loaded alignment with 67 taxa and 433 sites
+
+WARNING: Sequences KY575646 and KY575674 are exactly identical!
+WARNING: Sequences KY575647 and KY575651 are exactly identical!
+WARNING: Duplicate sequences found: 2
+
+NOTE: Reduced alignment (with duplicates and gap-only sites/taxa removed) 
+NOTE: was saved to: /home/shorigan/raxml-ng/T10.raxml.reduced.phy
+
+Alignment comprises 1 partitions and 326 patterns
+
+Partition 0: noname
+Model: TPM2uf+FO+I+G4m
+Alignment sites / patterns: 433 / 326
+Gaps: 7.79 %
+Invariant sites: 27.94 %
+
+
+NOTE: Binary MSA file created: T10.raxml.rba
+
+Parallelization scheme autoconfig: 1 worker(s) x 1 thread(s)
+
+Parallel reduction/worker buffer size: 1 KB  / 0 KB
+
+[00:00:00] Data distribution: max. partitions/sites/weight per thread: 1 / 326 / 5216
+[00:00:00] Data distribution: max. searches per worker: 100
+[00:00:00] Starting bootstrapping analysis with 100 replicates.
+
+[00:00:09] Bootstrap tree #1, logLikelihood: -13072.307960
+[00:00:17] Bootstrap tree #2, logLikelihood: -13485.731607
+[00:00:25] Bootstrap tree #3, logLikelihood: -13709.566990
+[00:00:34] Bootstrap tree #4, logLikelihood: -13602.006853
+[00:00:43] Bootstrap tree #5, logLikelihood: -13349.800444
+[00:00:50] Bootstrap tree #6, logLikelihood: -13525.886306
+[00:00:58] Bootstrap tree #7, logLikelihood: -13068.863143
+[00:01:05] Bootstrap tree #8, logLikelihood: -13643.515505
+[00:01:14] Bootstrap tree #9, logLikelihood: -13202.488409
+[00:01:21] Bootstrap tree #10, logLikelihood: -12750.507146
+[00:01:28] Bootstrap tree #11, logLikelihood: -13436.494740
+[00:01:39] Bootstrap tree #12, logLikelihood: -13894.087003
+[00:01:48] Bootstrap tree #13, logLikelihood: -13734.600948
+[00:02:01] Bootstrap tree #14, logLikelihood: -12986.541041
+[00:02:08] Bootstrap tree #15, logLikelihood: -15264.263737
+[00:02:17] Bootstrap tree #16, logLikelihood: -13268.652206
+[00:02:24] Bootstrap tree #17, logLikelihood: -13230.294839
+[00:02:34] Bootstrap tree #18, logLikelihood: -14053.215709
+[00:02:41] Bootstrap tree #19, logLikelihood: -14017.489628
+[00:02:48] Bootstrap tree #20, logLikelihood: -13291.678483
+[00:02:59] Bootstrap tree #21, logLikelihood: -13579.134205
+[00:03:09] Bootstrap tree #22, logLikelihood: -13211.727015
+[00:03:15] Bootstrap tree #23, logLikelihood: -13905.521218
+[00:03:25] Bootstrap tree #24, logLikelihood: -13150.644560
+[00:03:36] Bootstrap tree #25, logLikelihood: -13722.277485
+[00:03:45] Bootstrap tree #26, logLikelihood: -13559.218874
+[00:04:00] Bootstrap tree #27, logLikelihood: -13532.607380
+[00:04:08] Bootstrap tree #28, logLikelihood: -13055.228533
+[00:04:15] Bootstrap tree #29, logLikelihood: -13542.635165
+[00:04:27] Bootstrap tree #30, logLikelihood: -12876.876845
+[00:04:34] Bootstrap tree #31, logLikelihood: -12901.659511
+[00:04:42] Bootstrap tree #32, logLikelihood: -13311.481211
+[00:04:48] Bootstrap tree #33, logLikelihood: -13988.760299
+[00:05:02] Bootstrap tree #34, logLikelihood: -12601.057150
+[00:05:12] Bootstrap tree #35, logLikelihood: -14140.974517
+[00:05:21] Bootstrap tree #36, logLikelihood: -13669.350605
+[00:05:30] Bootstrap tree #37, logLikelihood: -13797.410977
+[00:05:37] Bootstrap tree #38, logLikelihood: -14572.013765
+[00:05:44] Bootstrap tree #39, logLikelihood: -13210.522740
+[00:05:53] Bootstrap tree #40, logLikelihood: -11706.621378
+[00:06:01] Bootstrap tree #41, logLikelihood: -13552.121926
+[00:06:13] Bootstrap tree #42, logLikelihood: -13350.057199
+[00:06:24] Bootstrap tree #43, logLikelihood: -13529.309981
+[00:06:35] Bootstrap tree #44, logLikelihood: -14210.586462
+[00:06:42] Bootstrap tree #45, logLikelihood: -13885.305425
+[00:06:56] Bootstrap tree #46, logLikelihood: -13778.698507
+[00:07:03] Bootstrap tree #47, logLikelihood: -13550.511216
+[00:07:23] Bootstrap tree #48, logLikelihood: -14189.896156
+[00:07:33] Bootstrap tree #49, logLikelihood: -12741.105802
+[00:07:41] Bootstrap tree #50, logLikelihood: -14338.821129
+[00:07:51] Bootstrap tree #51, logLikelihood: -13215.392405
+[00:07:59] Bootstrap tree #52, logLikelihood: -13249.846607
+[00:08:07] Bootstrap tree #53, logLikelihood: -13373.696632
+[00:08:16] Bootstrap tree #54, logLikelihood: -12825.714097
+[00:08:23] Bootstrap tree #55, logLikelihood: -13966.445807
+[00:08:32] Bootstrap tree #56, logLikelihood: -14027.967717
+[00:08:48] Bootstrap tree #57, logLikelihood: -13507.429361
+[00:09:00] Bootstrap tree #58, logLikelihood: -13884.820671
+[00:09:08] Bootstrap tree #59, logLikelihood: -13800.246429
+[00:09:22] Bootstrap tree #60, logLikelihood: -12846.548561
+[00:09:31] Bootstrap tree #61, logLikelihood: -12652.964798
+[00:09:46] Bootstrap tree #62, logLikelihood: -13137.439337
+[00:09:56] Bootstrap tree #63, logLikelihood: -13331.191707
+[00:10:06] Bootstrap tree #64, logLikelihood: -13134.059497
+[00:10:15] Bootstrap tree #65, logLikelihood: -12952.125201
+[00:10:27] Bootstrap tree #66, logLikelihood: -13234.497451
+[00:10:37] Bootstrap tree #67, logLikelihood: -12976.606197
+[00:10:49] Bootstrap tree #68, logLikelihood: -13145.092178
+[00:10:58] Bootstrap tree #69, logLikelihood: -13396.301842
+[00:11:18] Bootstrap tree #70, logLikelihood: -13528.951226
+[00:11:27] Bootstrap tree #71, logLikelihood: -12897.039539
+[00:11:35] Bootstrap tree #72, logLikelihood: -13323.248499
+[00:11:44] Bootstrap tree #73, logLikelihood: -13869.934084
+[00:11:58] Bootstrap tree #74, logLikelihood: -13583.878412
+[00:12:16] Bootstrap tree #75, logLikelihood: -14192.461955
+[00:12:24] Bootstrap tree #76, logLikelihood: -13020.004826
+[00:12:36] Bootstrap tree #77, logLikelihood: -12631.757882
+[00:12:46] Bootstrap tree #78, logLikelihood: -13156.838086
+[00:12:56] Bootstrap tree #79, logLikelihood: -13714.380255
+[00:13:04] Bootstrap tree #80, logLikelihood: -13682.412916
+[00:13:22] Bootstrap tree #81, logLikelihood: -13160.399196
+[00:13:32] Bootstrap tree #82, logLikelihood: -12964.072883
+[00:13:39] Bootstrap tree #83, logLikelihood: -13654.508509
+[00:13:48] Bootstrap tree #84, logLikelihood: -13390.006861
+[00:13:56] Bootstrap tree #85, logLikelihood: -12868.927964
+[00:14:11] Bootstrap tree #86, logLikelihood: -13300.946734
+[00:14:18] Bootstrap tree #87, logLikelihood: -13319.002708
+[00:14:33] Bootstrap tree #88, logLikelihood: -14105.490548
+[00:14:41] Bootstrap tree #89, logLikelihood: -13122.888896
+[00:14:49] Bootstrap tree #90, logLikelihood: -13214.041609
+[00:14:56] Bootstrap tree #91, logLikelihood: -13857.159399
+[00:15:04] Bootstrap tree #92, logLikelihood: -13305.296805
+[00:15:12] Bootstrap tree #93, logLikelihood: -13824.835141
+[00:15:21] Bootstrap tree #94, logLikelihood: -13349.365686
+[00:15:29] Bootstrap tree #95, logLikelihood: -13070.973400
+[00:15:38] Bootstrap tree #96, logLikelihood: -13870.632429
+[00:15:47] Bootstrap tree #97, logLikelihood: -12857.591288
+[00:15:55] Bootstrap tree #98, logLikelihood: -12771.760632
+[00:16:01] Bootstrap tree #99, logLikelihood: -13786.594691
+[00:16:12] Bootstrap tree #100, logLikelihood: -12739.056868
+
+Bootstrap trees saved to: /home/shorigan/raxml-ng/T10.raxml.bootstraps
+
+Execution log saved to: /home/shorigan/raxml-ng/T10.raxml.log
+
+Analysis started: 25-Aug-2022 09:36:42 / finished: 25-Aug-2022 09:52:54
+
+Elapsed time: 972.539 seconds
+
+Consumed energy: 39.876 Wh
+

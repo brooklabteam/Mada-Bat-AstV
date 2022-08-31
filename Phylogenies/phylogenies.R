@@ -1,17 +1,23 @@
 rm(list=ls())
 
 #time to make Fig3A
-
+#install.packages('ggplot2')
 library(ggplot2)
-#install.packages('ggtree')
+install.packages('ggtree')
 library(ggtree)
 library(ape)
+#install.packages('ape')
+install.packages('ggnewscale')
 library(ggnewscale)
+#install.packages('tidyverse')
 library(tidyverse)
+library(dplyr)
+#install.packages('dplyr')
 
-homewd= "/Users/SophiaHorigan/Documents/GitHub/Mada-Bat-Astro/"
 
-setwd(paste0(homewd, "/Fig3"))
+homewd= "/Users/shorigan/Documents/GitHub/Mada-Bat-Astro/"
+
+setwd(paste0(homewd, "/Phylogenies"))
 
 
 #########################
@@ -19,17 +25,16 @@ setwd(paste0(homewd, "/Fig3"))
 #########################
 
 #load the fig3a tree
-treeA <-  read.tree(file = paste0(homewd, "Fig3/mam_fg_500bs.newick"))
+treeA <-  read.tree(file = paste0(homewd, "Phylogenies/RdRp-Mada-ML"))
 
 #root it
 
-
-rooted.tree.A <- root(treeA, which(treeA$tip.label == "NC_002470"))
+rooted.tree.A <- root(treeA, which(treeA$tip.label == "NC_002470___RdRp"))
 #take a quick look in base R
 plot(rooted.tree.A)
 
 #load tree data prepared from elsewhere
-dat <- read.csv(file=paste0(homewd,"Fig3/astro_meta_full.csv"), header = T, stringsAsFactors = F)
+dat <- read.csv(file=paste0(homewd,"Phylogenies/astro_meta_full.csv"), header = T, stringsAsFactors = F)
 head(dat)
 #dat <- dat[-c(10:17)]
 #check subgroup names
@@ -77,8 +82,9 @@ head(dat)
 #for some reason there are quotations around our new samples, need to remove
 #SEE IF YOU CAN FIX THIS IN THE EXPORT FROM GENEIOUS
 ## NEED TO SEE WHERE THE NAMES END UP IN TREE.DAT
-tree.dat[42,1] = "F_MIZ141_RR034B_198_NODE_4_length_6593_cov_808.543744"
-tree.dat[43,1] = "F_MIZ141_RR034B_198_NODE_5_length_6456_cov_49.595532"
+tree.dat[5,1] = "F_MIZ141_1"
+tree.dat[6,1] = "F_MIZ141_2"
+tree.dat[3,1] = "NC_002470"
 
 tree.dat <- merge(tree.dat, dat, by = "old_tip_label", all.x = T, sort = F)
 

@@ -1,6 +1,9 @@
 Accession,Strain,Genus,Geo_Location,Host,Animal,Family,Year,Bat_host
-F_MIZ141_RR034B_198_NODE_4_length_6593_cov_808.543744,Bat astrovirus,Mamastrovirus,Madagascar,Rousettus madagascariensis,Bat,Pteropidae,2018,1
-F_MIZ141_RR034B_198_NODE_5_length_6456_cov_49.595532,Bat astrovirus,Mamastrovirus,Madagascar,Rousettus madagascariensis,Bat,Pteropidae,2018,1
+F_MIZ141_1,Bat astrovirus,Mamastrovirus,Madagascar,Rousettus madagascariensis,Bat,Pteropodidae,2018,1
+F_MIZ141_2,Bat astrovirus,Mamastrovirus,Madagascar,Rousettus madagascariensis,Bat,Pteropodidae,2018,1
+MG693176,Bat astrovirus,Mamastrovirus,Cameroon,Eidolon helvum,Bat,Pteropodidae,2013,1
+MZ218054,Bat astrovirus,Mamastrovirus,Denmark,Myotis daubentonii,Bat,Vespertillionidae,2015,1
+MZ218053,Bat astrovirus,Mamastrovirus,Denmark,Myotis daubentonii,Bat,Vespertillionidae,2015,1
 MN832787,Bat astrovirus,Mamastrovirus,Denmark,Myotis daubentonii,Bat,Vespertillionidae,2014,1
 MT734809,Bat astrovirus,Mamastrovirus,USA,Chiroptera,Bat,Unknown,2020,1
 NC_001943,Human astrovirus,Mamastrovirus,Unknown,Homo sapiens,Human,Hominidae,,0

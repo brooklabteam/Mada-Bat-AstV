@@ -1,0 +1,232 @@
+Physical cores: 14
+Logical cores:  28
+Memory:         62.2GB
+Extensions:     AVX
+
+WARNING: MSA has not enough sites to infer reliable results
+Creating new checkpoint file: alignment.fasta.ckp
+--------------------------------------------------------------------------------
+ModelTest-NG v0.1.7
+
+Input data:
+  MSA:        alignment.fasta
+  Tree:       Maximum likelihood
+    file:           -
+  #taxa:            43
+  #sites:           9913
+  #patterns:        8549
+  Max. thread mem:  177 MB
+
+Output:
+  Log:           alignment.fasta.log
+  Starting tree: alignment.fasta.tree
+  Results:       alignment.fasta.out
+
+Selection options:
+  # dna schemes:      11
+  # dna models:       88
+  include model parameters:
+    Uniform:         true
+    p-inv (+I):      true
+    gamma (+G):      true
+    both (+I+G):     true
+    free rates (+R): false
+    fixed freqs:     true
+    estimated freqs: true
+    #categories:     4
+  gamma rates mode:   mean
+  asc bias:           none
+  epsilon (opt):      0.01
+  epsilon (par):      0.05
+  keep branches:      false
+
+Additional options:
+  verbosity:        very low
+  threads:          8/14
+  RNG seed:         12345
+  subtree repeats:  enabled
+--------------------------------------------------------------------------------
+modeltest-ng was called as follows: 
+>> modeltest-ng -i alignment.fasta -t ml -p 8 
+
+
+Partition 1/1
+
+ ----ID---  ----MODEL---- ---Time--- -Elapsed--- -------LnL------- -Alpha- -P-inv-
+
+Computation of likelihood scores completed. It took 0h:17:29
+
+BIC       model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  TVM+I+G4           9   -265290.6794    531427.9061         0.0000    0.9891
+       2  GTR+I+G4          10   -265290.5861    531436.9212         9.0151    0.0109
+       3  SYM+I+G4           7   -265328.7775    531485.6992        57.7931    0.0000
+       4  TVMef+I+G4         6   -265333.3942    531485.7311        57.8250    0.0000
+       5  TVM+G4             8   -265374.0650    531585.4759       157.5698    0.0000
+       6  GTR+G4             9   -265413.1442    531672.8358       244.9297    0.0000
+       7  TPM2uf+I+G4        7   -265432.2169    531692.5779       264.6718    0.0000
+       8  TIM2+I+G4          8   -265432.2250    531701.7958       273.8897    0.0000
+       9  SYM+G4             6   -265453.0287    531725.0000       297.0939    0.0000
+      10  TPM2+I+G4          4   -265472.2546    531745.0485       317.1424    0.0000
+--------------------------------------------------------------------------------
+Best model according to BIC
+---------------------------
+Model:              TVM+I+G4
+lnL:                -265290.6794
+Frequencies:        0.2555 0.2477 0.2368 0.2600
+Subst. Rates:       2.1153 3.5342 1.3298 1.2415 3.5342 1.0000 
+Inv. sites prop:    0.0219
+Gamma shape:        1.1000
+Score:              531427.9061
+Weight:             0.9891
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              0.0000
+Gamma-Inv:          1.0000
+Frequencies:        1.0000
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              0.9500
+Alpha-P.Inv:        1.1000
+P.Inv-Alpha:        0.0219
+Frequencies:        0.2555 0.2477 0.2368 0.2600 
+
+Commands:
+  > phyml  -i alignment.fasta -m 012314 -f m -v e -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s alignment.fasta -m GTRGAMMAIX -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa alignment.fasta --model TVM+I+G4
+  > paup -s alignment.fasta
+  > iqtree -s alignment.fasta -m TVM+I+G4
+
+AIC       model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  TVM+I+G4           9   -265290.6794    530765.3587         0.0000    0.7123
+       2  GTR+I+G4          10   -265290.5861    530767.1722         1.8135    0.2877
+       3  SYM+I+G4           7   -265328.7775    530837.5550        72.1963    0.0000
+       4  TVMef+I+G4         6   -265333.3942    530844.7885        79.4298    0.0000
+       5  TVM+G4             8   -265374.0650    530930.1301       164.7714    0.0000
+       6  GTR+G4             9   -265413.1442    531010.2884       244.9297    0.0000
+       7  TPM2uf+I+G4        7   -265432.2169    531044.4337       279.0750    0.0000
+       8  TIM2+I+G4          8   -265432.2250    531046.4500       281.0913    0.0000
+       9  SYM+G4             6   -265453.0287    531084.0574       318.6987    0.0000
+      10  TIM2ef+I+G4        5   -265468.2232    531112.4464       347.0877    0.0000
+--------------------------------------------------------------------------------
+Best model according to AIC
+---------------------------
+Model:              TVM+I+G4
+lnL:                -265290.6794
+Frequencies:        0.2555 0.2477 0.2368 0.2600
+Subst. Rates:       2.1153 3.5342 1.3298 1.2415 3.5342 1.0000 
+Inv. sites prop:    0.0219
+Gamma shape:        1.1000
+Score:              530765.3587
+Weight:             0.7123
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              0.0000
+Gamma-Inv:          1.0000
+Frequencies:        1.0000
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              0.9500
+Alpha-P.Inv:        1.1000
+P.Inv-Alpha:        0.0219
+Frequencies:        0.2556 0.2476 0.2369 0.2599 
+
+Commands:
+  > phyml  -i alignment.fasta -m 012314 -f m -v e -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s alignment.fasta -m GTRGAMMAIX -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa alignment.fasta --model TVM+I+G4
+  > paup -s alignment.fasta
+  > iqtree -s alignment.fasta -m TVM+I+G4
+
+AICc      model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  TVM+I+G4           9   -265290.6794    530766.3587         0.0000    0.7123
+       2  GTR+I+G4          10   -265290.5861    530768.1722         1.8135    0.2877
+       3  SYM+I+G4           7   -265328.7775    530838.5550        72.1963    0.0000
+       4  TVMef+I+G4         6   -265333.3942    530845.7885        79.4298    0.0000
+       5  TVM+G4             8   -265374.0650    530931.1301       164.7714    0.0000
+       6  GTR+G4             9   -265413.1442    531011.2884       244.9297    0.0000
+       7  TPM2uf+I+G4        7   -265432.2169    531045.4337       279.0750    0.0000
+       8  TIM2+I+G4          8   -265432.2250    531047.4500       281.0913    0.0000
+       9  SYM+G4             6   -265453.0287    531085.0574       318.6987    0.0000
+      10  TIM2ef+I+G4        5   -265468.2232    531113.4464       347.0877    0.0000
+--------------------------------------------------------------------------------
+Best model according to AICc
+---------------------------
+Model:              TVM+I+G4
+lnL:                -265290.6794
+Frequencies:        0.2555 0.2477 0.2368 0.2600
+Subst. Rates:       2.1153 3.5342 1.3298 1.2415 3.5342 1.0000 
+Inv. sites prop:    0.0219
+Gamma shape:        1.1000
+Score:              530766.3587
+Weight:             0.7123
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              0.0000
+Gamma-Inv:          1.0000
+Frequencies:        1.0000
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              0.9500
+Alpha-P.Inv:        1.1000
+P.Inv-Alpha:        0.0219
+Frequencies:        0.2556 0.2476 0.2369 0.2599 
+
+Commands:
+  > phyml  -i alignment.fasta -m 012314 -f m -v e -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s alignment.fasta -m GTRGAMMAIX -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa alignment.fasta --model TVM+I+G4
+  > paup -s alignment.fasta
+  > iqtree -s alignment.fasta -m TVM+I+G4
+
+There are 16 different topologies
+Topologies written to alignment.fasta.topos
+
+topo_id   models_count   bic_support   aic_support   aicc_support
+-----------------------------------------------------------------
+      1             25       1.00000       1.00000       1.00000
+      3              2       0.00000       0.00000       0.00000
+      5              8       0.00000       0.00000       0.00000
+      4              2       0.00000       0.00000       0.00000
+      6              4       0.00000       0.00000       0.00000
+      7              1       0.00000       0.00000       0.00000
+      2              2       0.00000       0.00000       0.00000
+      8             20       0.00000       0.00000       0.00000
+      9              1       0.00000       0.00000       0.00000
+     10              1       0.00000       0.00000       0.00000
+     11             11       0.00000       0.00000       0.00000
+     12              3       0.00000       0.00000       0.00000
+     13              5       0.00000       0.00000       0.00000
+     14              1       0.00000       0.00000       0.00000
+     15              1       0.00000       0.00000       0.00000
+     16              1       0.00000       0.00000       0.00000
+
+extended majority-rule consensus: ((NC_024472,((NC_019026,NC_013060)[1.00000],(NC_019027,NC_013443)[1.00000])[1.00000])[1.00000],(NC_019494,(NC_004579,NC_024701)[1.00000])[1.00000],((NC_024498,NC_002469)[1.00000],((F_MIZ141_RR034B_198_NODE_5_length_6456_cov_49.595532,F_MIZ141_RR034B_198_NODE_4_length_6593_cov_808.543744)[1.00000],((((((NC_033821,NC_025346)[1.00000],((NC_026814,((NC_025379,NC_022249)[1.00000],(NC_030922,NC_001943)[1.00000])[1.00000])[1.00000],(((NC_036583,NC_018702)[1.00000],(NC_023675,NC_016896)[1.00000])[1.00000],(((NC_023631,(NC_023630,(NC_037655,NC_024297)[1.00000])[1.00000])[1.00000],(NC_023632,NC_023629)[1.00000])[1.00000],(NC_023674,(NC_027711,NC_034974)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(NC_033792,(NC_011400,(NC_019028,NC_016155)[1.00000])[1.00000])[1.00000])[1.00000],(NC_035758,NC_032423)[1.00000])[1.00000],(NC_023636,NC_002470)[1.00000])[1.00000],(NC_015935,(MT734809,MN832787)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000]);
+strict consensus: ((NC_024472,((NC_019026,NC_013060)[1.00000],(NC_019027,NC_013443)[1.00000])[1.00000])[1.00000],(NC_019494,(NC_004579,NC_024701)[1.00000])[1.00000],((NC_024498,NC_002469)[1.00000],((F_MIZ141_RR034B_198_NODE_5_length_6456_cov_49.595532,F_MIZ141_RR034B_198_NODE_4_length_6593_cov_808.543744)[1.00000],((((((NC_033821,NC_025346)[1.00000],((NC_026814,((NC_025379,NC_022249)[1.00000],(NC_030922,NC_001943)[1.00000])[1.00000])[1.00000],(((NC_036583,NC_018702)[1.00000],(NC_023675,NC_016896)[1.00000])[1.00000],(((NC_023631,(NC_023630,(NC_037655,NC_024297)[1.00000])[1.00000])[1.00000],(NC_023632,NC_023629)[1.00000])[1.00000],(NC_023674,(NC_027711,NC_034974)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(NC_033792,(NC_011400,(NC_019028,NC_016155)[1.00000])[1.00000])[1.00000])[1.00000],(NC_035758,NC_032423)[1.00000])[1.00000],(NC_023636,NC_002470)[1.00000])[1.00000],(NC_015935,(MT734809,MN832787)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000]);
+
+Summary:
+
+Partition 1/1:
+                         Model         Score        Weight
+----------------------------------------------------------
+       BIC            TVM+I+G4   531427.9061        0.9891
+       AIC            TVM+I+G4   530765.3587        0.7123
+      AICc            TVM+I+G4   530766.3587        0.7123
+
+Execution results written to alignment.fasta.out
+Starting tree written to alignment.fasta.tree
