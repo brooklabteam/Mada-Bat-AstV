@@ -3,11 +3,11 @@ rm(list=ls())
 #time to make Fig3A
 #install.packages('ggplot2')
 library(ggplot2)
-install.packages('ggtree')
+#nstall.packages('ggtree')
 library(ggtree)
 library(ape)
 #install.packages('ape')
-install.packages('ggnewscale')
+#nstall.packages('ggnewscale')
 library(ggnewscale)
 #install.packages('tidyverse')
 library(tidyverse)
@@ -25,11 +25,11 @@ setwd(paste0(homewd, "/Phylogenies"))
 #########################
 
 #load the fig3a tree
-treeA <-  read.tree(file = paste0(homewd, "Phylogenies/RdRp-Mada-ML"))
+treeA <-  read.tree(file = paste0(homewd, "Phylogenies/full-ML-tree"))
 
 #root it
 
-rooted.tree.A <- root(treeA, which(treeA$tip.label == "NC_002470___RdRp"))
+rooted.tree.A <- root(treeA, which(treeA$tip.label == "NC_002470"))
 #take a quick look in base R
 plot(rooted.tree.A)
 
@@ -82,9 +82,9 @@ head(dat)
 #for some reason there are quotations around our new samples, need to remove
 #SEE IF YOU CAN FIX THIS IN THE EXPORT FROM GENEIOUS
 ## NEED TO SEE WHERE THE NAMES END UP IN TREE.DAT
-tree.dat[5,1] = "F_MIZ141_1"
-tree.dat[6,1] = "F_MIZ141_2"
-tree.dat[3,1] = "NC_002470"
+#tree.dat[5,1] = "F_MIZ141_1"
+#tree.dat[6,1] = "F_MIZ141_2"
+#tree.dat[3,1] = "NC_002470"
 
 tree.dat <- merge(tree.dat, dat, by = "old_tip_label", all.x = T, sort = F)
 
@@ -123,7 +123,7 @@ p1_family <- ggtree(rooted.tree.A) %<+% tree.dat + geom_tippoint(aes(color=Famil
   new_scale_fill() +
   geom_tiplab( aes(fill = novel), geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
   scale_fill_manual(values=colz2) + 
-  theme(legend.position = c(.1,.6), legend.title = element_blank()) +
+  theme(legend.position = c(.9,.6), legend.title = element_blank()) +
   xlim(c(0,6))
 p1_family
 
@@ -160,7 +160,7 @@ p1_common <- ggtree(rooted.tree.A, size = 1) %<+% tree.dat + geom_tippoint(aes(c
 p1_common
 
 
-ggsave(file = paste0(homewd, "/final-figures/Fig3_poster_4.png"),
+ggsave(file = paste0(homewd, "/final-figures/ml-full-genome-wbastro.png"),
        plot = p1_family,
        units="mm",  
        width=150, 
@@ -178,24 +178,24 @@ ggsave(file = paste0(homewd, "/final-figures/Fig3_poster_4.png"),
 #########################
 ##Madabat tree
 #load the fig3a tree
-treeB <-  read.tree(file = paste0(homewd, "Fig3/rdrp-madabat_1000bs.newick"))
+treeB <-  read.tree(file = paste0(homewd, "Phylogenies/RdRp-Mada-ML-tree"))
 
 #remove quotes
 treeB$tip.label <- gsub("'", '', treeB$tip.label)
 
 #root it
-rooted.tree.B <- root(treeB, which(treeB$tip.label == "NC_002470 - RdRp"))
+rooted.tree.B <- root(treeB, which(treeB$tip.label == "NC_002470___RdRp"))
 
 #take a quick look in base R
 plot(rooted.tree.B)
 
 #load tree data prepared from elsewhere
-datB <- read.csv(file=paste0(homewd,"Fig3/astro_meta_rdrp_madabat.csv"), header = T, stringsAsFactors = F)
+datB <- read.csv(file=paste0(homewd,"Phylogenies/astro_meta_rdrp_madabat.csv"), header = T, stringsAsFactors = F)
 head(datB)
 
 #manually change names to prevent errors
-datB[1,1] <- "F_MIZ141_RR034B_198_NODE_4_length_6593_cov_808.543744"
-datB[2,1] <- "F_MIZ141_RR034B_198_NODE_5_length_6456_cov_49.595532"
+#datB[1,1] <- "F_MIZ141_RR034B_198_NODE_4_length_6593_cov_808.543744"
+#datB[2,1] <- "F_MIZ141_RR034B_198_NODE_5_length_6456_cov_49.595532"
 #check subgroup names
 unique(datB$Genus)
 
@@ -251,6 +251,7 @@ shapez = c("novel" =  24, "previously published" = 21)
 colz2 = c('1' =  "yellow", '0' = "white")
 
 ## Tree 1: Colored by family, shaped by novel or not novel
+# doesn't work
 pb <- ggtree(rooted.tree.B) %<+% tree.datB + geom_tippoint(aes(color=Family, fill=Family, shape=novel)) +
   geom_nodelab(size=1.5,nudge_x = -.05, nudge_y = .7) +
   scale_color_manual(values=colz) + 
@@ -290,7 +291,7 @@ pB_common <- ggtree(rooted.tree.B, size = 1) %<+% tree.datB + geom_tippoint(aes(
 pB_common
 
 
-ggsave(file = paste0(homewd, "/final-figures/Mada-bat-RdRp.png"),
+ggsave(file = paste0(homewd, "/final-figures/ML-Mada-bat-RdRp_sept1.png"),
        plot = pB_family,
        units="mm",  
        width=150, 
@@ -300,8 +301,149 @@ ggsave(file = paste0(homewd, "/final-figures/Mada-bat-RdRp.png"),
 
 
 
-#####now combine the two together somehow
 
+#####################
+## SWIO RdRp
+#####################
+
+##Madabat tree
+#load the fig3a tree
+treeC <-  read.tree(file = paste0(homewd, "Phylogenies/RdRp-SWIO-ML-tree"))
+
+#remove quotes
+treeC$tip.label <- gsub("'", '', treeC$tip.label)
+
+#root it
+rooted.tree.C <- root(treeC, which(treeC$tip.label == "NC_002470"))
+
+#take a quick look in base R
+plot(rooted.tree.C)
+
+#load tree data prepared from elsewhere
+datC <- read.csv(file=paste0(homewd,"Phylogenies/astro_meta_rdrp_SWIO.csv"), header = T, stringsAsFactors = F)
+head(datC)
+
+#manually change names to prevent errors
+#datB[1,1] <- "F_MIZ141_RR034B_198_NODE_4_length_6593_cov_808.543744"
+#datB[2,1] <- "F_MIZ141_RR034B_198_NODE_5_length_6456_cov_49.595532"
+#check subgroup names
+unique(datC$Genus)
+
+colz = c("Mamastrovirus" = "royalblue", "Avastrovirus" = "tomato")
+
+#pick order for the labels
+datC$Genus <- factor(datC$Genus, levels = c("Mamastrovirus", "Avastrovirus"))   
+
+#and add a "novel" category
+#datB$novel = 0
+#datB$novel[datB$Geo_Location=="Madagascar"] <- 1
+#datB$novel <- as.factor(datB$novel)
+
+#rooted.tree.A$node.label <- round(as.numeric(rooted.tree.A$node.label)*100, 0)
+
+#take a glance
+p3 <- ggtree(rooted.tree.C) %<+% datC + geom_tippoint(aes(color=Genus)) +
+  geom_tiplab(size=1) + geom_nodelab(size=1) +
+  scale_color_manual(values=colz) + theme(legend.position = c(.2,.85), legend.title = element_blank())
+p3 #why are some of the tips grey?
+
+#now get new tip labels
+datC$old_tip_label <- datC$Accession
+datC$new_label <- NA
+datC$new_label[!is.na(datC$Strain)] <- paste(datC$Accession[!is.na(datC$Strain)], " | ", 
+                                             datC$Family[!is.na(datC$Strain)], "|" ,
+                                             datC$Host[!is.na(datC$Strain)])
+
+#dat$new_label[is.na(dat$strain)] <- paste(dat$accession_num[is.na(dat$strain)], " | ", 
+#                                         dat$host[is.na(dat$strain)], " | ",
+#                                          dat$country[is.na(dat$strain)], " | ",
+#                                          dat$collection_year[is.na(dat$strain)])
+
+#after Gwen checks these, can later manually edit any that are "NA"
+
+#make sure to sort in order
+tree.datC <- data.frame(old_tip_label=rooted.tree.C$tip.label, num =1:length(rooted.tree.C$tip.label))
+head(tree.datC)
+head(datC)
+
+tree.datC <- merge(tree.datC, datC, by = "old_tip_label", all.x = T, sort = F)
+
+names(tree.datC)
+
+tree.datC$tip_label <- tree.datC$new_label
+tree.datC <- dplyr::select(tree.datC, tip_label, Accession, Strain, Host, Geo_Location, Year, Genus, novel, old_tip_label, Family, Animal)
+
+rooted.tree.C$tip.label <- tree.datC$tip_label
+
+tree.datC$novel[tree.datC$novel==0] <- "previously published"
+tree.datC$novel[tree.datC$novel==1] <- "novel"
+tree.datC$novel <- as.factor(tree.datC$novel)
+shapez = c("novel" =  24, "previously published" = 21)
+colz2 = c('1' =  "yellow", '0' = "white")
+
+## color tip by family
+pC_family <- ggtree(rooted.tree.C) %<+% tree.datC + geom_tippoint(aes(color=Family, fill=Family, shape=novel)) +
+  geom_nodelab(size=1.5,nudge_x = -.05, nudge_y = .7) +
+  #scale_color_manual(values=colz) + 
+  #scale_fill_manual(values=colz) +
+  scale_shape_manual(values=shapez) + 
+  new_scale_fill() +
+  geom_tiplab(geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
+  #scale_fill_manual(values=colz2) + 
+  theme(legend.position = c(.1,.6), legend.title = element_blank()) +
+  xlim(c(0,5.6))
+pC_family
+
+## color tip by geo_location
+pC_geo <- ggtree(rooted.tree.C) %<+% tree.datC + geom_tippoint(aes(color=Geo_Location, fill=Geo_Location, shape=novel)) +
+  geom_nodelab(size=1.5,nudge_x = -.05, nudge_y = .7) +
+  #scale_color_manual(values=colz) + 
+  #scale_fill_manual(values=colz) +
+  scale_shape_manual(values=shapez) + 
+  new_scale_fill() +
+  geom_tiplab(geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
+  #scale_fill_manual(values=colz2) + 
+  theme(legend.position = c(.1,.6), legend.title = element_blank()) +
+  xlim(c(0,5.6))
+pC_geo
+
+## color tip by common name
+pB_common <- ggtree(rooted.tree.B, size = 1) %<+% tree.datB + geom_tippoint(aes(color=Animal, fill=Animal, shape=Bat_host, size=1)) +
+  geom_nodelab(size=1.8,nudge_x = -0.11, nudge_y = .4) +
+  #scale_color_manual(values=colz) + 
+  #scale_fill_manual(values=colz) +
+  scale_shape_manual(values=shapez) + 
+  new_scale_fill() +
+  geom_tiplab( aes(fill = novel), geom = "label", label.size = 0, alpha=.3,size=3, show.legend=F) +
+  scale_fill_manual(values=colz2) + 
+  theme(legend.position = c(.05,.6), legend.title = element_blank()) +
+  xlim(c(0,10.5))
+pB_common
+
+
+ggsave(file = paste0(homewd, "/final-figures/ML-Mada-bat-RdRp_sept1.png"),
+       plot = pB_family,
+       units="mm",  
+       width=150, 
+       height=100, 
+       #limitsize = F,
+       scale=4)#, 
+
+
+
+
+
+
+
+
+
+
+
+
+
+#####################
+## Combining figures
+#####################
 
 ###wrking on p1
 

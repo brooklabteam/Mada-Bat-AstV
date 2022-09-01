@@ -301,6 +301,24 @@ DRC - 2012
 Tanzania - 2013
 Cameroon - 2013
 
+Total seqs = 298
+
+ALIGNMENT
+1. align in geneious using mafft, default settings
+
+2. trim alignment
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

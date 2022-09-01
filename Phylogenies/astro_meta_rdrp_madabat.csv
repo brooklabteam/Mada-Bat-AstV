@@ -1,6 +1,6 @@
 Accession,Strain,Genus,Geo_Location,Host,Animal,Family,Year,novel,mada
-F_MIZ141_RR034B_198_NODE_4_length_6593_cov_808.543744 - RdRp,Bat astrovirus,Mamastrovirus,Madagascar,Rousettus madagascariensis,Bat,Pteropidae,2018,1,1
-F_MIZ141_RR034B_198_NODE_5_length_6456_cov_49.595532- RdRp,Bat astrovirus,Mamastrovirus,Madagascar,Rousettus madagascariensis,Bat,Pteropidae,2018,1,1
+F_MIZ141_1,Bat astrovirus,Mamastrovirus,Madagascar,Rousettus madagascariensis,Bat,Pteropidae,2018,1,1
+F_MIZ141_2,Bat astrovirus,Mamastrovirus,Madagascar,Rousettus madagascariensis,Bat,Pteropidae,2018,1,1
 KY575644,Bat astrovirus,Mamastrovirus,Madagascar,Miniopterus griveaudi,Bat,Miniopteridae,2014,0,1
 KY575645,Bat astrovirus,Mamastrovirus,Madagascar,Miniopterus griveaudi,Bat,Miniopteridae,2014,0,1
 KY575646,Bat astrovirus,Mamastrovirus,Madagascar,Miniopterus griveaudi,Bat,Miniopteridae,2014,0,1
@@ -65,4 +65,4 @@ MZ614433,Bat astrovirus,Mamastrovirus,Madagascar,Miniopterus gleni,Bat,Miniopter
 MZ614434,Bat astrovirus,Mamastrovirus,Madagascar,Miniopterus gleni,Bat,Miniopteridae,2012,0,1
 MZ614435,Bat astrovirus,Mamastrovirus,Madagascar,Miniopterus gleni,Bat,Miniopteridae,2012,0,1
 MZ614436,Bat astrovirus,Mamastrovirus,Madagascar,Miniopterus gleni,Bat,Miniopteridae,2012,0,1
-NC_002470 - RdRp,Turkey astrovirus,Avastrovirus,Unknown,Meleagris gallopavo,Turkey,Phasianidae,XXXX,0,0
+NC_002470,Turkey astrovirus,Avastrovirus,Unknown,Meleagris gallopavo,Turkey,Phasianidae,XXXX,0,0
