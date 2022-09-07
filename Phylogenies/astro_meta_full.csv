@@ -1,47 +1,47 @@
-Accession,Strain,Genus,Geo_Location,Host,Animal,Family,Year,Bat_host
-F_MIZ141_1,Bat astrovirus,Mamastrovirus,Madagascar,Rousettus madagascariensis,Bat,Pteropodidae,2018,1
-F_MIZ141_2,Bat astrovirus,Mamastrovirus,Madagascar,Rousettus madagascariensis,Bat,Pteropodidae,2018,1
-MG693176,Bat astrovirus,Mamastrovirus,Cameroon,Eidolon helvum,Bat,Pteropodidae,2013,1
-MZ218054,Bat astrovirus,Mamastrovirus,Denmark,Myotis daubentonii,Bat,Vespertillionidae,2015,1
-MZ218053,Bat astrovirus,Mamastrovirus,Denmark,Myotis daubentonii,Bat,Vespertillionidae,2015,1
-MN832787,Bat astrovirus,Mamastrovirus,Denmark,Myotis daubentonii,Bat,Vespertillionidae,2014,1
-MT734809,Bat astrovirus,Mamastrovirus,USA,Chiroptera,Bat,Unknown,2020,1
-NC_001943,Human astrovirus,Mamastrovirus,Unknown,Homo sapiens,Human,Hominidae,,0
-NC_002469,Mamastrovirus 13,Mamastrovirus,Unknown,Ovis aries,Sheep,Bovidae,,0
-NC_002470,Turkey astrovirus,Avastrovirus,Unknown,Meleagris gallopavo,Turkey,Phasianidae,,0
-NC_004579,Mamastrovirus 10,Mamastrovirus,Unknown,Unknown,Unknown,Unknown,,0
-NC_011400,Astrovirus MLB1,Mamastrovirus,Australia,Unknown,Unknown,Unknown,1999,0
-NC_013060,Mamastrovirus 9,Mamastrovirus,USA,Homo sapiens,Human,Hominidae,2008,0
-NC_013443,HMO Astrovirus A,Mamastrovirus,Nigeria,Homo sapiens,Human,Hominidae,2007,0
-NC_015935,Mouse astrovirus M-52/USA/2008,Mamastrovirus,USA,Mus musculus,Mouse,Muridae,2008,0
-NC_016155,Astrovirus MLB2,Mamastrovirus,USA,Homo sapiens,Human,Hominidae,2008,0
-NC_016896,Astrovirus wild boar/WBAstV-1/2011/HUN,Mamastrovirus,Hungary,Sus scrofa,Boar,Suidae,2011,0
-NC_018702,Murine astrovirus,Mamastrovirus,USA,Mouse,Mouse,Muridae,2011,0
-NC_019026,Astrovirus VA3,Mamastrovirus,India,Homo sapiens,Human,Hominidae,2005,0
-NC_019027,Astrovirus VA4,Mamastrovirus,Nepal,Homo sapiens,Human,Hominidae,2008,0
-NC_019028,Astrovirus MLB3,Mamastrovirus,India,Homo sapiens,Human,Hominidae,2004,0
-NC_019494,Porcine astrovirus 3,Mamastrovirus,USA,Sus scrofa,Boar,Suidae,2011,0
-NC_022249,Feline astrovirus 2,Mamastrovirus,Hong Kong,Felis catus,Cat,Felidae,2012,0
-NC_023629,Bovine astrovirus B76/HK,Mamastrovirus,Hong Kong,Bos taurus,Cow,Bovidae,,0
-NC_023630,Bovine astrovirus B76-2/HK,Mamastrovirus,Hong Kong,Bos taurus,Cow,Bovidae,,0
-NC_023631,Bovine astrovirus B18/HK,Mamastrovirus,Hong Kong,Bos taurus,Cow,Bovidae,,0
-NC_023632,Bovine astrovirus B170/HK,Mamastrovirus,Hong Kong,Bos taurus,Cow,Bovidae,,0
-NC_023636,Porcine astrovirus 5,Mamastrovirus,USA,Sus scrofa,Boar,Suidae,2011,0
-NC_023674,Porcine astrovirus 2,Mamastrovirus,USA,Sus scrofa,Boar,Suidae,2010,0
-NC_023675,Porcine astrovirus 4,Mamastrovirus,USA,Sus scrofa,Boar,Suidae,2010,0
-NC_024297,Bovine astrovirus,Mamastrovirus,China,Bos taurus,Cow,Bovidae,2014,0
-NC_024472,Burkina Faso astrovirus,Mamastrovirus,Burkina Faso,Homo sapiens,Human,Hominidae,2010,0
-NC_024498,Bovine astrovirus CH13,Mamastrovirus,Switzerland,Bos taurus,Cow,Bovidae,2012,0
-NC_024701,Mamastrovirus 2,Mamastrovirus,USA,Felis catus,Cat,Felidae,2013,0
-NC_025346,Rabbit astrovirus TN/2208/2010,Mamastrovirus,USA,Oryctolagus cuniculus,Rabbit,Leproidae,2010,0
-NC_025379,Mamastrovirus 3,Mamastrovirus,China: Guangxi,Sus scrofa,Boar,Suidae,2013,0
-NC_026814,Canine astrovirus,Mamastrovirus,United Kingdom,Unknown,Dog,Canidae,2012,0
-NC_027711,Dromedary astrovirus,Mamastrovirus,United Arab Emirates,Camelus dromedarius,Camel,Camelidae,2013,0
-NC_030922,Mamastrovirus 1,Mamastrovirus,India:Kolkata,Unknown,Unknown,Unknown,2004,0
-NC_032423,Bastrovirus/VietNam/Porcine/17489_85,Mamastrovirus,Viet Nam,Sus scrofa,Boar,Suidae,2013,0
-NC_033792,Qinghai Himalayan marmot astrovirus 1,Mamastrovirus,China,Marmota himalayana,Marmot,Sciuridae,2014,0
-NC_033821,Qinghai Himalayan marmot astrovirus 2,Mamastrovirus,China,Marmota himalayana,Marmot,Sciuridae,2014,0
-NC_034974,Mamastrovirus 2,Mamastrovirus,Kenya,Sus scrofa,Boar,Suidae,2012,0
-NC_035758,Bastrovirus BAS-1,Mamastrovirus,Netherlands,Homo sapiens,Human,Hominidae,,0
-NC_036583,Rodent astrovirus,Mamastrovirus,China,Rattus norvegicus,Rat,Muridae,,0
-NC_037655,Sichuan takin astrovirus,Mamastrovirus,China,Budorcas taxicolor tibetana,Takin,Bovidae,2013,0
+Accession,Strain,Genus,Geo_Location,Host,Animal,Order,Family,Year,Bat_host
+F_MIZ141_1,Bat astrovirus,Mamastrovirus,Madagascar,Rousettus madagascariensis,Bat,Chiroptera,Pteropodidae,2018,1
+F_MIZ141_2,Bat astrovirus,Mamastrovirus,Madagascar,Rousettus madagascariensis,Bat,Chiroptera,Pteropodidae,2018,1
+MG693176,Bat astrovirus,Mamastrovirus,Cameroon,Eidolon helvum,Bat,Chiroptera,Pteropodidae,2013,1
+MZ218054,Bat astrovirus,Mamastrovirus,Denmark,Myotis daubentonii,Bat,Chiroptera,Vespertillionidae,2015,1
+MZ218053,Bat astrovirus,Mamastrovirus,Denmark,Myotis daubentonii,Bat,Chiroptera,Vespertillionidae,2015,1
+MN832787,Bat astrovirus,Mamastrovirus,Denmark,Myotis daubentonii,Bat,Chiroptera,Vespertillionidae,2014,1
+MT734809,Bat astrovirus,Mamastrovirus,USA,Chiroptera,Bat,Chiroptera,Unknown,2020,1
+NC_001943,Human astrovirus,Mamastrovirus,Unknown,Homo sapiens,Human,Primates,Hominidae,,0
+NC_002469,Mamastrovirus 13,Mamastrovirus,Unknown,Ovis aries,Sheep,Artiodactylia,Bovidae,,0
+NC_002470,Turkey astrovirus,Avastrovirus,Unknown,Meleagris gallopavo,Turkey,Galliformes,Phasianidae,,0
+NC_004579,Mamastrovirus 10,Mamastrovirus,Unknown,Unknown,Unknown,Unknown,Unknown,,0
+NC_011400,Astrovirus MLB1,Mamastrovirus,Australia,Unknown,Unknown,Unknown,Unknown,1999,0
+NC_013060,Mamastrovirus 9,Mamastrovirus,USA,Homo sapiens,Human,Primates,Hominidae,2008,0
+NC_013443,HMO Astrovirus A,Mamastrovirus,Nigeria,Homo sapiens,Human,Primates,Hominidae,2007,0
+NC_015935,Mouse astrovirus M-52/USA/2008,Mamastrovirus,USA,Mus musculus,Mouse,Rodentia,Muridae,2008,0
+NC_016155,Astrovirus MLB2,Mamastrovirus,USA,Homo sapiens,Human,Primates,Hominidae,2008,0
+NC_016896,Astrovirus wild boar/WBAstV-1/2011/HUN,Mamastrovirus,Hungary,Sus scrofa,Boar,Artiodactylia,Suidae,2011,0
+NC_018702,Murine astrovirus,Mamastrovirus,USA,Mouse,Mouse,Rodentia,Muridae,2011,0
+NC_019026,Astrovirus VA3,Mamastrovirus,India,Homo sapiens,Human,Primates,Hominidae,2005,0
+NC_019027,Astrovirus VA4,Mamastrovirus,Nepal,Homo sapiens,Human,Primates,Hominidae,2008,0
+NC_019028,Astrovirus MLB3,Mamastrovirus,India,Homo sapiens,Human,Primates,Hominidae,2004,0
+NC_019494,Porcine astrovirus 3,Mamastrovirus,USA,Sus scrofa,Boar,Artiodactylia,Suidae,2011,0
+NC_022249,Feline astrovirus 2,Mamastrovirus,Hong Kong,Felis catus,Cat,Carnivora,Felidae,2012,0
+NC_023629,Bovine astrovirus B76/HK,Mamastrovirus,Hong Kong,Bos taurus,Cow,Artiodactylia,Bovidae,,0
+NC_023630,Bovine astrovirus B76-2/HK,Mamastrovirus,Hong Kong,Bos taurus,Cow,Artiodactylia,Bovidae,,0
+NC_023631,Bovine astrovirus B18/HK,Mamastrovirus,Hong Kong,Bos taurus,Cow,Artiodactylia,Bovidae,,0
+NC_023632,Bovine astrovirus B170/HK,Mamastrovirus,Hong Kong,Bos taurus,Cow,Artiodactylia,Bovidae,,0
+NC_023636,Porcine astrovirus 5,Mamastrovirus,USA,Sus scrofa,Boar,Artiodactylia,Suidae,2011,0
+NC_023674,Porcine astrovirus 2,Mamastrovirus,USA,Sus scrofa,Boar,Artiodactylia,Suidae,2010,0
+NC_023675,Porcine astrovirus 4,Mamastrovirus,USA,Sus scrofa,Boar,Artiodactylia,Suidae,2010,0
+NC_024297,Bovine astrovirus,Mamastrovirus,China,Bos taurus,Cow,Artiodactylia,Bovidae,2014,0
+NC_024472,Burkina Faso astrovirus,Mamastrovirus,Burkina Faso,Homo sapiens,Human,Primates,Hominidae,2010,0
+NC_024498,Bovine astrovirus CH13,Mamastrovirus,Switzerland,Bos taurus,Cow,Artiodactylia,Bovidae,2012,0
+NC_024701,Mamastrovirus 2,Mamastrovirus,USA,Felis catus,Cat,Carnivora,Felidae,2013,0
+NC_025346,Rabbit astrovirus TN/2208/2010,Mamastrovirus,USA,Oryctolagus cuniculus,Rabbit,Lagomorpha,Leproidae,2010,0
+NC_025379,Mamastrovirus 3,Mamastrovirus,China: Guangxi,Sus scrofa,Boar,Artiodactylia,Suidae,2013,0
+NC_026814,Canine astrovirus,Mamastrovirus,United Kingdom,Unknown,Dog,Carnivora,Canidae,2012,0
+NC_027711,Dromedary astrovirus,Mamastrovirus,United Arab Emirates,Camelus dromedarius,Camel,Artiodactylia,Camelidae,2013,0
+NC_030922,Mamastrovirus 1,Mamastrovirus,India:Kolkata,Unknown,Unknown,Unknown,Unknown,2004,0
+NC_032423,Bastrovirus/VietNam/Porcine/17489_85,Mamastrovirus,Viet Nam,Sus scrofa,Boar,Artiodactylia,Suidae,2013,0
+NC_033792,Qinghai Himalayan marmot astrovirus 1,Mamastrovirus,China,Marmota himalayana,Marmot,Rodentia,Sciuridae,2014,0
+NC_033821,Qinghai Himalayan marmot astrovirus 2,Mamastrovirus,China,Marmota himalayana,Marmot,Rodentia,Sciuridae,2014,0
+NC_034974,Mamastrovirus 2,Mamastrovirus,Kenya,Sus scrofa,Boar,Artiodactylia,Suidae,2012,0
+NC_035758,Bastrovirus BAS-1,Mamastrovirus,Netherlands,Homo sapiens,Human,Primates,Hominidae,,0
+NC_036583,Rodent astrovirus,Mamastrovirus,China,Rattus norvegicus,Rat,Rodentia,Muridae,,0
+NC_037655,Sichuan takin astrovirus,Mamastrovirus,China,Budorcas taxicolor tibetana,Takin,Artiodactylia,Bovidae,2013,0

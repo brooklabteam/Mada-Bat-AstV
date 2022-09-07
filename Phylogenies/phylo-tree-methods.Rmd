@@ -47,6 +47,9 @@ I added in three more basically full bat seqs-- 2 from denmark, 1 from cameroon
 
 TOTAL = 46
 
+Then, removed 2 sneaky bastrovirus sequences
+
+TOTAL = 44
 
 5. export to modeltest-ng on midway
 AIC	  model              K            lnL          score          delta    weight

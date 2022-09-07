@@ -176,6 +176,8 @@ ggsave(file = paste0(homewd, "/final-figures/ml-full-genome-wbastro.png"),
 #########################
 ##### ML RdRp Mada Bat #####
 #########################
+#**this tree is being absorbed into the SWIO tree
+
 ##Madabat tree
 #load the fig3a tree
 treeB <-  read.tree(file = paste0(homewd, "Phylogenies/RdRp-Mada-ML-tree"))
@@ -314,6 +316,8 @@ treeC <-  read.tree(file = paste0(homewd, "Phylogenies/RdRp-SWIO-ML-tree"))
 treeC$tip.label <- gsub("'", '', treeC$tip.label)
 
 #root it
+#double rooting bc of bat avastrovirus
+#1. get the node number so we can root by node
 rooted.tree.C <- root(treeC, which(treeC$tip.label == "NC_002470"))
 
 #take a quick look in base R
@@ -371,7 +375,7 @@ tree.datC <- merge(tree.datC, datC, by = "old_tip_label", all.x = T, sort = F)
 names(tree.datC)
 
 tree.datC$tip_label <- tree.datC$new_label
-tree.datC <- dplyr::select(tree.datC, tip_label, Accession, Strain, Host, Geo_Location, Year, Genus, novel, old_tip_label, Family, Animal)
+tree.datC <- dplyr::select(tree.datC, tip_label, Accession, Strain, Host, Geo_Location, Year, Genus, novel, old_tip_label, Family, Animal, suborder)
 
 rooted.tree.C$tip.label <- tree.datC$tip_label
 
@@ -380,6 +384,12 @@ tree.datC$novel[tree.datC$novel==1] <- "novel"
 tree.datC$novel <- as.factor(tree.datC$novel)
 shapez = c("novel" =  24, "previously published" = 21)
 colz2 = c('1' =  "yellow", '0' = "white")
+
+tree.datC$Geo_Location <- as.factor(tree.datC$Geo_Location)
+shape_geo = c("Madagascar" = 24, "Mozambique" = 21, "Reunion Island" = 15, "Unknown" = 4)
+
+tree.datC$suborder <- as.factor(tree.datC$suborder)
+shape_suborder = c("Yangochiroptera" = 24, "Yinpterochiroptera" = 21)
 
 ## color tip by family
 pC_family <- ggtree(rooted.tree.C) %<+% tree.datC + geom_tippoint(aes(color=Family, fill=Family, shape=novel)) +
@@ -407,19 +417,31 @@ pC_geo <- ggtree(rooted.tree.C) %<+% tree.datC + geom_tippoint(aes(color=Geo_Loc
   xlim(c(0,5.6))
 pC_geo
 
-## color tip by common name
-pB_common <- ggtree(rooted.tree.B, size = 1) %<+% tree.datB + geom_tippoint(aes(color=Animal, fill=Animal, shape=Bat_host, size=1)) +
-  geom_nodelab(size=1.8,nudge_x = -0.11, nudge_y = .4) +
+## color by sub-order, shape by location
+pC_suborder <- ggtree(rooted.tree.C) %<+% tree.datC + geom_tippoint(aes(color=suborder, fill=suborder, shape=Geo_Location)) +
+  geom_nodelab(size=1.5,nudge_x = -.05, nudge_y = .7) +
   #scale_color_manual(values=colz) + 
   #scale_fill_manual(values=colz) +
-  scale_shape_manual(values=shapez) + 
+  scale_shape_manual(values=shape_geo) + 
   new_scale_fill() +
-  geom_tiplab( aes(fill = novel), geom = "label", label.size = 0, alpha=.3,size=3, show.legend=F) +
-  scale_fill_manual(values=colz2) + 
-  theme(legend.position = c(.05,.6), legend.title = element_blank()) +
-  xlim(c(0,10.5))
-pB_common
+  geom_tiplab(geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
+  #scale_fill_manual(values=colz2) + 
+  theme(legend.position = c(.1,.6), legend.title = element_blank()) +
+  xlim(c(0,5.6))
+pC_suborder
 
+## color by location, shape by suborder
+pC_suborder2 <- ggtree(rooted.tree.C) %<+% tree.datC + geom_tippoint(aes(color=Geo_Location, fill=Geo_Location, shape=suborder)) +
+  geom_nodelab(size=1.5,nudge_x = -.05, nudge_y = .7) +
+  #scale_color_manual(values=colz) + 
+  #scale_fill_manual(values=colz) +
+  scale_shape_manual(values=shape_suborder) + 
+  new_scale_fill() +
+  geom_tiplab(geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
+  #scale_fill_manual(values=colz2) + 
+  theme(legend.position = c(.1,.6), legend.title = element_blank()) +
+  xlim(c(0,5.6))
+pC_suborder2
 
 ggsave(file = paste0(homewd, "/final-figures/ML-Mada-bat-RdRp_sept1.png"),
        plot = pB_family,
