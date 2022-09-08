@@ -81,18 +81,16 @@ raxml-ng-mpi --check --msa alignment.phy --model TVM+I+G4 --prefix T1
 3. compute threads
 raxml-ng-mpi --parse --msa alignment.phy --model TVM+I+G4 --prefix T2
 
-threads = 7
-
-4. run batch script -- here we go! hope the threads thing works
-did 500 trees-- took about 3 hours.
-** I did get a best tree, so the ML finished.
+threads = 6
 
 5. did it converge?
-`raxml-ng-mpi --bsconverge --bs-trees T3.raxml.bootstraps --prefix T4 --seed 2 --threads 7`
+`raxml-ng-mpi --bsconverge --bs-trees T3.raxml.bootstraps --prefix T4 --seed 2 --threads 6`
 converged after only 200 trees! maybe the sequences are just so divergent that it worked out?
 
 6. because it converged, bring folder onto desktop to examine tree etc.
-T7.raxml.support is the tree
+
+
+have support.FBP and support.TBE
 
 
 ############################################

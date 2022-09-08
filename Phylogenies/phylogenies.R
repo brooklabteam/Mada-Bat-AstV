@@ -25,7 +25,7 @@ setwd(paste0(homewd, "/Phylogenies"))
 #########################
 
 #load the fig3a tree
-treeA <-  read.tree(file = paste0(homewd, "Phylogenies/full-ML-tree"))
+treeA <-  read.tree(file = paste0(homewd, "Phylogenies/full-ML-tree-FPB"))
 
 #root it
 
@@ -48,7 +48,7 @@ dat$Genus <- factor(dat$Genus, levels = c("Mamastrovirus", "Avastrovirus"))
 #and add a "novel" category
 dat$novel = 0
 dat$novel[dat$Geo_Location=="Madagascar"] <- 1
-dat$novel <- as.factor(dat$novel)
+#dat$novel <- as.factor(dat$novel)
 
 #rooted.tree.A$node.label <- round(as.numeric(rooted.tree.A$node.label)*100, 0)
 
@@ -91,15 +91,23 @@ tree.dat <- merge(tree.dat, dat, by = "old_tip_label", all.x = T, sort = F)
 names(tree.dat)
 
 tree.dat$tip_label <- tree.dat$new_label
-tree.dat <- dplyr::select(tree.dat, tip_label, Accession, Strain, Host, Bat_host, Geo_Location, Year, Genus, novel, old_tip_label, Family, Animal)
+tree.dat <- dplyr::select(tree.dat, tip_label, Accession, Strain, Host, Bat_host, Geo_Location, Year, Genus, novel, old_tip_label, Family, Animal, Order)
 
 rooted.tree.A$tip.label <- tree.dat$tip_label
 
+colz2 = c('1' =  "yellow", '0' = "white")
+
+#shape by novelty
+tree.dat$novel[tree.dat$novel==0] <- "previously published"
+tree.dat$novel[tree.dat$novel==1] <- "novel"
+tree.dat$novel <- as.factor(tree.dat$novel)
+shapez = c("novel" =  24, "previously published" = 21)
+
+#shape by bat host
 tree.dat$Bat_host[tree.dat$Bat_host==0] <- "non-bat host"
 tree.dat$Bat_host[tree.dat$Bat_host==1] <- "bat host"
 tree.dat$Bat_host <- as.factor(tree.dat$Bat_host)
 shapez = c("bat host" =  24, "non-bat host" = 21)
-colz2 = c('1' =  "yellow", '0' = "white")
 
 ## Tree 1: Colored by genus, shape by bat/non-bat
 p1 <- ggtree(rooted.tree.A) %<+% tree.dat + geom_tippoint(aes(color=Genus, fill=Genus, shape=Bat_host)) +
@@ -127,21 +135,30 @@ p1_family <- ggtree(rooted.tree.A) %<+% tree.dat + geom_tippoint(aes(color=Famil
   xlim(c(0,6))
 p1_family
 
-#collapsing branches by family where possible
-##need to match colors to color bar, or just remove color bar and label on the figure
-node1 <- MRCA(p1_family, 'NC_024297  |  Bovine astrovirus  |  Bos taurus  |  China  |  2014', 'NC_023629  |  Bovine astrovirus B76/HK  |  Bos taurus  |  Hong Kong  |  NA')
-c1 <- scaleClade(p1_family, node1, .3) %>% collapse(node1, 'max', fill='red')
+## color tip by order, shape by novelty
+p1_order <- ggtree(rooted.tree.A) %<+% tree.dat + geom_tippoint(aes(color=Order, fill=Order, shape=novel)) +
+  geom_nodelab(size=1.5,nudge_x = -.05, nudge_y = .7) +
+  #scale_color_manual(values=colz) + 
+  #scale_fill_manual(values=colz) +
+  scale_shape_manual(values=shapez) + 
+  new_scale_fill() +
+  geom_tiplab(geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
+  scale_fill_manual(values=colz2) + 
+  theme(legend.position = c(.65,.6), legend.title = element_blank()) +
+  xlim(c(0,6))
+#quartz()
+p1_order
 
-node2 <- MRCA(p1_family, 'NC_018702  |  Murine astrovirus  |  Mouse  |  USA  |  2011', 'NC_036583  |  Rodent astrovirus  |  Rattus norvegicus  |  China  |  NA')
-c2 <- collapse(c1, node2, 'max', fill='green')
 
-node3 <- MRCA(p1_family, 'NC_023675  |  Porcine astrovirus 4  |  Sus scrofa  |  USA  |  2010','NC_016896  |  Astrovirus wild boar/WBAstV-1/2011/HUN  |  Sus scrofa  |  Hungary  |  2011')
-c3 <- collapse(c2, node3, 'max', fill='purple')
+##nodes to collapose
+node1 <- MRCA(p1_order, 'NC_037655  |  Sichuan takin astrovirus  |  Budorcas taxicolor tibetana  |  China  |  2013', 'NC_023674  |  Porcine astrovirus 2  |  Sus scrofa  |  USA  |  2010')
+node2 <- MRCA(p1_order, 'NC_019026  |  Astrovirus VA3  |  Homo sapiens  |  India  |  2005', 'NC_024472  |  Burkina Faso astrovirus  |  Homo sapiens  |  Burkina Faso  |  2010')
 
-node4 <- MRCA(p1_family, 'NC_019027  |  Astrovirus VA4  |  Homo sapiens  |  Nepal  |  2008', 'NC_024472  |  Burkina Faso astrovirus  |  Homo sapiens  |  Burkina Faso  |  2010')
-c4 <- collapse(c3, node4, 'max', fill='darkgreen')
-
-scaleClade(c4, node4, .3)
+p_order2 <- p1_order %>% collapse(node=node1) +
+  geom_point2(aes(subset=(node==node1)), shape=23, size=5, fill='#F8766D')
+#p_order3 <- collapse(p_order2, node=node2) +
+  #geom_point2(aes(subset=(node==node2)), shape=23, size=5, fill="#619CFF")
+p_order2
 
 ##try highlighting and shrinking instead
 h1 <- p1_family + geom_highlight(node1, 'red')
@@ -160,8 +177,8 @@ p1_common <- ggtree(rooted.tree.A, size = 1) %<+% tree.dat + geom_tippoint(aes(c
 p1_common
 
 
-ggsave(file = paste0(homewd, "/final-figures/ml-full-genome-wbastro.png"),
-       plot = p1_family,
+ggsave(file = paste0(homewd, "/final-figures/ml-full-genome-collapsefew.png"),
+       plot = p_order2,
        units="mm",  
        width=150, 
        height=100, 
