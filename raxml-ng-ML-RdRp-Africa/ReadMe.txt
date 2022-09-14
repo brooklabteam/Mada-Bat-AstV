@@ -12,13 +12,13 @@ export PATH=/project2/cbrook/software/raxml-ng/bin:$PATH
 
 2. Ensure raxml works with your alignment
 
-raxml-ng-mpi --check --msa alignment.phy --model MODEL --prefix T1
+raxml-ng-mpi --check --msa alignment.phy --model GTR+I+G4 --prefix T1
 
 
 
 3. Check for recommended threads
 
-raxml-ng-mpi --parse --msa alignment.phy --model MODEL --prefix T2
+raxml-ng-mpi --parse --msa alignment.phy --model GTR+I+G4 --prefix T2
 
 
 
@@ -34,12 +34,12 @@ sbatch ./raxml-ng.sbatch
 
 Check convergence
 
-raxml-ng-mpi --bsconverge --bs-trees T3.raxml.bootstraps --prefix T4 --seed 2 --threads 1
+raxml-ng-mpi --bsconverge --bs-trees T3.raxml.bootstraps --prefix T4 --seed 2 --threads 2
 
 
 
 Run additional bootstraps
-raxml-ng --bootstrap --msa alignment.phy --model MODEL --prefix T5 --seed 333 --threads 1 --bs-trees #TREES --bs-metric fbp,tbe
+Raxml-ng-mpi --bootstrap --msa alignment.phy --model GTR+I+G4 --prefix T5 --seed 333 --threads 2 --bs-trees 500 --bs-metric fbp,tbe
 
 cat T3.raxml.bootstraps T5.raxml.bootstraps > all bootstraps
 

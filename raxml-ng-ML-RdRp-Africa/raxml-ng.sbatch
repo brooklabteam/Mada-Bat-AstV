@@ -9,8 +9,8 @@
 #SBATCH --mail-user=shorigan@uchicago.edu
 
 #just to make sure it's loaded
-module load openmpi/3.0.0+gcc-10.1.0
-export PATH=/project2/cbrook/software/raxml-ng/bin:$PATH
+#module load openmpi/3.0.0+gcc-10.1.0
+#export PATH=/project2/cbrook/software/raxml-ng/bin:$PATH
 
 
-raxml-ng-mpi --all --msa alignment.phy --model MODEL --prefix T3 --seed 2 --threads 1 --bs-trees 1000 --bs-metric fbp,tbe
+raxml-ng-mpi --all --msa alignment.phy --model GTR+I+G4 --prefix T3 --seed 2 --threads 1 --bs-trees 500 --bs-metric fbp,tbe

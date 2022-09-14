@@ -5,9 +5,11 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=8
 #SBATCH --cpus-per-task=1
-#SBATCH --time=05:00:00
+#SBATCH --time=07:00:00
 
 module load python
+
+#conda init bash
 
 conda activate /project2/cbrook/software/modeltest_env
 

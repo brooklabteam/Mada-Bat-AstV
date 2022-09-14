@@ -307,8 +307,11 @@ Total seqs = 298
 ALIGNMENT
 1. align in geneious using mafft, default settings
 
-2. trim alignment
+2. trim alignment minimally (will later remove shorties/trim to shortest)
 
+Modeltest-ng
+
+modeltest-ng -i alignment.fasta -t ml -p 8
 
 
 
