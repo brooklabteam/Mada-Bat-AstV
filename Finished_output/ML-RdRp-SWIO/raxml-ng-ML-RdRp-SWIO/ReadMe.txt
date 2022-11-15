@@ -12,13 +12,13 @@ export PATH=/project2/cbrook/software/raxml-ng/bin:$PATH
 
 2. Ensure raxml works with your alignment
 
-raxml-ng-mpi --check --msa alignment.phy --model GTR+I+G4 --prefix T1
+raxml-ng-mpi --check --msa alignment_trimmed.phy --model TIM2+I+G4 --prefix T1
 
 
 
 3. Check for recommended threads
 
-raxml-ng-mpi --parse --msa alignment.phy --model GTR+I+G4 --prefix T2
+raxml-ng-mpi --parse --msa alignment_trimmed.phy --model TIM2+I+G4 --prefix T2
 
 
 

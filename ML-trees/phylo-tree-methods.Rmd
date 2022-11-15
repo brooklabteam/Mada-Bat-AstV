@@ -1,0 +1,378 @@
+---
+title: "Phylo tree methods"
+author: "Sophia Horigan"
+date: "6/30/2022"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+## Building a phylogenetic tree
+
+This tutorial outlines methods for building a maximum-likelihood phylogenetic tree using the program RAxML, and time/phylogeography trees using BEAST1 and BEAST2
+
+############################################
+### Full-genome Astrovirus phylogeny
+############################################
+
+1. I scraped full genome non-bat host **reference** nucleotide sequences from  NCBI-virus (https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/).
+Search:
+* Astroviridae (tax id 39733)
+* unclassified Astroviridae (tax id 352926)
+
+with selections Sequence Type = RefSeq, RefSeq Genome Completeness = complete.
+Total = 49
+
+2. I scraped full genome bat nucleotide sequences from NCBI-virus (https://www.ncbi.nlm.nih.gov/labs/virus/vssi/#/).
+Search:
+* Astroviridae (tax id 39733)
+* unclassified Astroviridae (tax id 352926)
+
+with selections Nucleotide Completeness = complete, Host = Chiroptera (tax id 30560)
+Total = 10
+
+49 + 10 + 2 (my full) = 61 sequences
+ 
+3. Cutoffs
+To help alignment, I decided to cut any sequences that were less than 6kb (based on length)
+This left 48 sequences.
+
+3. Outgroup
+Inlcuding one turkey avastrovirus as the outgroup. thus, I removed all other avastrovirus sequences. so now I have 43 total sequences.
+
+4. Alignment
+I aligned the 43 complete sequences in Genious using Multiple Alignment -> MAFFT on default settings.
+
+I added in three more basically full bat seqs-- 2 from denmark, 1 from cameroon
+
+TOTAL = 46
+
+Then, removed 2 sneaky bastrovirus sequences
+
+TOTAL = 44
+
+5. export to modeltest-ng on midway
+BIC       model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  TVM+I+G4           9   -253558.4206    507959.2311         0.0000    0.9873
+       2  GTR+I+G4          10   -253558.1937    507967.9338         8.7027    0.0127
+       3  TVMef+I+G4         6   -253659.6442    508134.2090	   174.9779    0.0000
+       4  SYM+I+G4           7   -253656.9706    508138.0182	   178.7871    0.0000
+       5  TPM3uf+I+G4        7   -253724.3399    508272.7569	   313.5258    0.0000
+       6  TIM3+I+G4          8   -253724.1353    508281.5040	   322.2729    0.0000
+       7  TPM2uf+I+G4        7   -253742.2277    508308.5325	   349.3014    0.0000
+       8  TIM2+I+G4          8   -253741.7436    508316.7206	   357.4895    0.0000
+       9  TPM2+I+G4          4   -253794.7488    508386.1054	   426.8743    0.0000
+      10  TIM2ef+I+G4        5   -253792.7183    508391.2009	   431.9698    0.0000
+--------------------------------------------------------------------------------
+AIC	  model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  TVM+I+G4           9   -253558.4206    507300.8412         0.0000    0.6842
+       2  GTR+I+G4          10   -253558.1937    507302.3875         1.5463    0.3158
+       3  SYM+I+G4           7   -253656.9706    507493.9411	   193.1000    0.0000
+       4  TVMef+I+G4         6   -253659.6442    507497.2883	   196.4472    0.0000
+       5  TPM3uf+I+G4        7   -253724.3399    507628.6798	   327.8386    0.0000
+       6  TIM3+I+G4          8   -253724.1353    507630.2705	   329.4293    0.0000
+       7  TPM2uf+I+G4        7   -253742.2277    507664.4554	   363.6142    0.0000
+       8  TIM2+I+G4          8   -253741.7436    507665.4871	   364.6459    0.0000
+       9  TIM2ef+I+G4        5   -253792.7183    507761.4366	   460.5954    0.0000
+      10  TPM2+I+G4          4   -253794.7488    507763.4976	   462.6564    0.0000
+--------------------------------------------------------------------------------
+
+ML TREE
+1. upload onto midway2
+
+2. check alignment works
+raxml-ng-mpi --check --msa alignment_trimmed.phy --model TVM+I+G4 --prefix T1
+
+3. compute threads
+raxml-ng-mpi --parse --msa alignment_trimmed.phy --model TVM+I+G4 --prefix T2
+
+recommends 8 but that overloads the system so I lowered to 6, will just run more slowly
+threads = 6
+
+5. did it converge?
+`raxml-ng-mpi --bsconverge --bs-trees T3.raxml.bootstraps.TMP --prefix T4 --seed 2445 --threads 6`
+
+nope! more trees
+'raxml-ng-mpi --bootstrap --msa alignment_trimmed.phy --model TVM+I+G4 --prefix T5 --seed 77 --threads 6 --bs-trees 100 --bs-metric fbp,tbe'
+
+Cat bootstraps
+'cat T3.raxml.bootstraps.TMP T5.raxml.bootstraps > allbootstraps'
+
+Check convergence again
+'raxml-ng-mpi --bsconverge --bs-trees allbootstraps --prefix T6 --seed 666 --threads 6'
+
+Nope not after 186 trees. keep it going!
+'raxml-ng-mpi --bootstrap --msa alignment_trimmed.phy --model TVM+I+G4 --prefix T7 --seed 778 --threads 6 --bs-trees 500 --bs-metric fbp,tbe'
+
+
+Converged after 350 trees! 
+
+Add bootstraps to bestML tree
+
+Looks like it didn't finish the ML tree part...
+Re-do ML
+'raxml-ng-mpi --msa alignment_trimmed.phy --model TVM+I+G4 --prefix T9 --threads 6 --seed 224'
+
+Now that ML finished (super fast) need to attach bootstraps to the tree
+
+`raxml-ng-mpi --support --tree T9.raxml.bestTree --bs-trees ALLbootstraps --prefix T10 --threads 6`
+
+tree is T10.raxml.support
+
+############################################
+### ML RdRp tree - SWIO 
+############################################
+Goal: make an ML tree including RdRp seqs from SWIO area to start investigating some biogeographical patterns 
+
+GATHER SEQUENCES
+1. To the file containing the Madagascar RdRp seqs from the previous tree (plus our two novel seqs), I added SWIO seqs that I found as a result of a lit search. I located seqs from Reunion Island and Mozambique. Altogether, there are now 125 sequences.
+
+ALIGNMENT
+1. In Geneious Prime, I aligned the RdRp sequences using default settings. (same turkey avastrovirus outgroup as other trees)
+
+2. Didn't even need to trim becuase all of the sequences were basically the same length, woohoo!
+
+MODEL TEST
+1. export alignment as a .fasta for model test
+
+2. put into modeltest-ng directory
+
+3. move directory to midway and run
+
+output: 
+
+                         Model         Score        Weight
+----------------------------------------------------------
+       BIC           TIM2+I+G4    43121.0091        0.9989
+       AIC           TIM2+I+G4    42120.1822        0.9919
+      AICc           TIM2+I+G4    43093.1822        0.9164
+
+
+
+ML TREE
+1. export alignment as phylip from geneious into copy of raxml-ng directory
+
+2. move directory to midway
+
+3. load raxml-ng
+
+8. make sure it will work with your specific model and alignment
+`raxml-ng-mpi --check --msa alignment_trimmed.phy --model TIM2+I+G4 --prefix T1`
+
+9. check for number of recommended threads
+`raxml-ng-mpi --parse --msa alignment_trimmed.phy --model TIM2+I+G4 --prefix T2`
+threads = 1
+
+
+See if it converged.
+`raxml-ng-mpi --bsconverge --bs-trees T3.raxml.bootstraps --prefix T3 --seed 2 --threads 1`
+Yay! Did after 700 trees.
+
+Moving everything off of Midway. success!
+
+
+
+############################################
+### Bayesian full genome tree
+############################################
+
+*goal : make a bayesian full genome tree to infer timing of MRCA of our new genomes
+
+Following Fig4 directions from brooklabteam/Mada-Bat-CoV
+
+PREPARE INPUTS
+1. prepare inputs for pre-beast-name.R
+-fullgenome fasta (unaligned) "astro_full_BEAST.fasta"
+-dataset and query (csv)
+
+
+1A. for any seqs where only collection year was posted, july 15th
+for any seqs where only collection year and month was posted, 15th of that month
+ **successfully used R script, fasta now re-named in BEAST format.
+ 
+ 
+2. Alignment and model test
+Alignment in Geneious, modeltest using model-test-ng
+
+Model = TVM+I+G4
+
+MAKE THE BEAST TREE
+1. generate .xml file for input into BEAST, using program BEAUti
+-get dates from tip labels
+-using blog, generate model TVM
+-select strict molecular clock
+-use coalescent constant population model (Lebarchenon 2018 mada bat astro paper, but RdRp?)
+-clock rate lognormal with mean of 0.001 following cara following Jenkins et al 2014. all other priors left at default.
+-MCMC chain length 700,000,000 and set tracelog and treelog every 10,000 iterations. all other MCMC parameters left at default.
+
+
+BEAST IS DONE
+1. I accidentally ran it for over 800000000 iterations, but I feel like that's fine.
+
+Following Cara's steps, need to 1) burn in initial 10%
+2) assess parameter convergence using tracer? is this only to choose between models?
+3) average BEAST output in TreeAnnotator
+4) visualize tree in FigTree
+5) export from FigTree as Newick
+6) make it pretty in R.
+
+I think that Tracer isn't relevant now, so I'm going to skip straight to the TreeAnnotator
+first step of that is pulling the output onto the desktop.
+
+/software/beast-2.6.2-el7-x86_64/bin/treeannotator -burnin 80000000 astro_full_BEAST_alignment.trees out.txt
+
+############################################
+### ML RdRp tree - Madagascar  **SCRAPPED**
+############################################
+
+Create an ML RdRp tree using all published Madagascar seqs and our new Mada seqs
+
+CREATE DATASET
+1. determine how many of my samples have the complete RdRp gene
+-we only have 2, contained within the full genomes
+
+2. get all published Madabat RdRp seqs
+-2 sources:
+  -1: Hoarau et al 2021 : https://virologyj.biomedcentral.com/articles/10.1186/s12985-021-01673-2
+  -2: Lebarbenchon et al 2017 : https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5520320/
+  
+  total seqs (with my 2 novel = 67)
+
+ALIGNMENT
+3. Align in Geneious prime using MAFFT default settings and trim alignment
+
+4. Export alignment as .fasta to modeltest-ng folder
+
+MODELTEST-NG
+5. scp folder with alignment and batch script to midway
+`scp -r /Users/sophiahorigan/Documents/GitHub/Mada-Bat-Astro/modeltest-ng/ shorigan@midway2.rcc.uchicago.edu:/home/shorigan/`
+
+6. execute batch script
+`chmod 0700 modeltestbash.sbatch`
+`./modeltestbash.sbatch`
+##
+contents of modeltestbash.sbach:
+#!/bin/bash
+#SBATCH --job-name=batAstro
+#SBATCH --account=cbrook
+#SBATCH --partition=broadwl
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --cpus-per-task=1
+#SBATCH --time=36:00:00
+
+module load python
+
+conda activate /project2/cbrook/software/modeltest_env
+
+modeltest-ng -i alignment.fasta -t ml -p 8
+
+scp -r shorigan@midway2.rcc.uchicago.edu:/home/shorigan/modeltest-ng/alignment.fasta.out /Users/sophiahorigan/Documents/GitHub/Mada-Bat-Astro/modeltest-ng/
+
+conda deactivate
+##
+
+output : 
+Summary:
+
+Partition 1/1:
+                         Model         Score        Weight
+----------------------------------------------------------
+       BIC         TPM2uf+I+G4    28051.7731        0.5345
+       AIC            TVM+I+G4    27482.2826        0.7046
+      AICc            TVM+I+G4    27617.2826        0.7088
+
+
+RAXML-NG
+6. Export alignment as .phy to raxml-ng directory, and move directory to midway
+
+7. load raxml-ng
+`module load openmpi/3.0.0+gcc-10.1.0`
+`export PATH=/project2/cbrook/software/raxml-ng/bin:$PATH`
+
+8. make sure it will work with your specific model and alignment
+`raxml-ng-mpi --check --msa alignment.phy --model TPM2uf+I+G4 --prefix T1`
+
+9. check for number of recommended threads
+`raxml-ng-mpi --parse --msa alignment.phy --model TPM2uf+I+G4 --prefix T2`
+in this case, recommended threads/MPI processes = 1
+
+10. modify sbatch script to include correct model and number of threads
+
+in this case, looks like this...
+#!/bin/bash
+#SBATCH --job-name=raxml-ng
+#SBATCH --account=cbrook
+#SBATCH --partition=broadwl
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --cpus-per-task=1
+#SBATCH --time=36:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=shorigan@uchicago.edu
+
+
+`raxml-ng-mpi --all --msa alignment.phy --model TPM2uf+I+G4 --prefix T3 --seed 2 --threads 1 --bs-metric fbp,tbe --bs-trees 1000`
+
+Update: had to manually set the number of bootstraps at 1000, and it did not converge! but was close. going to add 200 more bootstraps 
+
+Check convergence using 
+`raxml-ng-mpi --bsconverge --bs-trees T3.raxml.bootstraps --prefix T4 --seed 2 --threads 1`
+
+Run 200 more bootstraps
+`raxml-ng --bootstrap --msa alignment.phy --model TPM2uf+I+G4 --prefix T5 --seed 333 --threads 1 --bs-trees 200 --bs-metric fbp,tbe`
+
+Concatenate bootstraps
+`cat T3.raxml.bootstraps T5.raxml.bootstraps > allbootstraps`
+
+Re-assess convergence
+`raxml-ng-mpi --bsconverge --bs-trees allbootstraps --prefix T6 --seed 2 --threads 1 --bs-cutoff 0.03`
+
+Not converged yet! but still getting there. going to add 500 more bootstraps (T7 - T2)
+`raxml-ng --bootstrap --msa alignment.phy --model TPM2uf+I+G4 --prefix T7 --seed 666 --bs-trees 500 --bs-metric fbp,tbe`
+
+Hooray, converged after 1650 bootstraps!
+
+Map BS support values onto best-scoring/best-known ML tree, using .besttree generated in the original run
+`raxml-ng-mpi --support --tree T3.raxml.bestTree --bs-trees allbootstraps --prefix T13 --threads 1`
+
+Tree with support saved as
+`T3.raxml.supportFPB` and `T3.raxml.supportTBE`
+
+Scp back to local computer, import into R to use with phylogenies.R to make trees
+1. copy contents into new directory and save on Github (so I can delete and re-upload new empty version of raxml-ng)
+`cp -r raxml-ng/* raxml-ng-ML-RdRp-Mada`
+
+
+
+############################################
+### ML RdRp tree - Africa **SCRAPPED**
+############################################
+1. Lit search of all astrovirus rdrp seqs from Africa
+Madagascar - 2012, 2014, 2018
+Mozambique - 2015
+Reunion - 2017, 2018
+Kenya - ?
+Gabon - 2009
+Egypt - 2016
+DRC - 2012
+Tanzania - 2013
+Cameroon - 2013
+
+Total seqs = 298
+
+ALIGNMENT
+1. align in geneious using mafft, default settings
+
+2. trim alignment minimally (will later remove shorties/trim to shortest)
+
+Modeltest-ng
+
+modeltest-ng -i alignment.fasta -t ml -p 8
+
+
+RAXML
+
+-1000 trees didn't converge, but was close, adding 200 more.

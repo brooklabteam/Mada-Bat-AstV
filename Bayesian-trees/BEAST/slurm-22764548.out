@@ -1,0 +1,179 @@
+
+                        BEAST v2.6.2, 2002-2020
+             Bayesian Evolutionary Analysis Sampling Trees
+                       Designed and developed by
+ Remco Bouckaert, Alexei J. Drummond, Andrew Rambaut & Marc A. Suchard
+                                    
+                   Centre for Computational Evolution
+                         University of Auckland
+                       r.bouckaert@auckland.ac.nz
+                        alexei@cs.auckland.ac.nz
+                                    
+                   Institute of Evolutionary Biology
+                        University of Edinburgh
+                           a.rambaut@ed.ac.uk
+                                    
+                    David Geffen School of Medicine
+                 University of California, Los Angeles
+                           msuchard@ucla.edu
+                                    
+                      Downloads, Help & Resources:
+                           http://beast2.org/
+                                    
+  Source code distributed under the GNU Lesser General Public License:
+                   http://github.com/CompEvol/beast2
+                                    
+                           BEAST developers:
+   Alex Alekseyenko, Trevor Bedford, Erik Bloomquist, Joseph Heled, 
+ Sebastian Hoehna, Denise Kuehnert, Philippe Lemey, Wai Lok Sibon Li, 
+Gerton Lunter, Sidney Markowitz, Vladimir Minin, Michael Defoin Platel, 
+          Oliver Pybus, Tim Vaughan, Chieh-Hsi Wu, Walter Xie
+                                    
+                               Thanks to:
+          Roald Forsberg, Beth Shapiro and Korbinian Strimmer
+
+Random number seed: 1663799226690
+
+File: astro_full_BEAST_alignment.xml seed: 1663799226690 threads: 1
+Loading package BEAST v2.6.2
+Loading package BEAST v2.6.2
+Alignment(astro_full_BEAST_alignment)
+  44 taxa
+  9722 sites
+  8242 patterns
+
+Using format 'yyyy-M-dd' to parse '2018-02-18' as: 2018.131506849315
+Using format 'yyyy-M-dd' to parse '2018-02-18' as: 2018.131506849315
+Using format 'yyyy-M-dd' to parse '2013-12-15' as: 2013.9534246575342
+Using format 'yyyy-M-dd' to parse '2014-10-15' as: 2014.786301369863
+Using format 'yyyy-M-dd' to parse '2020-02-15' as: 2020.122950819672
+Using format 'yyyy-M-dd' to parse '1977-07-15' as: 1977.5342465753424
+Using format 'yyyy-M-dd' to parse '2012-03-15' as: 2012.2021857923498
+Using format 'yyyy-M-dd' to parse '2011-06-24' as: 2011.4767123287672
+Using format 'yyyy-M-dd' to parse '2008-08-15' as: 2008.620218579235
+Using format 'yyyy-M-dd' to parse '2005-07-15' as: 2005.5342465753424
+Using format 'yyyy-M-dd' to parse '2007-03-21' as: 2007.2164383561644
+Using format 'yyyy-M-dd' to parse '2008-07-15' as: 2008.535519125683
+Using format 'yyyy-M-dd' to parse '2010-07-15' as: 2010.5342465753424
+Using format 'yyyy-M-dd' to parse '2013-10-15' as: 2013.786301369863
+Using format 'yyyy-M-dd' to parse '2008-07-15' as: 2008.535519125683
+Using format 'yyyy-M-dd' to parse '1985-07-15' as: 1985.5342465753424
+Using format 'yyyy-M-dd' to parse '1999-10-06' as: 1999.7616438356165
+Using format 'yyyy-M-dd' to parse '2008-07-15' as: 2008.535519125683
+Using format 'yyyy-M-dd' to parse '2004-07-15' as: 2004.535519125683
+Using format 'yyyy-M-dd' to parse '2015-11-15' as: 2015.8712328767124
+Using format 'yyyy-M-dd' to parse '2015-11-15' as: 2015.8712328767124
+Using format 'yyyy-M-dd' to parse '2004-07-15' as: 2004.535519125683
+Using format 'yyyy-M-dd' to parse '2003-07-15' as: 2003.5342465753424
+Using format 'yyyy-M-dd' to parse '2012-03-01' as: 2012.1639344262296
+Using format 'yyyy-M-dd' to parse '2013-07-15' as: 2013.5342465753424
+Using format 'yyyy-M-dd' to parse '2009-07-15' as: 2009.5342465753424
+Using format 'yyyy-M-dd' to parse '2009-07-15' as: 2009.5342465753424
+Using format 'yyyy-M-dd' to parse '2009-07-15' as: 2009.5342465753424
+Using format 'yyyy-M-dd' to parse '2014-01-15' as: 2014.0383561643835
+Using format 'yyyy-M-dd' to parse '2013-07-15' as: 2013.5342465753424
+Using format 'yyyy-M-dd' to parse '2009-07-15' as: 2009.5342465753424
+Using format 'yyyy-M-dd' to parse '2010-06-15' as: 2010.4520547945206
+Using format 'yyyy-M-dd' to parse '2012-08-15' as: 2012.620218579235
+Using format 'yyyy-M-dd' to parse '2013-04-04' as: 2013.2547945205479
+Using format 'yyyy-M-dd' to parse '2010-06-04' as: 2010.4219178082192
+Using format 'yyyy-M-dd' to parse '2004-07-15' as: 2004.535519125683
+Using format 'yyyy-M-dd' to parse '1988-09-15' as: 1988.704918032787
+Using format 'yyyy-M-dd' to parse '2004-09-02' as: 2004.6693989071039
+Using format 'yyyy-M-dd' to parse '2012-08-15' as: 2012.620218579235
+Using format 'yyyy-M-dd' to parse '2011-04-15' as: 2011.2849315068493
+Using format 'yyyy-M-dd' to parse '2010-07-15' as: 2010.5342465753424
+Using format 'yyyy-M-dd' to parse '2011-01-15' as: 2011.0383561643835
+Using format 'yyyy-M-dd' to parse '2009-07-15' as: 2009.5342465753424
+Using format 'yyyy-M-dd' to parse '2011-06-23' as: 2011.4739726027397
+F_MIZ141_1_2018-02-18 = 2018-02-18 (1.9914439703570679)
+F_MIZ141_2_2018-02-18 = 2018-02-18 (1.9914439703570679)
+MG693176_2013-12-15 = 2013-12-15 (6.1695261621377995)
+MN832787_2014-10-15 = 2014-10-15 (5.3366494498091015)
+MT734809_2020-02-15 = 2020-02-15 (0.0)
+MZ218053_2015-11-15 = 2015-11-15 (4.251717942959658)
+MZ218054_2015-11-15 = 2015-11-15 (4.251717942959658)
+NC_001943_1988-09-15 = 1988-09-15 (31.418032786885078)
+NC_002469_1977-07-15 = 1977-07-15 (42.58870424432962)
+NC_002470_1985-07-15 = 1985-07-15 (34.58870424432962)
+NC_004579_2003-07-15 = 2003-07-15 (16.58870424432962)
+NC_011400_1999-10-06 = 1999-10-06 (20.361306984055545)
+NC_013060_2008-08-15 = 2008-08-15 (11.502732240437126)
+NC_013443_2007-03-21 = 2007-03-21 (12.906512463507624)
+NC_015935_2008-07-15 = 2008-07-15 (11.587431693988947)
+NC_016155_2008-07-15 = 2008-07-15 (11.587431693988947)
+NC_016896_2011-04-15 = 2011-04-15 (8.83801931282278)
+NC_018702_2011-01-15 = 2011-01-15 (9.084594655288583)
+NC_019026_2005-07-15 = 2005-07-15 (14.58870424432962)
+NC_019027_2008-07-15 = 2008-07-15 (11.587431693988947)
+NC_019028_2004-07-15 = 2004-07-15 (15.587431693988947)
+NC_019494_2011-06-24 = 2011-06-24 (8.646238490904807)
+NC_022249_2012-03-01 = 2012-03-01 (7.959016393442425)
+NC_023629_2009-07-15 = 2009-07-15 (10.58870424432962)
+NC_023630_2009-07-15 = 2009-07-15 (10.58870424432962)
+NC_023631_2009-07-15 = 2009-07-15 (10.58870424432962)
+NC_023632_2009-07-15 = 2009-07-15 (10.58870424432962)
+NC_023636_2011-06-23 = 2011-06-23 (8.648978216932392)
+NC_023674_2010-06-15 = 2010-06-15 (9.670896025151478)
+NC_023675_2010-07-15 = 2010-07-15 (9.58870424432962)
+NC_024297_2014-01-15 = 2014-01-15 (6.0845946552885835)
+NC_024472_2010-07-15 = 2010-07-15 (9.58870424432962)
+NC_024498_2012-03-15 = 2012-03-15 (7.920765027322204)
+NC_024701_2013-10-15 = 2013-10-15 (6.3366494498091015)
+NC_025346_2010-06-04 = 2010-06-04 (9.701033011452864)
+NC_025379_2013-07-15 = 2013-07-15 (6.5887042443296195)
+NC_026814_2012-08-15 = 2012-08-15 (7.502732240437126)
+NC_027711_2013-04-04 = 2013-04-04 (6.868156299124166)
+NC_030922_2004-09-02 = 2004-09-02 (15.453551912568173)
+NC_033792_2004-07-15 = 2004-07-15 (15.587431693988947)
+NC_033821_2004-07-15 = 2004-07-15 (15.587431693988947)
+NC_034974_2012-08-15 = 2012-08-15 (7.502732240437126)
+NC_036583_2009-07-15 = 2009-07-15 (10.58870424432962)
+NC_037655_2013-07-15 = 2013-07-15 (6.5887042443296195)
+  Using BEAGLE version: 2.1.2 resource 0: CPU
+    with instance flags:  PRECISION_DOUBLE COMPUTATION_SYNCH EIGEN_REAL SCALING_MANUAL SCALERS_RAW VECTOR_SSE THREADING_NONE PROCESSOR_CPU FRAMEWORK_CPU
+  Ignoring ambiguities in tree likelihood.
+  Ignoring character uncertainty in tree likelihood.
+  With 8242 unique site patterns.
+  Using rescaling scheme : dynamic
+===============================================================================
+Citations for this model:
+
+Bouckaert, Remco, Timothy G. Vaughan, Joëlle Barido-Sottani, Sebastián Duchêne, 
+  Mathieu Fourment, Alexandra Gavryushkina, Joseph Heled et al. 
+  BEAST 2.5: An advanced software platform for Bayesian evolutionary analysis. 
+  PLoS computational biology 15, no. 4 (2019): e1006650.
+
+===============================================================================
+Start likelihood: -365177.82495843363 
+Trying to write file astro_full_BEAST_alignment.log but the file already exists (perhaps use the -overwrite flag?).
+Overwrite (Y=yes/N=no/A=overwrite all)?:
+Fatal exception: null
+java.lang.NullPointerException
+	at beast.core.Logger.openLogFile(Unknown Source)
+	at beast.core.Logger.init(Unknown Source)
+	at beast.core.MCMC.run(Unknown Source)
+	at beast.app.BeastMCMC.run(Unknown Source)
+	at beast.app.beastapp.BeastMain.<init>(Unknown Source)
+	at beast.app.beastapp.BeastMain.main(Unknown Source)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at beast.app.beastapp.BeastLauncher.run(Unknown Source)
+	at beast.app.beastapp.BeastLauncher.main(Unknown Source)
+Fatal exception: null
+java.lang.RuntimeException: An error was encounted. Terminating BEAST
+	at beast.app.util.ErrorLogHandler.publish(Unknown Source)
+	at java.util.logging.Logger.log(Logger.java:738)
+	at java.util.logging.Logger.doLog(Logger.java:765)
+	at java.util.logging.Logger.log(Logger.java:788)
+	at java.util.logging.Logger.severe(Logger.java:1463)
+	at beast.app.beastapp.BeastMain.<init>(Unknown Source)
+	at beast.app.beastapp.BeastMain.main(Unknown Source)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at beast.app.beastapp.BeastLauncher.run(Unknown Source)
+	at beast.app.beastapp.BeastLauncher.main(Unknown Source)

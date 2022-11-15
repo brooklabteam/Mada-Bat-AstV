@@ -7,10 +7,10 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --time=05:00:00
 
-module load python
+module load python/anaconda-2021.05
 
 conda activate /project2/cbrook/software/modeltest_env
 
-modeltest-ng -i alignment.fasta -t ml -p 8
+modeltest-ng -i alignment_trimmed.fasta -t ml -p 8
 
 conda deactivate

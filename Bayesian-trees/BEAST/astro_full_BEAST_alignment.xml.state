@@ -1,0 +1,29 @@
+<itsabeastystatewerein version='2.0' sample='171524999'>
+<statenode id='Tree.t:astro_full_BEAST_alignment'>((((((0:120.1305454150367,1:120.1305454150367)50:269.2875549329055,2:385.24001815616134)52:265.75970862289773,((((8:268.86934764426775,32:303.53728686127516)58:129.1469947735191,21:431.9588081712118)78:46.84689829687807,(((12:188.36152527889064,18:185.27555327499815)77:127.42013905078645,(13:208.0871267152882,19:209.40620748480688)66:106.2907573913185)65:29.63047640630589,31:347.3261687320905)75:130.53707198257456)80:36.848779842304225,(10:409.7788864581005,33:420.030941252621)56:97.93313409886878)79:132.868528139898)63:48.76534678268126,(((3:397.10395586777145,4:402.44060531758055)49:98.68867512738342,14:489.541848750975)53:124.89182863074194,(5:45.41196077199306,6:45.41196077199306)51:576.3574303607531)54:79.91349064817223)82:76.62470289284329,(9:652.0628541261829,((11:191.29955508991517,(15:128.9646338457937,20:124.96463384579371)74:71.10879653418806)83:373.46344564566016,39:569.536876025642)81:101.52725065088157)45:95.90774424620895)85:35.77198294396533,((((((7:61.36595003547606,38:77.33043090979297)84:297.95159963541585,(22:197.51066681463146,35:198.88097896374427)61:185.26589924970295)60:92.02682738960794,36:475.2596776069478)48:148.33867882625998,(34:407.85751492596233,40:401.97111624342625)72:213.54254073622968)69:71.51675527406746,(((16:168.84014718429808,29:168.08946225279124)64:304.46987477425944,(17:377.99269902331446,42:376.4885894342734)47:95.07074759277714)67:135.6217187777172,(((23:78.30998663238145,26:78.30998663238145)71:188.66932029877077,((24:90.86704767865177,(30:60.10306454016094,43:59.59895495111991)57:35.26809272753198)55:39.1651140092313,25:130.03216168788308)46:136.94714524326903)70:36.26126967405952,((28:179.94707589493882,41:182.11523967965317)59:38.08862690644298,37:220.83844252740911)62:86.12268202300797)73:303.94047919955614)68:84.84808389861496)44:45.593634443209,27:739.562500173989)76:70.11980716976541)86:0.0</statenode>
+<statenode id='freqParameter.s:astro_full_BEAST_alignment'>freqParameter.s:astro_full_BEAST_alignment[4 1] (0.0,1.0): 0.262890878649111 0.2345828272601411 0.24166612871259974 0.2608601653781337 </statenode>
+<statenode id='rateAC.s:astro_full_BEAST_alignment'>rateAC.s:astro_full_BEAST_alignment[1 1] (0.0,Infinity): 0.681785384190006 </statenode>
+<statenode id='rateAT.s:astro_full_BEAST_alignment'>rateAT.s:astro_full_BEAST_alignment[1 1] (0.0,Infinity): 0.49130585750672223 </statenode>
+<statenode id='rateCG.s:astro_full_BEAST_alignment'>rateCG.s:astro_full_BEAST_alignment[1 1] (0.0,Infinity): 0.47007219039779496 </statenode>
+<statenode id='rateGT.s:astro_full_BEAST_alignment'>rateGT.s:astro_full_BEAST_alignment[1 1] (0.0,Infinity): 0.3940408680945584 </statenode>
+<statenode id='clockRate.c:astro_full_BEAST_alignment'>clockRate.c:astro_full_BEAST_alignment[1 1] (0.0,Infinity): 9.218477327146394E-4 </statenode>
+<statenode id='popSize.t:astro_full_BEAST_alignment'>popSize.t:astro_full_BEAST_alignment[1 1] (-Infinity,Infinity): 6573.943606113968 </statenode>
+</itsabeastystatewerein>
+<!--
+{"operators":[
+{"id":"FrequenciesExchanger.s:astro_full_BEAST_alignment","p":0.008342406415557004,"accept":267390,"reject":794984,"acceptFC":267379,"rejectFC":794965,"rejectIv":0,"rejectOp":0},
+{"id":"RateACScaler.s:astro_full_BEAST_alignment","p":0.8726630939786475,"accept":150977,"reject":911967,"acceptFC":150975,"rejectFC":911938,"rejectIv":0,"rejectOp":0},
+{"id":"RateATScaler.s:astro_full_BEAST_alignment","p":0.8489772676333246,"accept":141322,"reject":922740,"acceptFC":141315,"rejectFC":922709,"rejectIv":0,"rejectOp":0},
+{"id":"RateCGScaler.s:astro_full_BEAST_alignment","p":0.8538152771525392,"accept":170580,"reject":894070,"acceptFC":170574,"rejectFC":894023,"rejectIv":0,"rejectOp":0},
+{"id":"RateGTScaler.s:astro_full_BEAST_alignment","p":0.8533176717878178,"accept":171572,"reject":890816,"acceptFC":171569,"rejectFC":890792,"rejectIv":0,"rejectOp":0},
+{"id":"StrictClockRateScaler.c:astro_full_BEAST_alignment","p":0.997902061219506,"accept":29861563,"reject":2044999,"acceptFC":29860573,"rejectFC":2044999,"rejectIv":0,"rejectOp":0},
+{"id":"strictClockUpDownOperator.c:astro_full_BEAST_alignment","p":0.8594729111568304,"accept":21434859,"reject":10474442,"acceptFC":21434859,"rejectFC":10473480,"rejectIv":456544,"rejectOp":456544},
+{"id":"CoalescentConstantTreeScaler.t:astro_full_BEAST_alignment","p":0.9475939296412234,"accept":3209287,"reject":28701129,"acceptFC":3209287,"rejectFC":28700122,"rejectIv":458386,"rejectOp":458386},
+{"id":"CoalescentConstantTreeRootScaler.t:astro_full_BEAST_alignment","p":0.9189665829109939,"accept":3448436,"reject":28454608,"acceptFC":3448428,"rejectFC":28453679,"rejectIv":8405343,"rejectOp":8405343},
+{"id":"CoalescentConstantUniformOperator.t:astro_full_BEAST_alignment","p":"NaN","accept":25597386,"reject":293441342,"acceptFC":25596600,"rejectFC":293432057,"rejectIv":0,"rejectOp":0},
+{"id":"CoalescentConstantSubtreeSlide.t:astro_full_BEAST_alignment","p":2.300830905284167,"accept":143553762,"reject":15956145,"acceptFC":143553632,"rejectFC":15951401,"rejectIv":317852,"rejectOp":317852},
+{"id":"CoalescentConstantNarrow.t:astro_full_BEAST_alignment","p":"NaN","accept":34032,"reject":159487555,"acceptFC":33978,"rejectFC":159482595,"rejectIv":1098265,"rejectOp":1098265},
+{"id":"CoalescentConstantWide.t:astro_full_BEAST_alignment","p":"NaN","accept":110,"reject":31905732,"acceptFC":110,"rejectFC":31904768,"rejectIv":16403008,"rejectOp":16403008},
+{"id":"CoalescentConstantWilsonBalding.t:astro_full_BEAST_alignment","p":"NaN","accept":134,"reject":31906594,"acceptFC":129,"rejectFC":31905569,"rejectIv":2929592,"rejectOp":2929592},
+{"id":"PopSizeScaler.t:astro_full_BEAST_alignment","p":0.9963206604427183,"accept":31759245,"reject":147222,"acceptFC":31758194,"rejectFC":147222,"rejectIv":0,"rejectOp":0}
+]}
+-->

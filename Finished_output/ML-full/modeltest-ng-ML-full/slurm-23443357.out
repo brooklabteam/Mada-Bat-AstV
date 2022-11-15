@@ -1,0 +1,363 @@
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda activate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+
+                             _      _ _            _      _   _  _____ 
+                            | |    | | |          | |    | \ | |/ ____|
+         _ __ ___   ___   __| | ___| | |_ ___  ___| |_   |  \| | |  __ 
+        | '_ ` _ \ / _ \ / _` |/ _ \ | __/ _ \/ __| __|  | . ` | | |_ |
+        | | | | | | (_) | (_| |  __/ | ||  __/\__ \ |_   | |\  | |__| |
+        |_| |_| |_|\___/ \__,_|\___|_|\__\___||___/\__|  |_| \_|\_____|
+--------------------------------------------------------------------------------
+ModelTest-NG v0.1.7 released on 17.03.2021 by The Exelixis Lab.
+Written by Diego Darriba.
+Contributors: Tomas Flouri, Alexey Kozlov, Benoit Morel, David Posada, 
+              Alexandros Stamatakis.
+Latest version: https://github.com/ddarriba/modeltest
+--------------------------------------------------------------------------------
+
+Physical cores: 14
+Logical cores:  28
+Memory:         62.2GB
+Extensions:     AVX
+
+WARNING: MSA has not enough sites to infer reliable results
+Validating binary checkpoint
+OK!
+--------------------------------------------------------------------------------
+ModelTest-NG v0.1.7
+
+Input data:
+  MSA:        alignment_trimmed.fasta
+  Tree:       Maximum likelihood
+    file:           -
+  #taxa:            43
+  #sites:           9475
+  #patterns:        8074
+  Max. thread mem:  167 MB
+
+Output:
+  Log:           alignment_trimmed.fasta.log
+  Starting tree: alignment_trimmed.fasta.tree
+  Results:       alignment_trimmed.fasta.out
+
+Selection options:
+  # dna schemes:      11
+  # dna models:       88
+  include model parameters:
+    Uniform:         true
+    p-inv (+I):      true
+    gamma (+G):      true
+    both (+I+G):     true
+    free rates (+R): false
+    fixed freqs:     true
+    estimated freqs: true
+    #categories:     4
+  gamma rates mode:   mean
+  asc bias:           none
+  epsilon (opt):      0.01
+  epsilon (par):      0.05
+  keep branches:      false
+
+Additional options:
+  verbosity:        very low
+  threads:          8/14
+  RNG seed:         12345
+  subtree repeats:  enabled
+--------------------------------------------------------------------------------
+modeltest-ng was called as follows: 
+>> modeltest-ng -i alignment_trimmed.fasta -t ml -p 8 
+
+
+Partition 1/1
+
+    9/88   TPM1uf+I+G4    0h:02:24   0h:02:24         -253865.7140  1.2441  0.0473
+    6/88   TIM1+I+G4      0h:03:15   0h:03:15         -253865.2239  1.2437  0.0473
+    8/88   TrN+I+G4       0h:03:23   0h:03:23         -253893.1642  1.2425  0.0474
+    7/88   TPM3uf+I+G4    0h:03:24   0h:03:24         -253724.3399  1.2311  0.0467
+    4/88   TIM3+I+G4      0h:04:13   0h:04:13         -253724.1353  1.2305  0.0467
+    5/88   TIM2+I+G4      0h:04:15   0h:04:15         -253741.7436  1.2472  0.0471
+    3/88   TVM+I+G4       0h:05:02   0h:05:02         -253558.4206  1.2315  0.0463
+   10/88   TPM2uf+I+G4    0h:03:04   0h:05:28         -253742.2277  1.2472  0.0470
+   13/88   HKY+I+G4       0h:03:14   0h:06:38         -253893.5650  1.2399  0.0451
+   15/88   TIM1ef+I+G4    0h:02:51   0h:07:06         -254109.9788  1.2555  0.0469
+   17/88   F81+I+G4       0h:01:46   0h:07:14         -256812.3916  1.2853  0.0454
+   12/88   TVMef+I+G4     0h:04:03   0h:07:26         -253659.6442  1.2510  0.0460
+    2/88   GTR+I+G4       0h:07:32   0h:07:32         -253558.1937  1.2305  0.0464
+   11/88   SYM+I+G4       0h:04:21   0h:07:36         -253656.9706  1.2498  0.0460
+   16/88   TIM3ef+I+G4    0h:02:57   0h:07:59         -254010.1552  1.2480  0.0467
+   14/88   TIM2ef+I+G4    0h:04:04   0h:08:17         -253792.7183  1.2421  0.0463
+   20/88   TPM1+I+G4      0h:02:07   0h:09:21         -254112.9889  1.2562  0.0470
+   18/88   TPM3+I+G4      0h:03:14   0h:09:52         -254013.8928  1.2486  0.0467
+   23/88   JC+I+G4        0h:02:24   0h:10:00         -257011.1509  1.2895  0.0471
+   19/88   TPM2+I+G4      0h:03:00   0h:10:06         -253794.7488  1.2428  0.0463
+   21/88   TrNef+I+G4     0h:03:14   0h:10:40         -254134.1508  1.2549  0.0470
+   22/88   K80+I+G4       0h:03:14   0h:10:46         -254137.1616  1.2555  0.0470
+   24/88   GTR+G4         0h:03:08   0h:11:07         -253863.5953  0.8100       -
+   25/88   TVM+G4         0h:02:53   0h:11:10         -253864.0540  0.8100       -
+   26/88   TIM3+G4        0h:02:53   0h:12:14         -254034.6793  0.8100       -
+   29/88   TPM3uf+G4      0h:02:12   0h:12:18         -254035.1168  0.8100       -
+   31/88   TPM1uf+G4      0h:02:10   0h:12:56         -254193.8866  0.8100       -
+   32/88   TPM2uf+G4      0h:02:01   0h:13:08         -254066.5646  0.8100       -
+   30/88   TrN+G4         0h:02:29   0h:13:09         -254221.3928  0.8100       -
+   27/88   TIM2+G4        0h:03:28   0h:13:20         -254065.7179  0.8100       -
+   33/88   SYM+G4         0h:02:42   0h:13:52         -253974.0788  0.8550       -
+   28/88   TIM1+G4        0h:04:11   0h:14:11         -254193.0268  0.8100       -
+   35/88   HKY+G4         0h:02:00   0h:14:18         -254222.1707  0.8100       -
+   34/88   TVMef+G4       0h:02:41   0h:14:55         -253977.7180  0.8550       -
+   38/88   TIM3ef+G4      0h:01:56   0h:15:05         -254331.6606  0.8550       -
+   39/88   F81+G4         0h:01:48   0h:15:08         -257157.0170  0.8550       -
+   36/88   TIM2ef+G4      0h:02:43   0h:15:39         -254118.5998  0.8550       -
+   40/88   TPM3+G4        0h:01:56   0h:15:48         -254336.6667  0.8550       -
+   37/88   TIM1ef+G4      0h:02:44   0h:15:52         -254440.1567  0.8100       -
+   42/88   TPM1+G4        0h:01:59   0h:16:17         -254443.2483  0.8550       -
+   44/88   K80+G4         0h:01:45   0h:16:50         -254467.9768  0.8550       -
+   41/88   TPM2+G4        0h:02:40   0h:16:51         -254121.4221  0.8550       -
+   43/88   TrNef+G4       0h:01:56   0h:16:51         -254463.8578  0.8550       -
+   48/88   TIM3+I         0h:01:12   0h:17:04         -261706.0372       -  0.0524
+   45/88   JC+G4          0h:02:02   0h:17:10         -257354.2295  0.8550       -
+   46/88   GTR+I          0h:01:49   0h:17:28         -261557.7754       -  0.0524
+   47/88   TVM+I          0h:01:45   0h:17:33         -261619.3242       -  0.0524
+   49/88   TIM2+I         0h:01:17   0h:17:34         -261624.1062       -  0.0524
+   52/88   TrN+I          0h:01:12   0h:18:03         -261765.2161       -  0.0524
+   51/88   TPM3uf+I       0h:01:15   0h:18:06         -261777.9090       -  0.0524
+   50/88   TIM1+I         0h:01:17   0h:18:07         -261743.7227       -  0.0524
+   53/88   TPM1uf+I       0h:01:13   0h:18:17         -261805.9408       -  0.0524
+   54/88   TPM2uf+I       0h:01:17   0h:18:27         -261676.4241       -  0.0524
+   56/88   TVMef+I        0h:01:13   0h:18:46         -261665.4396       -  0.0524
+   57/88   HKY+I          0h:01:13   0h:18:47         -261826.7929       -  0.0524
+   55/88   SYM+I          0h:01:23   0h:18:51         -261648.9573       -  0.0524
+   58/88   TIM2ef+I       0h:01:12   0h:19:15         -261712.7250       -  0.0524
+   59/88   TIM1ef+I       0h:01:13   0h:19:19         -262005.4367       -  0.0524
+   60/88   TIM3ef+I       0h:01:13   0h:19:20         -261964.1013       -  0.0524
+   61/88   F81+I          0h:01:14   0h:19:31         -264225.4941       -  0.0524
+   62/88   TPM3+I         0h:01:11   0h:19:38         -261984.3896       -  0.0524
+   63/88   TPM2+I         0h:01:11   0h:19:57         -261727.7432       -  0.0524
+   64/88   TPM1+I         0h:01:11   0h:19:58         -262024.1690       -  0.0524
+   70/88   TIM3           0h:00:25   0h:20:03         -265935.5872       -       -
+   65/88   TrNef+I        0h:01:12   0h:20:03         -262019.9043       -  0.0524
+   72/88   TIM1           0h:00:14   0h:20:12         -266033.7268       -       -
+   74/88   TrN            0h:00:13   0h:20:16         -266056.3203       -       -
+   66/88   K80+I          0h:01:10   0h:20:25         -262038.5393       -  0.0524
+   67/88   JC+I           0h:01:13   0h:20:32         -264437.8300       -  0.0524
+   77/88   SYM            0h:00:13   0h:20:38         -265877.3628       -       -
+   78/88   TVMef          0h:00:12   0h:20:44         -265897.5886       -       -
+   80/88   TIM2ef         0h:00:11   0h:20:55         -265968.6510       -       -
+   81/88   TIM1ef         0h:00:08   0h:21:03         -266287.7832       -       -
+   71/88   TIM2           0h:01:12   0h:21:09         -265816.2581       -       -
+   68/88   GTR            0h:01:50   0h:21:10         -265695.0008       -       -
+   82/88   TIM3ef         0h:00:08   0h:21:11         -266217.0416       -       -
+   75/88   TPM1uf         0h:01:03   0h:21:15         -266038.4139       -       -
+   84/88   TPM3           0h:00:08   0h:21:18         -266242.0102       -       -
+   85/88   TPM2           0h:00:12   0h:21:23         -265986.6750       -       -
+   86/88   TPM1           0h:00:09   0h:21:24         -266310.3234       -       -
+   87/88   TrNef          0h:00:08   0h:21:26         -266301.7689       -       -
+   88/88   K80            0h:00:07   0h:21:30         -266324.2222       -       -
+   89/88   JC             0h:00:10   0h:21:34         -268674.3461       -       -
+   79/88   HKY            0h:01:01   0h:21:39         -266059.7495       -       -
+   73/88   TPM3uf         0h:01:50   0h:21:53         -265957.6957       -       -
+   76/88   TPM2uf         0h:01:50   0h:22:06         -265886.1973       -       -
+   83/88   F81            0h:01:05   0h:22:14         -268389.1782       -       -
+   69/88   TVM            0h:02:44   0h:22:15         -265780.0186       -       -
+ ----ID---  ----MODEL---- ---Time--- -Elapsed--- -------LnL------- -Alpha- -P-inv-
+
+Computation of likelihood scores completed. It took 0h:22:15
+
+BIC       model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  TVM+I+G4           9   -253558.4206    507959.2311         0.0000    0.9873
+       2  GTR+I+G4          10   -253558.1937    507967.9338         8.7027    0.0127
+       3  TVMef+I+G4         6   -253659.6442    508134.2090       174.9779    0.0000
+       4  SYM+I+G4           7   -253656.9706    508138.0182       178.7871    0.0000
+       5  TPM3uf+I+G4        7   -253724.3399    508272.7569       313.5258    0.0000
+       6  TIM3+I+G4          8   -253724.1353    508281.5040       322.2729    0.0000
+       7  TPM2uf+I+G4        7   -253742.2277    508308.5325       349.3014    0.0000
+       8  TIM2+I+G4          8   -253741.7436    508316.7206       357.4895    0.0000
+       9  TPM2+I+G4          4   -253794.7488    508386.1054       426.8743    0.0000
+      10  TIM2ef+I+G4        5   -253792.7183    508391.2009       431.9698    0.0000
+--------------------------------------------------------------------------------
+Best model according to BIC
+---------------------------
+Model:              TVM+I+G4
+lnL:                -253558.4206
+Frequencies:        0.2587 0.2411 0.2323 0.2679
+Subst. Rates:       2.2318 3.6163 1.3283 1.3420 3.6163 1.0000 
+Inv. sites prop:    0.0463
+Gamma shape:        1.2315
+Score:              507959.2311
+Weight:             0.9873
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              0.0000
+Gamma-Inv:          1.0000
+Frequencies:        1.0000
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              0.8100
+Alpha-P.Inv:        1.2315
+P.Inv-Alpha:        0.0463
+Frequencies:        0.2587 0.2411 0.2323 0.2679 
+
+Commands:
+  > phyml  -i alignment_trimmed.fasta -m 012314 -f m -v e -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s alignment_trimmed.fasta -m GTRGAMMAIX -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa alignment_trimmed.fasta --model TVM+I+G4
+  > paup -s alignment_trimmed.fasta
+  > iqtree -s alignment_trimmed.fasta -m TVM+I+G4
+
+AIC       model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  TVM+I+G4           9   -253558.4206    507300.8412         0.0000    0.6842
+       2  GTR+I+G4          10   -253558.1937    507302.3875         1.5463    0.3158
+       3  SYM+I+G4           7   -253656.9706    507493.9411       193.1000    0.0000
+       4  TVMef+I+G4         6   -253659.6442    507497.2883       196.4472    0.0000
+       5  TPM3uf+I+G4        7   -253724.3399    507628.6798       327.8386    0.0000
+       6  TIM3+I+G4          8   -253724.1353    507630.2705       329.4293    0.0000
+       7  TPM2uf+I+G4        7   -253742.2277    507664.4554       363.6142    0.0000
+       8  TIM2+I+G4          8   -253741.7436    507665.4871       364.6459    0.0000
+       9  TIM2ef+I+G4        5   -253792.7183    507761.4366       460.5954    0.0000
+      10  TPM2+I+G4          4   -253794.7488    507763.4976       462.6564    0.0000
+--------------------------------------------------------------------------------
+Best model according to AIC
+---------------------------
+Model:              TVM+I+G4
+lnL:                -253558.4206
+Frequencies:        0.2587 0.2411 0.2323 0.2679
+Subst. Rates:       2.2318 3.6163 1.3283 1.3420 3.6163 1.0000 
+Inv. sites prop:    0.0463
+Gamma shape:        1.2315
+Score:              507300.8412
+Weight:             0.6842
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              0.0000
+Gamma-Inv:          1.0000
+Frequencies:        1.0000
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              0.8100
+Alpha-P.Inv:        1.2312
+P.Inv-Alpha:        0.0464
+Frequencies:        0.2585 0.2412 0.2321 0.2681 
+
+Commands:
+  > phyml  -i alignment_trimmed.fasta -m 012314 -f m -v e -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s alignment_trimmed.fasta -m GTRGAMMAIX -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa alignment_trimmed.fasta --model TVM+I+G4
+  > paup -s alignment_trimmed.fasta
+  > iqtree -s alignment_trimmed.fasta -m TVM+I+G4
+
+AICc      model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  TVM+I+G4           9   -253558.4206    507301.8412         0.0000    0.6842
+       2  GTR+I+G4          10   -253558.1937    507303.3875         1.5463    0.3158
+       3  SYM+I+G4           7   -253656.9706    507494.9411       193.1000    0.0000
+       4  TVMef+I+G4         6   -253659.6442    507498.2883       196.4472    0.0000
+       5  TPM3uf+I+G4        7   -253724.3399    507629.6798       327.8386    0.0000
+       6  TIM3+I+G4          8   -253724.1353    507631.2705       329.4293    0.0000
+       7  TPM2uf+I+G4        7   -253742.2277    507665.4554       363.6142    0.0000
+       8  TIM2+I+G4          8   -253741.7436    507666.4871       364.6459    0.0000
+       9  TIM2ef+I+G4        5   -253792.7183    507762.4366       460.5954    0.0000
+      10  TPM2+I+G4          4   -253794.7488    507764.4976       462.6564    0.0000
+--------------------------------------------------------------------------------
+Best model according to AICc
+---------------------------
+Model:              TVM+I+G4
+lnL:                -253558.4206
+Frequencies:        0.2587 0.2411 0.2323 0.2679
+Subst. Rates:       2.2318 3.6163 1.3283 1.3420 3.6163 1.0000 
+Inv. sites prop:    0.0463
+Gamma shape:        1.2315
+Score:              507301.8412
+Weight:             0.6842
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              0.0000
+Gamma-Inv:          1.0000
+Frequencies:        1.0000
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              0.8100
+Alpha-P.Inv:        1.2312
+P.Inv-Alpha:        0.0464
+Frequencies:        0.2585 0.2412 0.2321 0.2681 
+
+Commands:
+  > phyml  -i alignment_trimmed.fasta -m 012314 -f m -v e -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s alignment_trimmed.fasta -m GTRGAMMAIX -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa alignment_trimmed.fasta --model TVM+I+G4
+  > paup -s alignment_trimmed.fasta
+  > iqtree -s alignment_trimmed.fasta -m TVM+I+G4
+
+There are 6 different topologies
+Topologies written to alignment_trimmed.fasta.topos
+
+topo_id   models_count   bic_support   aic_support   aicc_support
+-----------------------------------------------------------------
+      1             44       1.00000       1.00000       1.00000
+      2             22       0.00000       0.00000       0.00000
+      3              8       0.00000       0.00000       0.00000
+      4              1       0.00000       0.00000       0.00000
+      5             12       0.00000       0.00000       0.00000
+      6              1       0.00000       0.00000       0.00000
+
+extended majority-rule consensus: ((NC_024472,((NC_019026,NC_013060)[1.00000],(NC_019027,NC_013443)[1.00000])[1.00000])[1.00000],(((MG693176,F_MIZ141_1)[1.00000],(((MZ218054,MZ218053)[1.00000],((NC_023636,NC_002470)[1.00000],((((NC_026814,((NC_025379,NC_022249)[1.00000],(NC_030922,NC_001943)[1.00000])[1.00000])[1.00000],(((NC_023675,NC_016896)[1.00000],(NC_036583,NC_018702)[1.00000])[1.00000],(((NC_023631,(NC_023630,(NC_037655,NC_024297)[1.00000])[1.00000])[1.00000],(NC_023632,NC_023629)[1.00000])[1.00000],(NC_023674,(NC_027711,NC_034974)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(NC_033821,NC_025346)[1.00000])[1.00000],(NC_033792,(NC_011400,(NC_019028,NC_016155)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(NC_015935,(MT734809,MN832787)[1.00000])[1.00000])[1.00000])[1.00000],(NC_024498,NC_002469)[1.00000])[1.00000],(NC_019494,(NC_004579,NC_024701)[1.00000])[1.00000]);
+strict consensus: ((NC_024472,((NC_019026,NC_013060)[1.00000],(NC_019027,NC_013443)[1.00000])[1.00000])[1.00000],(((MG693176,F_MIZ141_1)[1.00000],(((MZ218054,MZ218053)[1.00000],((NC_023636,NC_002470)[1.00000],((((NC_026814,((NC_025379,NC_022249)[1.00000],(NC_030922,NC_001943)[1.00000])[1.00000])[1.00000],(((NC_023675,NC_016896)[1.00000],(NC_036583,NC_018702)[1.00000])[1.00000],(((NC_023631,(NC_023630,(NC_037655,NC_024297)[1.00000])[1.00000])[1.00000],(NC_023632,NC_023629)[1.00000])[1.00000],(NC_023674,(NC_027711,NC_034974)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(NC_033821,NC_025346)[1.00000])[1.00000],(NC_033792,(NC_011400,(NC_019028,NC_016155)[1.00000])[1.00000])[1.00000])[1.00000])[1.00000])[1.00000],(NC_015935,(MT734809,MN832787)[1.00000])[1.00000])[1.00000])[1.00000],(NC_024498,NC_002469)[1.00000])[1.00000],(NC_019494,(NC_004579,NC_024701)[1.00000])[1.00000]);
+
+Summary:
+
+Partition 1/1:
+                         Model         Score        Weight
+----------------------------------------------------------
+       BIC            TVM+I+G4   507959.2311        0.9873
+       AIC            TVM+I+G4   507300.8412        0.6842
+      AICc            TVM+I+G4   507301.8412        0.6842
+
+Execution results written to alignment_trimmed.fasta.out
+Starting tree written to alignment_trimmed.fasta.tree
+
+CommandNotFoundError: Your shell has not been properly configured to use 'conda deactivate'.
+To initialize your shell, run
+
+    $ conda init <SHELL_NAME>
+
+Currently supported shells are:
+  - bash
+  - fish
+  - tcsh
+  - xonsh
+  - zsh
+  - powershell
+
+See 'conda init --help' for more information and options.
+
+IMPORTANT: You may need to close and restart your shell after running 'conda init'.
+
+

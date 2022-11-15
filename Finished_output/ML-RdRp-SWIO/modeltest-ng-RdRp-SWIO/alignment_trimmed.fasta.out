@@ -1,0 +1,180 @@
+--------------------------------------------------------------------------------
+ModelTest-NG v0.1.7
+
+Input data:
+  MSA:        alignment_trimmed.fasta
+  Tree:       Maximum likelihood
+    file:           -
+  #taxa:            124
+  #sites:           386
+  #patterns:        319
+  Max. thread mem:  19 MB
+
+Output:
+  Log:           alignment_trimmed.fasta.log
+  Starting tree: alignment_trimmed.fasta.tree
+  Results:       alignment_trimmed.fasta.out
+
+Selection options:
+  # dna schemes:      11
+  # dna models:       88
+  include model parameters:
+    Uniform:         true
+    p-inv (+I):      true
+    gamma (+G):      true
+    both (+I+G):     true
+    free rates (+R): false
+    fixed freqs:     true
+    estimated freqs: true
+    #categories:     4
+  gamma rates mode:   mean
+  asc bias:           none
+  epsilon (opt):      0.01
+  epsilon (par):      0.05
+  keep branches:      false
+
+Additional options:
+  verbosity:        very low
+  threads:          8/14
+  RNG seed:         12345
+  subtree repeats:  enabled
+--------------------------------------------------------------------------------
+
+BIC       model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  TIM2+I+G4          8    -20807.0911     43121.0091         0.0000    0.9989
+       2  TVM+I+G4           9    -20810.9039     43134.5905        13.5814    0.0011
+       3  TPM2uf+I+G4        7    -20822.7438     43146.3585        25.3495    0.0000
+       4  HKY+I+G4           6    -20828.2033     43151.3218        30.3127    0.0000
+       5  GTR+I+G4          10    -20818.1985     43155.1355        34.1265    0.0000
+       6  TPM1uf+I+G4        7    -20830.1162     43161.1035        40.0944    0.0000
+       7  TIM1+I+G4          8    -20827.7896     43162.4060        41.3969    0.0000
+       8  TPM3uf+I+G4        7    -20832.0156     43164.9022        43.8931    0.0000
+       9  TPM2+I+G4          4    -20842.6110     43168.2256        47.2165    0.0000
+      10  TIM3+I+G4          8    -20831.3244     43169.4756        48.4665    0.0000
+--------------------------------------------------------------------------------
+Best model according to BIC
+---------------------------
+Model:              TIM2+I+G4
+lnL:                -20807.0911
+Frequencies:        0.2755 0.2154 0.2209 0.2883
+Subst. Rates:       1.7162 3.9590 1.7162 1.0000 3.9869 1.0000 
+Inv. sites prop:    0.1787
+Gamma shape:        0.8540
+Score:              43121.0091
+Weight:             0.9989
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              0.0000
+Gamma-Inv:          1.0000
+Frequencies:        1.0000
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              0.5068
+Alpha-P.Inv:        0.8540
+P.Inv-Alpha:        0.1787
+Frequencies:        0.2755 0.2154 0.2209 0.2883 
+
+Commands:
+  > phyml  -i alignment_trimmed.fasta -m 010232 -f m -v e -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s alignment_trimmed.fasta -m GTRGAMMAIX -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa alignment_trimmed.fasta --model TIM2+I+G4
+  > paup -s alignment_trimmed.fasta
+  > iqtree -s alignment_trimmed.fasta -m TIM2+I+G4
+
+AIC       model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  TIM2+I+G4          8    -20807.0911     42120.1822         0.0000    0.9919
+       2  TVM+I+G4           9    -20810.9039     42129.8078         9.6256    0.0081
+       3  GTR+I+G4          10    -20818.1985     42146.3970        26.2148    0.0000
+       4  TPM2uf+I+G4        7    -20822.7438     42149.4875        29.3053    0.0000
+       5  HKY+I+G4           6    -20828.2033     42158.4066        38.2244    0.0000
+       6  TIM1+I+G4          8    -20827.7896     42161.5791        41.3969    0.0000
+       7  TPM1uf+I+G4        7    -20830.1162     42164.2325        44.0503    0.0000
+       8  TPM3uf+I+G4        7    -20832.0156     42168.0312        47.8490    0.0000
+       9  TIM3+I+G4          8    -20831.3244     42168.6487        48.4665    0.0000
+      10  TVMef+I+G4         6    -20838.5062     42179.0125        58.8303    0.0000
+--------------------------------------------------------------------------------
+Best model according to AIC
+---------------------------
+Model:              TIM2+I+G4
+lnL:                -20807.0911
+Frequencies:        0.2755 0.2154 0.2209 0.2883
+Subst. Rates:       1.7162 3.9590 1.7162 1.0000 3.9869 1.0000 
+Inv. sites prop:    0.1787
+Gamma shape:        0.8540
+Score:              42120.1822
+Weight:             0.9919
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              0.0000
+Gamma-Inv:          1.0000
+Frequencies:        1.0000
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              0.5068
+Alpha-P.Inv:        0.8537
+P.Inv-Alpha:        0.1787
+Frequencies:        0.2755 0.2153 0.2208 0.2883 
+
+Commands:
+  > phyml  -i alignment_trimmed.fasta -m 010232 -f m -v e -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s alignment_trimmed.fasta -m GTRGAMMAIX -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa alignment_trimmed.fasta --model TIM2+I+G4
+  > paup -s alignment_trimmed.fasta
+  > iqtree -s alignment_trimmed.fasta -m TIM2+I+G4
+
+AICc      model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  TIM2+I+G4          8    -20807.0911     43093.1822         0.0000    0.9164
+       2  TPM2+I+G4          4    -20842.6110     43098.2221         5.0399    0.0737
+       3  HKY+I+G4           6    -20828.2033     43102.4066         9.2244    0.0091
+       4  TPM2uf+I+G4        7    -20822.7438     43107.4875        14.3053    0.0007
+       5  TVM+I+G4           9    -20810.9039     43117.8078        24.6256    0.0000
+       6  TPM1uf+I+G4        7    -20830.1162     43122.2325        29.0503    0.0000
+       7  TVMef+I+G4         6    -20838.5062     43123.0125        29.8303    0.0000
+       8  TPM3uf+I+G4        7    -20832.0156     43126.0312        32.8490    0.0000
+       9  TIM1+I+G4          8    -20827.7896     43134.5791        41.3969    0.0000
+      10  TIM2ef+I+G4        5    -20853.1648     43135.3295        42.1473    0.0000
+--------------------------------------------------------------------------------
+Best model according to AICc
+---------------------------
+Model:              TIM2+I+G4
+lnL:                -20807.0911
+Frequencies:        0.2755 0.2154 0.2209 0.2883
+Subst. Rates:       1.7162 3.9590 1.7162 1.0000 3.9869 1.0000 
+Inv. sites prop:    0.1787
+Gamma shape:        0.8540
+Score:              43093.1822
+Weight:             0.9164
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              0.0000
+Gamma-Inv:          1.0000
+Frequencies:        0.9263
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              0.5068
+Alpha-P.Inv:        0.8541
+P.Inv-Alpha:        0.1788
+Frequencies:        0.2757 0.2154 0.2206 0.2883 
+
+Commands:
+  > phyml  -i alignment_trimmed.fasta -m 010232 -f m -v e -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s alignment_trimmed.fasta -m GTRGAMMAIX -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa alignment_trimmed.fasta --model TIM2+I+G4
+  > paup -s alignment_trimmed.fasta
+  > iqtree -s alignment_trimmed.fasta -m TIM2+I+G4
+Done

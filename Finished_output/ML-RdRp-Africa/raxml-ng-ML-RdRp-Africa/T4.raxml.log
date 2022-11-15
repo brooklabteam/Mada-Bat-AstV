@@ -1,0 +1,47 @@
+
+RAxML-NG v. 1.1.0-master released on 22.06.2022 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+System: Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz, 28 cores, 251 GB RAM
+
+RAxML-NG was called at 14-Sep-2022 08:50:49 as follows:
+
+raxml-ng-mpi --bsconverge --bs-trees T3.raxml.bootstraps --prefix T4 --seed 2 --threads 2
+
+Analysis options:
+  run mode: A posteriori bootstrap convergence test
+  start tree(s): 
+  random seed: 2
+  SIMD kernels: AVX2
+  parallelization: coarse-grained (auto), PTHREADS (2 threads), thread pinning: ON
+
+Reading bootstrap trees from file: T3.raxml.bootstraps
+Loaded 500 trees with 298 taxa.
+
+Performing bootstrap convergence assessment using autoMRE criterion
+
+ # trees        avg WRF       avg WRF in %       # perms: wrf <= 3.00 %     converged?  
+      50       1110.065              8.248                            0        NO
+     100       1527.403              5.575                            0        NO
+     150       2032.283              4.885                            0        NO
+     200       2476.696              4.437                            0        NO
+     250       2828.337              4.027                            1        NO
+     300       3383.977              3.998                            1        NO
+     350       3790.411              3.822                            7        NO
+     400       4179.440              3.672                           32        NO
+     450       4433.464              3.453                           80        NO
+     500       4730.697              3.311                          167        NO
+Bootstopping test did not converge after 500 trees
+
+
+Execution log saved to: /home/shorigan/raxml-ng-ML-RdRp-Africa/T4.raxml.log
+
+Analysis started: 14-Sep-2022 08:50:49 / finished: 14-Sep-2022 08:56:28
+
+Elapsed time: 339.101 seconds
+
+Consumed energy: 12.872 Wh
+

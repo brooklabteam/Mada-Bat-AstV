@@ -8,4 +8,8 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=shorigan@uchicago.edu
 
-raxml-ng-mpi --all --msa alignment.phy --model TVM+I+G4 --prefix T3 --seed 2 --threads 6 --bs-trees 1000 --bs-metric fbp,tbe
+#raxml-ng-mpi --all --msa alignment_trimmed.phy --model TVM+I+G4 --prefix T3 --seed 2 --threads auto{11} --bs-trees 500 --bs-metric fbp,tbe
+
+#raxml-ng-mpi --bootstrap --msa alignment_trimmed.phy --model TVM+I+G4 --prefix T7 --seed 7345 --threads 6 --bs-trees 500 --bs-metric fbp,tbe
+
+raxml-ng-mpi --msa alignment_trimmed.phy --model TVM+I+G4 --prefix T9 --threads 6 --seed 224
