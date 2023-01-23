@@ -12,4 +12,6 @@
 module load beagle/trunk
 module load beast/2.6.2
 
-/software/beast-2.6.2-el7-x86_64/bin/beast -resume -threads 1 astro_full_BEAST_alignment.xml 
+/software/beast-2.6.2-el7-x86_64/bin/beast -beagle_cpu -seed 777 astro_full_BEAST_alignment.xml 
+
+#/software/beast-2.6.2-el7-x86_64/bin/beast -resume -threads 1 astro_full_BEAST_alignment.xml 
