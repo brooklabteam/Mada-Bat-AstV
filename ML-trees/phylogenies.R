@@ -95,13 +95,12 @@ tree.dat <- dplyr::select(tree.dat, tip_label, Accession, Strain, Host, Bat_host
 
 rooted.tree.A$tip.label <- tree.dat$tip_label
 
-colz2 = c('1' =  "yellow", '0' = "white")
-
 #shape by novelty
 tree.dat$novel[tree.dat$novel==0] <- "previously published"
 tree.dat$novel[tree.dat$novel==1] <- "novel"
 tree.dat$novel <- as.factor(tree.dat$novel)
 shapez = c("novel" =  24, "previously published" = 21)
+colz2 = c('novel' =  "yellow", 'previously published' = "white")
 
 #shape by bat host
 tree.dat$Bat_host[tree.dat$Bat_host==0] <- "non-bat host"
@@ -135,16 +134,16 @@ p1_family <- ggtree(rooted.tree.A) %<+% tree.dat + geom_tippoint(aes(color=Famil
   xlim(c(0,6))
 p1_family
 
-## color tip by order, shape by novelty
-## current
-p1_order <- ggtree(rooted.tree.A, size=.8) %<+% tree.dat + geom_tippoint(aes(color=Order, fill=Order, shape=novel), size=2.8) +
+## color tip by order, shape by chiroptera, color by novelty
+## CURRENT
+p1_order <- ggtree(rooted.tree.A, size=.8) %<+% tree.dat + geom_tippoint(aes(color=Order, fill=Order, shape=Bat_host), size=2.8) +
   geom_nodelab(size=1.8,nudge_x = -.05, nudge_y = .7) +
   geom_treescale(fontsize=2.5) + 
   #scale_color_manual(values=colz) + 
   #scale_fill_manual(values=colz) +
   scale_shape_manual(values=shapez) + 
   new_scale_fill() +
-  geom_tiplab(geom = "label", label.size = 0, alpha=.3, size=3, show.legend=F) +
+  geom_tiplab(aes(fill=novel), geom = "label", label.size = 0, alpha=.3, size=3, show.legend=F) +
   scale_fill_manual(values=colz2) + 
   theme(legend.position = c(.8,.6), legend.title = element_blank()) +
   xlim(c(0,6))
@@ -272,7 +271,7 @@ tree.datC$novel[tree.datC$novel==0] <- "previously published"
 tree.datC$novel[tree.datC$novel==1] <- "novel"
 tree.datC$novel <- as.factor(tree.datC$novel)
 shapez = c("novel" =  24, "previously published" = 21)
-colz2 = c('1' =  "yellow", '0' = "white")
+colz2 = c("novel" =  "yellow", "previously published" = "white")
 
 tree.datC$Geo_Location <- as.factor(tree.datC$Geo_Location)
 shape_geo = c("Madagascar" = 17, "Mozambique" = 16, "Reunion Island" = 15, "Unknown" = 4)
@@ -309,17 +308,19 @@ pC_geo
 ## color by sub-order, shape by location
 ##CURRENT
 pC_suborder <- ggtree(rooted.tree.C) %<+% tree.datC + geom_tippoint(aes(color=suborder, fill=suborder, shape=Geo_Location)) +
+  #geom_hilight(node = 220, fill = "darkgoldenrod1", alpha = 0.6) +
   geom_nodelab(aes(subset = as.numeric(label) > 30), size=1.5, nudge_x = -.05, nudge_y = .7) +
   #scale_color_manual(values=colz) + 
   #scale_fill_manual(values=colz) +
   scale_shape_manual(values=shape_geo) + 
   new_scale_fill() +
-  geom_tiplab(geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
-  #scale_fill_manual(values=colz2) + 
+  geom_tiplab(aes(fill=novel), geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
+  scale_fill_manual(values=colz2) + 
   theme(legend.position = c(.1,.6), legend.title = element_blank()) +
   geom_treescale(x= 2.15, y= .05, fontsize=1.5) + 
   xlim(c(0,5.6))
 pC_suborder
+
 ## rotate clades
 MRCA(pC_suborder, 'KY575655  |  Vespertilionidae | Myotis goudoti', 'MH013985  |  Rhinonycteridae | Triaenops afer')
 pR <- ggtree::rotate(pC_suborder, 176)

@@ -5,7 +5,7 @@ library(dplyr)
 library(ggplot2)
 library(reshape2)
 
-homewd="/Users/sophiahorigan/Documents/Github/Mada-Bat-Astro/"
+homewd="/Users/shorigan/Documents/Github/Mada-Bat-Astro/"
 setwd(paste0(homewd, "/Fig5/"))
 
 
@@ -29,11 +29,11 @@ names(long.sim2)[names(long.sim2)=="variable"] <- "strain"
 
 long.sim2$strain[long.sim2$strain=="MG693176"] <- "Eidolon helvum"
 long.sim2$strain[long.sim2$strain=="MN832787"] <- "Myotis daubentonii 1"
-long.sim2$strain[long.sim2$strain=="MT734809"] <- "Chiroptera spp."
+long.sim2$strain[long.sim2$strain=="MT734809"] <- "Myotis yumanensis"
 long.sim2$strain[long.sim2$strain=="MZ218053"] <- "Myotis daubentonii 2"
 long.sim2$strain[long.sim2$strain=="MZ218054"] <- "Myotis daubentonii 3"
 
-long.sim2$strain <- factor(long.sim2$strain, levels = c("Eidolon helvum", "Myotis daubentonii 1", "Myotis daubentonii 2", "Myotis daubentonii 3", "Chiroptera spp."))
+long.sim2$strain <- factor(long.sim2$strain, levels = c("Eidolon helvum", "Myotis daubentonii 1", "Myotis daubentonii 2", "Myotis daubentonii 3", "Myotis yumanensis"))
 
 #and plot
 
@@ -51,7 +51,7 @@ genome.df <- data.frame(position = c(1, 2600,
 genome.df$gene <- factor(genome.df$gene, levels = unique(genome.df$gene))
 
 
-colz2= c("Eidolon helvum"="firebrick3", "Myotis daubentonii 1" = "royalblue", "Myotis daubentonii 2" = "lightblue","Myotis daubentonii 3" = "blue","Chiroptera spp." = "goldenrod")
+colz2= c("Eidolon helvum"="firebrick3", "Myotis daubentonii 1" = "royalblue", "Myotis daubentonii 2" = "lightblue","Myotis daubentonii 3" = "blue","Myotis yumanensis" = "goldenrod")
 
 
 
