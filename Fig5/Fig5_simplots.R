@@ -4,6 +4,7 @@ library(plyr)
 library(dplyr)
 library(ggplot2)
 library(reshape2)
+library(cowplot)
 
 homewd="/Users/shorigan/Documents/Github/Mada-Bat-Astro/"
 setwd(paste0(homewd, "/Fig5/"))
@@ -13,62 +14,106 @@ setwd(paste0(homewd, "/Fig5/"))
 ##  All bats ##
 ###################################
 
-
-simplot2 <- read.csv(file = "all_bat.csv", header = T, stringsAsFactors = F)
+simplot <- read.csv(file = "all_bat.csv", header = T, stringsAsFactors = F) #nucleotide
+simplot2 <- read.csv(file = "allbat_aa.csv", header = T, stringsAsFactors = F) #animo acid
 head(simplot2)
 
 #move to long
+long.sim <- melt(simplot, id.vars = c("pointer"), measure.vars = c("MG693176", "MN832787", "MT734809", "MZ218053", "MZ218054"))
 long.sim2 <- melt(simplot2, id.vars = c("pointer"), measure.vars = c("MG693176", "MN832787", "MT734809", "MZ218053", "MZ218054"))
 
+
 head(long.sim2)
+
+unique(long.sim$variable)
 unique(long.sim2$variable)
+
+long.sim$variable <- as.character(long.sim$variable)
 long.sim2$variable <- as.character(long.sim2$variable)
 #long.sim2$variable[long.sim2$variable=="Alternate"] <- long.sim2$Alternate_ID[long.sim2$variable=="Alternate"] 
 #unique(long.sim2$variable)
-names(long.sim2)[names(long.sim2)=="variable"] <- "strain"
+names(long.sim)[names(long.sim)=="variable"] <- "host"
+names(long.sim2)[names(long.sim2)=="variable"] <- "host"
 
-long.sim2$strain[long.sim2$strain=="MG693176"] <- "Eidolon helvum"
-long.sim2$strain[long.sim2$strain=="MN832787"] <- "Myotis daubentonii 1"
-long.sim2$strain[long.sim2$strain=="MT734809"] <- "Myotis yumanensis"
-long.sim2$strain[long.sim2$strain=="MZ218053"] <- "Myotis daubentonii 2"
-long.sim2$strain[long.sim2$strain=="MZ218054"] <- "Myotis daubentonii 3"
+long.sim$host[long.sim$host=="MG693176"] <- "Eidolon helvum"
+long.sim$host[long.sim$host=="MN832787"] <- "Myotis daubentonii 1"
+long.sim$host[long.sim$host=="MT734809"] <- "Myotis yumanensis"
+long.sim$host[long.sim$host=="MZ218053"] <- "Myotis daubentonii 2"
+long.sim$host[long.sim$host=="MZ218054"] <- "Myotis daubentonii 3"
 
-long.sim2$strain <- factor(long.sim2$strain, levels = c("Eidolon helvum", "Myotis daubentonii 1", "Myotis daubentonii 2", "Myotis daubentonii 3", "Myotis yumanensis"))
+long.sim2$host[long.sim2$host=="MG693176"] <- "Eidolon helvum"
+long.sim2$host[long.sim2$host=="MN832787"] <- "Myotis daubentonii 1"
+long.sim2$host[long.sim2$host=="MT734809"] <- "Myotis yumanensis"
+long.sim2$host[long.sim2$host=="MZ218053"] <- "Myotis daubentonii 2"
+long.sim2$host[long.sim2$host=="MZ218054"] <- "Myotis daubentonii 3"
+
+long.sim$host <- factor(long.sim$host, levels = c("Eidolon helvum", "Myotis daubentonii 1", "Myotis daubentonii 2", "Myotis daubentonii 3", "Myotis yumanensis"))
+long.sim2$host <- factor(long.sim2$host, levels = c("Eidolon helvum", "Myotis daubentonii 1", "Myotis daubentonii 2", "Myotis daubentonii 3", "Myotis yumanensis"))
 
 #and plot
+long.sim$value[long.sim$value<0] <-0
+long.sim$value <- long.sim$value/100
 
 long.sim2$value[long.sim2$value<0] <- 0
 long.sim2$value <- long.sim2$value/100
 #long.sim2$Query[long.sim2$Query=="Pteropus_rufus"] <- "Pteropus rufus"
 #long.sim2$Query[long.sim2$Query=="Rousettus_madagascariensis"] <- "Rousettus madagascariensis"
 
-genome.df <- data.frame(position = c(1, 2600,
+genome.df.nc <- data.frame(position = c(1, 2600,
                                      2601, 4150,
                                      4151, 6700), 
                         gene = rep(c("ORF1a", "ORF1b", "ORF2"), each=2))
 
+genome.df.nc$gene <- factor(genome.df.nc$gene, levels = unique(genome.df.nc$gene))
 
-genome.df$gene <- factor(genome.df$gene, levels = unique(genome.df$gene))
+genome.df.aa <- data.frame(position = c(1, 1000,
+                                        1001, 1380,
+                                        1381, 2100), 
+                           gene = rep(c("ORF1a", "ORF1b", "ORF2"), each=2))
 
+genome.df.aa$gene <- factor(genome.df.aa$gene, levels = unique(genome.df.aa$gene))
 
 colz2= c("Eidolon helvum"="firebrick3", "Myotis daubentonii 1" = "royalblue", "Myotis daubentonii 2" = "lightblue","Myotis daubentonii 3" = "blue","Myotis yumanensis" = "goldenrod")
 
 
 
-allbat <- ggplot(long.sim2) + geom_line(aes(x=pointer, y=value, color=strain), size=1) +
+
+
+## nucleotide
+allbat_nc <- ggplot(long.sim) + geom_line(aes(x=pointer, y=value, color=host), size=1) +
   #geom_ribbon(data=genome.df, aes(x=position, ymin=-.1, ymax=-.05,  fill=gene), color="black") +
-  theme_bw() + xlab("genome position") + ylab("nucleotide similarity") + ylim(0,1) +
+  theme_bw() + xlab("") + 
+  ylab("nucleotide similarity") + ylim(0,1) +
+  theme(panel.grid = element_blank(), strip.text = element_text(face="italic", size=14),
+        strip.background = element_rect(fill="white"), 
+        legend.position = "none", legend.direction = "horizontal",# legend.box = "vertical",
+        legend.text = element_text(face="italic", size = 12), axis.text = element_text(size=12), 
+       axis.title = element_text(size=14)) +
+  scale_color_manual(values=colz2) + #coord_cartesian(ylim=c(-.1,1)) +
+  scale_x_continuous(breaks=c(0,2000,4000,6000), labels = c(0,2000, 4000,6000))
+
+allbat_nc
+
+
+## animo acid
+allbat_aa <- ggplot(long.sim2) + geom_line(aes(x=pointer, y=value, color=host), size=1) +
+  #geom_ribbon(data=genome.df.aa, aes(x=position, ymin=-.1, ymax=-.05,  fill=gene), color="black") +
+  theme_bw() + xlab("genome position") + ylab("animo acid similarity") + ylim(0,0.5) +
   theme(panel.grid = element_blank(), strip.text = element_text(face="italic", size=14),
         strip.background = element_rect(fill="white"), 
         legend.position = "bottom", legend.direction = "horizontal",# legend.box = "vertical",
         legend.text = element_text(face="italic", size = 12),
         axis.text = element_text(size=12), axis.title = element_text(size=14)) +
   scale_color_manual(values=colz2) + #coord_cartesian(ylim=c(-.1,1)) +
-  scale_x_continuous(breaks=c(0,2000,4000,6000), labels = c(0,2000, 4000,6000))
+  scale_x_continuous(breaks=c(0,1000,2000,3000), labels = c(0,1000, 2000,3000)) 
+  #scale_y_break(c(0.3, 0.9))
 
-allbat
+allbat_aa
 
-
+plot_grid(
+  allbat_nc, allbat_aa,
+  labels = "AUTO", ncol = 1
+)
 
 
 
@@ -95,17 +140,17 @@ unique(long.boot$variable)
 long.boot$variable <- as.character(long.boot$variable)
 long.boot$variable[long.boot$variable=="Alternative"] <- long.boot$ID_Alternative[long.boot$variable=="Alternative"] 
 unique(long.boot$variable)
-names(long.boot)[names(long.boot)=="variable"] <- "strain"
+names(long.boot)[names(long.boot)=="variable"] <- "host"
 
-long.boot$strain_label <- NA
+long.boot$host_label <- NA
 
 #ylab(bquote("r"^"*"~", virus growth")) 
 
-long.boot$strain[long.boot$strain=="Eidolon_helvum"] <- "E. helvum bat coronavirus"
-long.boot$strain[long.boot$strain=="Pteropus_rufus"] <- "P. rufus Nobecovirus"
-long.boot$strain[long.boot$strain=="Rousettus_madagascariensis"] <-  "R. madagascariensis Nobecovirus"
+long.boot$host[long.boot$host=="Eidolon_helvum"] <- "E. helvum bat coronavirus"
+long.boot$host[long.boot$host=="Pteropus_rufus"] <- "P. rufus Nobecovirus"
+long.boot$host[long.boot$host=="Rousettus_madagascariensis"] <-  "R. madagascariensis Nobecovirus"
 
-long.boot$strain <- factor(long.boot$strain, levels = c("HKU9", "E. helvum bat coronavirus", "P. rufus Nobecovirus", "R. madagascariensis Nobecovirus"))
+long.boot$host <- factor(long.boot$host, levels = c("HKU9", "E. helvum bat coronavirus", "P. rufus Nobecovirus", "R. madagascariensis Nobecovirus"))
 
 long.boot$value[long.boot$value<0] <- 0
 long.boot$Query[long.boot$Query=="Pteropus_rufus"] <- "Pteropus rufus"
@@ -113,7 +158,7 @@ long.boot$Query[long.boot$Query=="Rousettus_madagascariensis"] <- "Rousettus mad
 
 
 
-p3 <- ggplot(long.boot) + geom_line(aes(x=CenterPos, y=value, color=strain), show.legend = F, size=.9) +
+p3 <- ggplot(long.boot) + geom_line(aes(x=CenterPos, y=value, color=host), show.legend = F, size=.9) +
   geom_ribbon(data=genome.df2, aes(x=position, ymin=-10, ymax=-5, fill=gene), color="black", show.legend = F) +
   facet_grid(~Query) + theme_bw() + xlab("genome position") + ylab("% of Permuted Trees") +
   theme(panel.grid = element_blank(), strip.text = element_blank(),
@@ -165,14 +210,14 @@ id.plot$variable <- as.character(id.plot$variable)
 head(id.plot)
 
 
-names(id.plot)[names(id.plot)=="variable"] <- "strain"
+names(id.plot)[names(id.plot)=="variable"] <- "host"
 
-#id.plot$strain[id.plot$strain=="Eidolon_helvum"] <- "E. helvum bat coronavirus"
-#id.plot$strain[id.plot$strain=="Pteropus_rufus"] <- "P. rufus Nobecovirus"
-#id.plot$strain[id.plot$strain=="Rousettus_madagascariensis"] <- "R. madagascariensis Nobecovirus"
+#id.plot$host[id.plot$host=="Eidolon_helvum"] <- "E. helvum bat coronavirus"
+#id.plot$host[id.plot$host=="Pteropus_rufus"] <- "P. rufus Nobecovirus"
+#id.plot$host[id.plot$host=="Rousettus_madagascariensis"] <- "R. madagascariensis Nobecovirus"
 
-#id.plot$strain <- factor(id.plot$strain, levels = c("HKU9", "GCCDC1", "GX2018.BtCoV92", "E. helvum bat coronavirus", "P. rufus Nobecovirus", "R. madagascariensis Nobecovirus"))
-#id.plot$strain <- factor(id.plot$strain, levels = c("HKU9", "E. helvum bat coronavirus", "P. rufus Nobecovirus", "R. madagascariensis Nobecovirus"))
+#id.plot$host <- factor(id.plot$host, levels = c("HKU9", "GCCDC1", "GX2018.BtCoV92", "E. helvum bat coronavirus", "P. rufus Nobecovirus", "R. madagascariensis Nobecovirus"))
+#id.plot$host <- factor(id.plot$host, levels = c("HKU9", "E. helvum bat coronavirus", "P. rufus Nobecovirus", "R. madagascariensis Nobecovirus"))
 
 
 #and plot
@@ -194,7 +239,7 @@ genome.df$gene <- factor(genome.df$gene, levels = unique(genome.df$gene))
 colz= c("F_MIZ141_1"="goldenrod", "F_MIZ141_2" = "forestgreen")
 #colz= c("HKU9"="firebrick3", "E. helvum bat coronavirus" = "royalblue", "P. rufus Nobecovirus" = "goldenrod", "R. madagascariensis Nobecovirus" = "forestgreen")
 
-bat_human <- ggplot(id.plot) + geom_line(aes(x=pointer, y=value, color=strain), size=1) +
+bat_human <- ggplot(id.plot) + geom_line(aes(x=pointer, y=value, color=host), size=1) +
   geom_ribbon(data=genome.df, aes(x=position, ymin=-.1, ymax=-.05,  fill=gene), color="black") +
   theme_bw() + xlab("genome position") + ylab("nucleotide similarity") +
   theme(panel.grid = element_blank(), strip.text = element_text(face="italic", size=14),
@@ -212,7 +257,7 @@ leg1 <- cowplot::get_legend(bat_human)
 
 ## amino acid
 
-# p1 <- ggplot(id.plot) + geom_line(aes(x=pointer, y=value, color=strain), size=1, show.legend = F) +
+# p1 <- ggplot(id.plot) + geom_line(aes(x=pointer, y=value, color=host), size=1, show.legend = F) +
 #   geom_ribbon(data=genome.df, aes(x=position, ymin=-.1, ymax=-.05, fill=gene), color="black", show.legend = F) +
 #   facet_grid(~Query) + theme_bw() + xlab("genome position") + ylab("amino acid similarity") +
 #   theme(panel.grid = element_blank(), strip.text = element_text(face="italic", size=14),

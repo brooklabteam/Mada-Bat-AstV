@@ -214,18 +214,9 @@ MAKE THE BEAST TREE
 1. generate .xml file for input into BEAST, using program BEAUti (screenshots in BEAUTi_specs)
 -get dates from tip labels
 -select strict molecular clock
--use coalescent constant population model (Lebarchenon 2018 mada bat astro paper, but RdRp?)
+-use bayesian skyline coalescent model
 -clock rate lognormal with mean of 0.001 following cara following Jenkins et al 2014. all other priors left at default.
--MCMC chain length 700,000,000 and set tracelog and treelog every 10,000 iterations. all other MCMC parameters left at default.
-
-
-
-
-
-
-
-
-
+-MCMC chain length 763,370,000 and set tracelog and treelog every 10,000 iterations. all other MCMC parameters left at default.
 
 
 BEAST IS DONE
@@ -241,36 +232,16 @@ Followed these tutorials.
 https://beast.community/second_tutorial
 
 1/2) Evaluated parameter convergence in Tracer, all looks good. Did many iterations so have super solid estimates.
+>700,000,000 iterations
 
 2) build MCC tree using TreeAnnotator
---had to resample trees using LogCombiner to reduce the number of trees
---reasmpled every 100000, 10% burnin, ended up with ~14000 trees
---defaults
-*finished super fast
+--10% burnin
 
 3) make it pretty in R*
-*failed! Something got messed up in the resampling/MCC/nexus export stage and I lost the posterior values, which I need to plot. Going to redo the steps above.
 
-REDO POST PROCESSING
 
-1) try treeannotator again with giant file
-Looks like I generated 141155 trees :D oops.
-I only need about 10,000.
-** that means I did a total of 1411550000 iterations.
 
-2) re-sample with LogCombiner
-target ~10,000 trees. Since I did a treelog every 10,000, I need to use iterations of that. I'll try re-sampling every 100,000.
-** Now I have 14,116
-** if I do 25% burnin, that gets me close to 10,000 trees. 
-
-3) Import the re-sampled into TreeAnnotator to make the MCC file
-** actually you choose the number of trees for burnin, not the %, so I'm just going to say 25% of 14,116 = 3529
-** keep target heights
-
-4) open in fig tree (why Do I need this step?) I think that I want to keep it in the nexus output that TreeAnnotator generated. the file is currently in the format that the R script calls for. I'm going to skip this step.
-
-5) make it pretty in R!
-Try again reading in beast file and creating phylogeny.
+*** I'm going to do another tree with a relaxed clock bc this one estimates divergence at over 30,000 years ago... not sure if that's insane but if it isn't I want to be able to back it up with some model comparison
 
 
 
