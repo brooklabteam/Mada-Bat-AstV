@@ -193,21 +193,13 @@ PREPARE INPUTS
 for any seqs where only collection year and month was posted, 15th of that month
  **successfully used R script, fasta now re-named in BEAST format.
  
- *trimming tree to only contain the clade with our new sequence in it (based on ML phylogeny)
- 17 seqs.
- *also you don't need outgroups for Bayesian trees
- 
+Removing outgroup: 
+
+
 2. Alignment and model test
 Alignment in Geneious using MAFFT, modeltest using model-test-ng
 
-Model using AIC = GTR+I+G4
-
-Partition 1/1:
-                         Model         Score        Weight
-----------------------------------------------------------
-       BIC            TVM+I+G4   215099.4042        0.7236
-       AIC            GTR+I+G4   214816.7634        0.9247
-      AICc            GTR+I+G4   214816.7634        0.9247
+Model: TVM+I+G4 
 
 
 MAKE THE BEAST TREE

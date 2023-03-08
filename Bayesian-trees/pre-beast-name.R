@@ -6,7 +6,7 @@ library(seqinr)
 
 
 #set wd
-homewd= "/Users/shorigan/Documents/GitHub/Mada-Bat-Astro/"
+homewd= "/Users/sophiahorigan/Documents/GitHub/Mada-Bat-Astro/"
 setwd(paste0(homewd, "/Bayesian-trees/"))
 
 #load the dataset and query
@@ -17,7 +17,7 @@ head(dat)
 dat = dat %>% filter(!is.na(bat_host))
 
 #now, get the fasta file 
-fasta.dat <- read.fasta(file= paste0(homewd,"/Bayesian-trees/astro_full_BEAST.fasta"), forceDNAtolower = F, as.string = T)
+fasta.dat <- read.fasta(file= paste0(homewd,"/Bayesian-trees/astro-full-beast-alignment.fasta"), forceDNAtolower = F, as.string = T)
 
 names(fasta.dat)
 

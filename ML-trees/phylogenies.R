@@ -15,7 +15,7 @@ library(dplyr)
 #install.packages('dplyr')
 
 
-homewd= "/Users/shorigan/Documents/GitHub/Mada-Bat-Astro/"
+homewd= "/Users/sophiahorigan/Documents/GitHub/Mada-Bat-Astro/"
 
 setwd(paste0(homewd, "/ML-trees"))
 
@@ -108,6 +108,25 @@ tree.dat$Bat_host[tree.dat$Bat_host==1] <- "bat host"
 tree.dat$Bat_host <- as.factor(tree.dat$Bat_host)
 shapez = c("bat host" =  24, "non-bat host" = 21)
 
+tree.dat$Clade <- tree.dat$Strain
+#need to check these against literature.
+tree.dat$Clade[tree.dat$Host == "Sus scrofa" ] <- "Porcine AstV" 
+tree.dat$Clade[tree.dat$Host == "Bos taurus" ] <- "Bovine AstV"
+tree.dat$Clade[tree.dat$Host == "Homo sapiens" ] <- "Human AstV" 
+tree.dat$Clade[tree.dat$Host == "Mus musculus" ] <- "Murine AstV" 
+tree.dat$Clade[tree.dat$Host == "Felis catus" ] <- "Feline AstV" 
+tree.dat$Clade[tree.dat$Host == "Marmota himalayana" ] <- "Marmot AstV" 
+tree.dat$Clade[tree.dat$Host == "Ovis aries" ] <- "Bovine AstV" 
+tree.dat$Clade[tree.dat$Host == "Mouse" ] <- "Murine AstV" 
+tree.dat$Clade[tree.dat$Host == "Oryctolagus cuniculus" ] <- "Leporine AstV" 
+tree.dat$Clade[tree.dat$Host == "Budorcas taxicolor tibetana" ] <- "Bovine AstV"
+tree.dat$Clade[tree.dat$Bat_host=="bat host"] <- "Bat AstV"
+tree.dat$Clade[tree.dat$Host == "Canis lupus familiaris" ] <- "Canine AstV"
+tree.dat$Clade[tree.dat$Host == "Camelus dromedarius" ] <- "Camel AstV"
+tree.dat$Clade[tree.dat$Host == "Neogale vison" ] <- "Mink AstV"
+tree.dat$Clade[tree.dat$Host == "Rattus norvegicus" ] <- "Murine AstV"
+tree.dat$Clade[tree.dat$Host == "Meleagris gallopavo" ] <- "AvastV"
+
 ## Tree 1: Colored by genus, shape by bat/non-bat
 p1 <- ggtree(rooted.tree.A) %<+% tree.dat + geom_tippoint(aes(color=Genus, fill=Genus, shape=Bat_host)) +
   geom_nodelab(size=1.5,nudge_x = -.05, nudge_y = .7) +
@@ -136,7 +155,10 @@ p1_family
 
 ## color tip by order, shape by chiroptera, color by novelty
 ## CURRENT
-p1_order <- ggtree(rooted.tree.A, size=.8) %<+% tree.dat + geom_tippoint(aes(color=Order, fill=Order, shape=Bat_host), size=2.8) +
+p1_order <- ggtree(rooted.tree.A, size=.8) %<+% tree.dat + geom_tippoint(aes(color=Clade, fill=Clade, shape=Bat_host), size=2.8) +
+  #new_scale_fill() +
+  scale_color_manual(values=c(AvastV = "azure4", 'Bat AstV' = "#0CB702", 'Bovine AstV' = "#00BFC4", 'Camel AstV' = "#00A9FF", 'Canine AstV' = "#8494FF", 'Feline AstV' = "#C77CFF", 'Human AstV' = "#ED68ED", 'Leporine AstV' = "#FF68A1", 'Marmot AstV' = "#E68613", 'Mink AstV' = "#CD9600", 'Murine AstV' = "#ABA300", 'Porcine AstV' = "#7CAE00")) +
+  scale_fill_manual(values=c(AvastV = "azure4", 'Bat AstV' = "#0CB702", 'Bovine AstV' = "#00BFC4", 'Camel AstV' = "#00A9FF", 'Canine AstV' = "#8494FF", 'Feline AstV' = "#C77CFF", 'Human AstV' = "#ED68ED", 'Leporine AstV' = "#FF68A1", 'Marmot AstV' = "#E68613", 'Mink AstV' = "#CD9600", 'Murine AstV' = "#ABA300", 'Porcine AstV' = "#7CAE00")) +
   geom_nodelab(size=1.8,nudge_x = -.05, nudge_y = .7) +
   geom_treescale(fontsize=2.5) + 
   #scale_color_manual(values=colz) + 
@@ -314,8 +336,10 @@ pC_suborder <- ggtree(rooted.tree.C) %<+% tree.datC + geom_tippoint(aes(color=su
   #scale_fill_manual(values=colz) +
   scale_shape_manual(values=shape_geo) + 
   new_scale_fill() +
-  geom_tiplab(aes(fill=novel), geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
+  geom_tiplab(aes(fill=novel, color=suborder), geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
   scale_fill_manual(values=colz2) + 
+  scale_color_manual(values=c(Yangochiroptera = "#39B600", Yinpterochiroptera = "#00ABFD")) +
+  #scale_color_manual(values=c(Hipposideridae = "#F8766D", Rhinonycteridae = "#E68613", Pteropodidae = "#CD9600", Vespertilionidae = "#00BFC4", Nycteridae = "#00B8E7", Molossidae = "#00A9FF", Miniopteridae = "#00C19A", Phasianidae = "azure4")) +
   theme(legend.position = c(.1,.6), legend.title = element_blank()) +
   geom_treescale(x= 2.15, y= .05, fontsize=1.5) + 
   xlim(c(0,5.6))
@@ -327,6 +351,7 @@ pR <- ggtree::rotate(pC_suborder, 176)
 pR2 <- ggtree::rotate(pR, 206)
 pR3 <- ggtree::rotate(pR2, 207)
 pR4 <- ggtree::rotate(pR3, 208)
+pR4
 
 ## color by location, shape by suborder
 pC_suborder2 <- ggtree(rooted.tree.C) %<+% tree.datC + geom_tippoint(aes(color=Geo_Location, fill=Geo_Location, shape=suborder)) +

@@ -14,7 +14,7 @@ library(treeio)
 
 #first, read in the tree
 
-homewd= "/Users/shorigan/Documents/GitHub/Mada-Bat-Astro/"
+homewd= "/Users/sophiahorigan/Documents/GitHub/Mada-Bat-Astro/"
 
 setwd(paste0(homewd, "/Bayesian-trees"))
 
@@ -106,13 +106,16 @@ dat.sub$novel[dat.sub$country=="Madagascar"] <- "yes"
 
 colz2 = c('yes' =  "yellow", 'no' = "white")
 
-p3 <-ggtree(tree, mrsd=mrsd.dat) %<+% dat.sub +
+p3 <-ggtree(tree, mrsd=mrsd.dat, size=.8) %<+% dat.sub +
   geom_tippoint(aes(color=clade), size=4) +
+  scale_color_manual(values=c('Bat AstV' = "#0CB702", 'Bovine AstV' = "#00BFC4", 'Feline AstV' = "#C77CFF", 'Human AstV' = "#ED68ED", 'Mink AstV' = "#CD9600", 'Murine AstV' = "#ABA300", 'Porcine AstV' = "#7CAE00")) +
+  scale_fill_manual(values=c('Bat AstV' = "#0CB702", 'Bovine AstV' = "#00BFC4", 'Feline AstV' = "#C77CFF", 'Human AstV' = "#ED68ED", 'Mink AstV' = "#CD9600", 'Murine AstV' = "#ABA300", 'Porcine AstV' = "#7CAE00")) +
   #geom_nodelab(size=2.5,nudge_x = -21, nudge_y = .7) +
  # geom_nodelab(aes(label=new.nodel.lab), size=4,nudge_x = -55, nudge_y = -1,  color="firebrick", fontface=2, geom="label", fill="white") +
+  #geom_nodelab(size=1.8,nudge_x = -.05, nudge_y = .7) +
+  #geom_treescale(fontsize=2.5) + 
   theme_tree2() +
-  theme(legend.position = c(.02,.7), 
-        plot.margin = unit(c(.2,20,2,3), "lines")) +
+  theme(legend.position = c(.07,.7), plot.margin = unit(c(.2,24,3,3), "lines"), legend.title = element_blank()) +
   coord_cartesian(clip = "off") + 
   geom_nodepoint(aes(fill=posterior), shape=21, color="black", size=3, stroke=.1) +
   scale_fill_continuous(low="yellow", high="red") +
@@ -122,7 +125,8 @@ p3 <-ggtree(tree, mrsd=mrsd.dat) %<+% dat.sub +
   xlab("years to MRCA") +
 ggnewscale::new_scale_fill() +
   geom_tiplab(aes(fill = novel), geom = "label", label.size = 0, 
-              alpha=.3,  show.legend=F, size=2.7, hjust = -.05) + scale_fill_manual(values=colz2)
+              alpha=.3,  show.legend=F, size=3) + scale_fill_manual(values=colz2) 
+  #xlim(c(0,6))
 
 p3
 

@@ -1,0 +1,37 @@
+<itsabeastystatewerein version='2.0' sample='126354999'>
+<statenode id='Tree.t:astro_full_BEAST_alignment'>((((0:3567.1823223688425,1:3563.0042401770606)22:2692.136842281059,((6:2623.0213871055703,15:2657.6893263225784)31:1945.3864423653795,(((7:2820.603358970206,16:2830.8554137647266)21:1015.588836946024,13:3844.134661669652)24:383.0601748975723,(((8:1590.9710973454755,11:1587.885125341584)17:1010.0117061427984,(9:1624.0702302276127,12:1625.3893109971318)27:975.5087930375907)29:353.24938121784544,14:2956.146212702228)28:1270.1061581115746)23:375.1554586571492)25:1650.314074904979)26:539.222429451891,(4:320.371158903192,5:320.371158903192)18:6475.910161225998)30:267.6202683311076,((2:4179.664474472281,3:4185.0011239220885)19:826.217865716857,10:4999.631557944957)20:2056.934316764312)32:0.0</statenode>
+<statenode id='clockRate.c:astro_full_BEAST_alignment'>clockRate.c:astro_full_BEAST_alignment[1 1] (0.0,Infinity): 1.3943334090794752E-4 </statenode>
+<statenode id='proportionInvariant.s:astro_full_BEAST_alignment'>proportionInvariant.s:astro_full_BEAST_alignment[1 1] (0.0,1.0): 0.09436227696341394 </statenode>
+<statenode id='gammaShape.s:astro_full_BEAST_alignment'>gammaShape.s:astro_full_BEAST_alignment[1 1] (0.001,1000.0): 1.3785423389846285 </statenode>
+<statenode id='freqParameter.s:astro_full_BEAST_alignment'>freqParameter.s:astro_full_BEAST_alignment[4 1] (0.0,1.0): 0.2622197072299946 0.2282218923934795 0.24022472998420458 0.26933367039231915 </statenode>
+<statenode id='rateAC.s:astro_full_BEAST_alignment'>rateAC.s:astro_full_BEAST_alignment[1 1] (0.0,Infinity): 0.6578652406134423 </statenode>
+<statenode id='rateAG.s:astro_full_BEAST_alignment'>rateAG.s:astro_full_BEAST_alignment[1 1] (0.0,Infinity): 0.9539574281628682 </statenode>
+<statenode id='rateAT.s:astro_full_BEAST_alignment'>rateAT.s:astro_full_BEAST_alignment[1 1] (0.0,Infinity): 0.39002479728073475 </statenode>
+<statenode id='rateCG.s:astro_full_BEAST_alignment'>rateCG.s:astro_full_BEAST_alignment[1 1] (0.0,Infinity): 0.34430647155905125 </statenode>
+<statenode id='rateGT.s:astro_full_BEAST_alignment'>rateGT.s:astro_full_BEAST_alignment[1 1] (0.0,Infinity): 0.28870042466737955 </statenode>
+<statenode id='bPopSizes.t:astro_full_BEAST_alignment'>bPopSizes.t:astro_full_BEAST_alignment[1 1] (0.0,Infinity): 29982.050786436892 </statenode>
+<statenode id='bGroupSizes.t:astro_full_BEAST_alignment'>bGroupSizes.t:astro_full_BEAST_alignment[1 1] (1,2147483647): 16 </statenode>
+</itsabeastystatewerein>
+<!--
+{"operators":[
+{"id":"StrictClockRateScaler.c:astro_full_BEAST_alignment","p":0.9970206695986085,"accept":22537426,"reject":539812,"acceptFC":22536787,"rejectFC":539812,"rejectIv":0,"rejectOp":0},
+{"id":"strictClockUpDownOperator.c:astro_full_BEAST_alignment","p":0.4497025943783665,"accept":9717796,"reject":13358262,"acceptFC":9717587,"rejectFC":13357906,"rejectIv":0,"rejectOp":0},
+{"id":"proportionInvariantScaler.s:astro_full_BEAST_alignment","p":0.7189607056571945,"accept":154901,"reject":612838,"acceptFC":154882,"rejectFC":612835,"rejectIv":0,"rejectOp":0},
+{"id":"gammaShapeScaler.s:astro_full_BEAST_alignment","p":0.8030717132581866,"accept":143794,"reject":623483,"acceptFC":143791,"rejectFC":623467,"rejectIv":0,"rejectOp":0},
+{"id":"FrequenciesExchanger.s:astro_full_BEAST_alignment","p":0.012365162202553584,"accept":177385,"reject":590921,"acceptFC":177374,"rejectFC":590909,"rejectIv":0,"rejectOp":0},
+{"id":"RateACScaler.s:astro_full_BEAST_alignment","p":0.7840219928626018,"accept":134547,"reject":633302,"acceptFC":134545,"rejectFC":633283,"rejectIv":0,"rejectOp":0},
+{"id":"RateAGScaler.s:astro_full_BEAST_alignment","p":0.8079353740977602,"accept":124152,"reject":643221,"acceptFC":124145,"rejectFC":643200,"rejectIv":0,"rejectOp":0},
+{"id":"RateATScaler.s:astro_full_BEAST_alignment","p":0.7603992622027902,"accept":150435,"reject":619959,"acceptFC":150430,"rejectFC":619942,"rejectIv":0,"rejectOp":0},
+{"id":"RateCGScaler.s:astro_full_BEAST_alignment","p":0.7369811279284572,"accept":160536,"reject":606736,"acceptFC":160531,"rejectFC":606723,"rejectIv":0,"rejectOp":0},
+{"id":"RateGTScaler.s:astro_full_BEAST_alignment","p":0.7340092437289752,"accept":149134,"reject":622018,"acceptFC":149131,"rejectFC":622009,"rejectIv":0,"rejectOp":0},
+{"id":"BayesianSkylineTreeScaler.t:astro_full_BEAST_alignment","p":0.8937868808253806,"accept":4594998,"reject":18479180,"acceptFC":4594970,"rejectFC":18478623,"rejectIv":1,"rejectOp":1},
+{"id":"BayesianSkylineTreeRootScaler.t:astro_full_BEAST_alignment","p":0.7806771117009444,"accept":1871406,"reject":21193802,"acceptFC":1871388,"rejectFC":21193210,"rejectIv":7798553,"rejectOp":7798553},
+{"id":"BayesianSkylineUniformOperator.t:astro_full_BEAST_alignment","p":"NaN","accept":25299966,"reject":205323805,"acceptFC":25299248,"rejectFC":205318298,"rejectIv":0,"rejectOp":0},
+{"id":"BayesianSkylineSubtreeSlide.t:astro_full_BEAST_alignment","p":77.94606654743481,"accept":70187022,"reject":45151722,"acceptFC":70184346,"rejectFC":45151280,"rejectIv":720222,"rejectOp":720222},
+{"id":"BayesianSkylineNarrow.t:astro_full_BEAST_alignment","p":"NaN","accept":260340,"reject":115104117,"acceptFC":260244,"rejectFC":115101066,"rejectIv":1,"rejectOp":1},
+{"id":"BayesianSkylineWide.t:astro_full_BEAST_alignment","p":"NaN","accept":1812,"reject":23063120,"acceptFC":1811,"rejectFC":23062514,"rejectIv":11906872,"rejectOp":11906872},
+{"id":"BayesianSkylineWilsonBalding.t:astro_full_BEAST_alignment","p":"NaN","accept":3023,"reject":23065159,"acceptFC":3014,"rejectFC":23064588,"rejectIv":4746417,"rejectOp":4746417},
+{"id":"popSizesScaler.t:astro_full_BEAST_alignment","p":0.9894584200644125,"accept":114688255,"reject":650853,"acceptFC":114685196,"rejectFC":650853,"rejectIv":0,"rejectOp":0},
+{"id":"groupSizesDelta.t:astro_full_BEAST_alignment","p":536767.3426725557,"accept":46140762,"reject":0,"acceptFC":46139501,"rejectFC":0,"rejectIv":0,"rejectOp":0}
+]}
+-->
