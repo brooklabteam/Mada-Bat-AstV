@@ -13,6 +13,7 @@ library(ggnewscale)
 library(tidyverse)
 library(dplyr)
 #install.packages('dplyr')
+library("ggsci")
 
 
 homewd= "/Users/sophiahorigan/Documents/GitHub/Mada-Bat-Astro/"
@@ -159,6 +160,8 @@ p1_order <- ggtree(rooted.tree.A, size=.8) %<+% tree.dat + geom_tippoint(aes(col
   #new_scale_fill() +
   scale_color_manual(values=c(AvastV = "azure4", 'Bat AstV' = "#0CB702", 'Bovine AstV' = "#00BFC4", 'Camel AstV' = "#00A9FF", 'Canine AstV' = "#8494FF", 'Feline AstV' = "#C77CFF", 'Human AstV' = "#ED68ED", 'Leporine AstV' = "#FF68A1", 'Marmot AstV' = "#E68613", 'Mink AstV' = "#CD9600", 'Murine AstV' = "#ABA300", 'Porcine AstV' = "#7CAE00")) +
   scale_fill_manual(values=c(AvastV = "azure4", 'Bat AstV' = "#0CB702", 'Bovine AstV' = "#00BFC4", 'Camel AstV' = "#00A9FF", 'Canine AstV' = "#8494FF", 'Feline AstV' = "#C77CFF", 'Human AstV' = "#ED68ED", 'Leporine AstV' = "#FF68A1", 'Marmot AstV' = "#E68613", 'Mink AstV' = "#CD9600", 'Murine AstV' = "#ABA300", 'Porcine AstV' = "#7CAE00")) +
+  #scale_fill_npg() +
+  #scale_color_npg() +
   geom_nodelab(size=1.8,nudge_x = -.05, nudge_y = .7) +
   geom_treescale(fontsize=2.5) + 
   #scale_color_manual(values=colz) + 

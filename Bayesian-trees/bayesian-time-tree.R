@@ -14,10 +14,10 @@ library(treeio)
 
 #first, read in the tree
 
-homewd= "/Users/shorigan/Documents/GitHub/Mada-Bat-Astro/"
+homewd= "/Users/sophiahorigan/Documents/GitHub/Mada-Bat-Astro/"
 setwd(paste0(homewd, "/Bayesian-trees"))
 
-tree <- read.beast(file = paste0(homewd, "Bayesian-trees/astro-full-bayesian.tree"))
+tree <- read.beast(file = paste0(homewd, "Bayesian-trees/astro-full-beast-MCC"))
 
 
 treedat <- cbind.data.frame(tip_name = tree@phylo$tip.label)

@@ -224,16 +224,13 @@ Followed these tutorials.
 https://beast.community/second_tutorial
 
 1/2) Evaluated parameter convergence in Tracer, all looks good. Did many iterations so have super solid estimates.
->700,000,000 iterations
+>300,000,000 iterations
 
 2) build MCC tree using TreeAnnotator
 --10% burnin
 
 3) make it pretty in R*
 
-
-
-*** I'm going to do another tree with a relaxed clock bc this one estimates divergence at over 30,000 years ago... not sure if that's insane but if it isn't I want to be able to back it up with some model comparison
 
 
 

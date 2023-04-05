@@ -7,6 +7,7 @@ library(reshape2)
 library(cowplot)
 library(gggenes)
 library(LaCroixColoR)
+library("ggsci")
 
 homewd="/Users/sophiahorigan/Documents/Github/Mada-Bat-Astro/"
 setwd(paste0(homewd, "/Fig5/"))
@@ -16,16 +17,16 @@ setwd(paste0(homewd, "/Fig5/"))
 ###################################
 genes <- read.csv(file = "gene.csv", header = T, stringsAsFactors = F)
 
-gene_plot <- ggplot(genes, aes(xmin = start, xmax = end, y=molecule, fill = gene, label=gene) +
+gene_plot <- ggplot(genes, aes(xmin = start, xmax = end, y=molecule, fill = gene, label=gene)) +
   geom_gene_arrow(arrowhead_height = unit(6, "mm"), arrowhead_width = unit(2, "mm"), arrow_body_height = unit(6, "mm"), show.legend = FALSE) + 
-  geom_gene_label(align = "left", grow=T, size=14) +
+  geom_gene_label(align = "left", grow=T, min.size = 7) +
   theme_bw() + xlab("") + ylab("") + #ylim(0,0.5) +
   theme(panel.grid = element_blank(), strip.text = element_text(face="italic", size=14),
         strip.background = element_rect(fill="white"), legend.position = "none",
-        axis.title = element_blank(),
-        axis.text = element_blank(),
-        axis.ticks = element_blank()) + theme_genes() +
-  scale_color_manual(values = lacroix_palette("PeachPear", n=3, type = "discrete"))
+        axis.text = element_text(size=20), axis.title = element_text(size=14)) +
+      theme_genes() +
+    scale_fill_npg()
+ # scale_color_manual(values = lacroix_palette("PeachPear", n=3, type = "discrete"))
 
 gene_plot
 
@@ -109,7 +110,8 @@ allbat_aa <- ggplot(long.sim2) + geom_line(aes(x=pointer, y=value*100, color=hos
         legend.position = "none", legend.direction = "horizontal",legend.box = "vertical",
         legend.text = element_text(face="italic", size = 12),
         axis.text = element_text(size=12), axis.title = element_text(size=14)) +
-  scale_color_manual(values=lacroix_palette("PeachPear", type = "discrete")) + #coord_cartesian(ylim=c(-.1,1)) +
+  scale_color_npg() +
+  #scale_color_manual(values=lacroix_palette("PeachPear", type = "discrete")) + #coord_cartesian(ylim=c(-.1,1)) +
   scale_x_continuous(breaks=c(0,1000,2000,3000), labels = c(0,1000, 2000,3000)) 
 #scale_y_break(c(0.3, 0.9))
 
@@ -127,7 +129,8 @@ allbat_nc <- ggplot(long.sim) + geom_line(aes(x=pointer, y=value*100, color=host
         legend.position = "bottom", legend.direction = "horizontal", #legend.box = "vertical",
         legend.text = element_text(face="italic", size = 12), axis.text = element_text(size=12), 
        axis.title = element_text(size=14)) +
-  scale_color_manual(values=lacroix_palette("PeachPear", type = "discrete")) + #coord_cartesian(ylim=c(-.1,1)) +
+  scale_color_npg() +
+  #scale_color_manual(values=lacroix_palette("PeachPear", type = "discrete")) + #coord_cartesian(ylim=c(-.1,1)) +
   scale_x_continuous(breaks=c(0,2000,4000,6000), labels = c(0,2000, 4000,6000))
 
 allbat_nc
@@ -139,7 +142,7 @@ datcovg <- read.csv(file = paste0(homewd, "/Fig5/cov.csv"), header = T, stringsA
 
 datcovg$Coverage <- datcovg$Coverage/100
 
-covp <- ggplot(datcovg) + geom_area(aes(x=Position, y=Coverage), fill="#1BB6AF") +
+covp <- ggplot(datcovg) + geom_area(aes(x=Position, y=Coverage), fill="gray70") +
   #geom_ribbon(data=genome.df3, aes(x = Position, ymin=0, ymax=0,fill = Peptide), color="black") + 
   geom_hline(yintercept= mean(datcovg$Coverage),linetype=2) +
   facet_grid() + theme_bw() + ylab("Coverage (rpm)") + xlab("genome position") + 
@@ -155,7 +158,7 @@ covp <- ggplot(datcovg) + geom_area(aes(x=Position, y=Coverage), fill="#1BB6AF")
 
 plot_grid(
   gene_plot, allbat_aa, allbat_nc, covp,
-  labels = "AUTO", ncol = 1
+  labels = NULL, ncol = 1
 )
 
 
