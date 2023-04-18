@@ -156,7 +156,7 @@ p1_family
 
 ## color tip by order, shape by chiroptera, color by novelty
 ## CURRENT
-p1_order <- ggtree(rooted.tree.A, size=.8) %<+% tree.dat + geom_tippoint(aes(color=Clade, fill=Clade, shape=Bat_host), size=2.8) +
+p1_order <- ggtree(rooted.tree.A, size=.8) %<+% tree.dat + geom_tippoint(aes(color=Clade, fill=Clade), size=2.8) +
   #new_scale_fill() +
   scale_color_manual(values=c(AvastV = "azure4", 'Bat AstV' = "#0CB702", 'Bovine AstV' = "#00BFC4", 'Camel AstV' = "#00A9FF", 'Canine AstV' = "#8494FF", 'Feline AstV' = "#C77CFF", 'Human AstV' = "#ED68ED", 'Leporine AstV' = "#FF68A1", 'Marmot AstV' = "#E68613", 'Mink AstV' = "#CD9600", 'Murine AstV' = "#ABA300", 'Porcine AstV' = "#7CAE00")) +
   scale_fill_manual(values=c(AvastV = "azure4", 'Bat AstV' = "#0CB702", 'Bovine AstV' = "#00BFC4", 'Camel AstV' = "#00A9FF", 'Canine AstV' = "#8494FF", 'Feline AstV' = "#C77CFF", 'Human AstV' = "#ED68ED", 'Leporine AstV' = "#FF68A1", 'Marmot AstV' = "#E68613", 'Mink AstV' = "#CD9600", 'Murine AstV' = "#ABA300", 'Porcine AstV' = "#7CAE00")) +
@@ -166,7 +166,6 @@ p1_order <- ggtree(rooted.tree.A, size=.8) %<+% tree.dat + geom_tippoint(aes(col
   geom_treescale(fontsize=2.5) + 
   #scale_color_manual(values=colz) + 
   #scale_fill_manual(values=colz) +
-  scale_shape_manual(values=shapez) + 
   new_scale_fill() +
   geom_tiplab(aes(fill=novel), geom = "label", label.size = 0, alpha=.3, size=3, show.legend=F) +
   scale_fill_manual(values=colz2) + 

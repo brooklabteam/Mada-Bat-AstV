@@ -24,9 +24,9 @@ gene_plot <- ggplot(genes, aes(xmin = start, xmax = end, y=molecule, fill = gene
   theme(panel.grid = element_blank(), strip.text = element_text(face="italic", size=14),
         strip.background = element_rect(fill="white"), legend.position = "none",
         axis.text = element_text(size=20), axis.title = element_text(size=14)) +
-      theme_genes() +
-    scale_fill_npg()
- # scale_color_manual(values = lacroix_palette("PeachPear", n=3, type = "discrete"))
+  theme_genes() +
+  scale_fill_npg()
+# scale_color_manual(values = lacroix_palette("PeachPear", n=3, type = "discrete"))
 
 gene_plot
 
@@ -35,7 +35,7 @@ gene_plot
 ###################################
 
 simplot <- read.csv(file = "all_bat.csv", header = T, stringsAsFactors = F) #nucleotide
-simplot2 <- read.csv(file = "allbat_aa.csv", header = T, stringsAsFactors = F) #animo acid
+simplot2 <- read.csv(file = "alignment-allorf.csv", header = T, stringsAsFactors = F) #animo acid
 head(simplot2)
 
 #move to long
@@ -80,12 +80,12 @@ long.sim2$value <- long.sim2$value/100
 #long.sim2$Query[long.sim2$Query=="Rousettus_madagascariensis"] <- "Rousettus madagascariensis"
 
 genome.df.nc <- data.frame(position = c(1, 3307,
-                                      3308, 3416,  
-                                     3417, 4807,
-                                     4808, 4833,
-                                     4834, 7416,
-                                     7417, 7589), 
-                        gene = rep(c("ORF1a", "NCS", "ORF1b", "NCS", "ORF2", "NCS"), each=2))
+                                        3308, 3416,  
+                                        3417, 4807,
+                                        4808, 4833,
+                                        4834, 7416,
+                                        7417, 7589), 
+                           gene = rep(c("ORF1a", "NCS", "ORF1b", "NCS", "ORF2", "NCS"), each=2))
 
 genome.df.nc$gene <- factor(genome.df.nc$gene, levels = unique(genome.df.nc$gene))
 
@@ -104,7 +104,7 @@ lacolz = lacroix_palette("PeachPear", n=5, type = "discrete")
 ## animo acid
 allbat_aa <- ggplot(long.sim2) + geom_line(aes(x=pointer, y=value*100, color=host), size=1) +
   #geom_ribbon(data=genome.df.aa, aes(x=position, ymin=-.1, ymax=-.05,  fill=gene), color="black") +
-  theme_bw() + xlab("") + ylab("% aa similarity") + #ylim(0,0.5) +
+  theme_bw() + xlab("") + ylab("% aa similarity") + ylim(0,100) +
   theme(panel.grid = element_blank(), strip.text = element_text(face="italic", size=14),
         strip.background = element_rect(fill="white"), 
         legend.position = "none", legend.direction = "horizontal",legend.box = "vertical",
@@ -122,13 +122,13 @@ allbat_aa
 allbat_nc <- ggplot(long.sim) + geom_line(aes(x=pointer, y=value*100, color=host), size=1) +
   #geom_ribbon(data=genome.df.nc, aes(x=position, ymin=-.1, ymax= -4,  fill=gene), color="black") +
   theme_bw() + xlab("") + 
- geom_hline(yintercept= mean(long.sim$value*100),linetype=2) + #this doesn't seem right
-  ylab("% nt similarity") + #ylim(0,1) +
+  geom_hline(yintercept= mean(long.sim$value*100),linetype=2) + #this doesn't seem right
+  ylab("% nt similarity") + ylim(0,100) +
   theme(panel.grid = element_blank(), strip.text = element_text(face="italic", size=14),
         strip.background = element_rect(fill="white"), 
         legend.position = "bottom", legend.direction = "horizontal", #legend.box = "vertical",
         legend.text = element_text(face="italic", size = 12), axis.text = element_text(size=12), 
-       axis.title = element_text(size=14)) +
+        axis.title = element_text(size=14)) +
   scale_color_npg() +
   #scale_color_manual(values=lacroix_palette("PeachPear", type = "discrete")) + #coord_cartesian(ylim=c(-.1,1)) +
   scale_x_continuous(breaks=c(0,2000,4000,6000), labels = c(0,2000, 4000,6000))
@@ -151,14 +151,14 @@ covp <- ggplot(datcovg) + geom_area(aes(x=Position, y=Coverage), fill="gray70") 
         legend.position = "none", legend.direction = "horizontal",legend.box = "horizontal",
         legend.text = element_text(face="italic", size = 12),
         axis.text = element_text(size=12), axis.title = element_text(size=14)) + 
-        scale_x_continuous(breaks=c(0,2000/1,4000/1,6000/1, 8000/1), 
-                                                    labels = c(0,2000, 4000, 6000, 8000))  
+  scale_x_continuous(breaks=c(0,2000/1,4000/1,6000/1, 8000/1), 
+                     labels = c(0,2000, 4000, 6000, 8000))  
 
 
 
 plot_grid(
   gene_plot, allbat_aa, allbat_nc, covp,
-  labels = NULL, ncol = 1
+  labels = NULL, ncol = 1, rel_heights = c(1,1,1.25,1)
 )
 
 

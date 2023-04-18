@@ -33,7 +33,7 @@ treedat$beast_name <-treedat$tip_name
 #tree$node.label <- round(tree$posterior,2)
 #treedat <- cbind.data.frame(tip_name = tree$tip.label)
 treedat$accession_num <- sapply(strsplit(treedat$tip_name, "_"), function(x) x[[1]])
-treedat$accession_num[treedat$accession_num=="NC"] <- c("NC_001943", "NC_002469", "NC_004579", "NC_022400", "NC_013060", "NC_013443", "NC_015935", "NC_016155", "NC_016896", "NC_018702", "NC_019026", "NC_019027", "NC_019028", "NC_019494", "NC_022249", "NC_023629", "NC_023630", "NC_023631", "NC_023632", "NC_023636", "NC_023674", "NC_023675", "NC_024297", "NC_024472", "NC_024498", "NC_024701", "NC_025346", "NC_025379", "NC_026814", "NC_027711", "NC_030922", "NC_033792", "NC_033821", "NC_034974", "NC_036583", "NC_037655")
+treedat$accession_num[treedat$accession_num=="NC"] <- c("NC_001943", "NC_002469", "NC_004579", "NC_011400", "NC_013060", "NC_013443", "NC_015935", "NC_016155", "NC_016896", "NC_018702", "NC_019026", "NC_019027", "NC_019028", "NC_019494", "NC_022249", "NC_023629", "NC_023630", "NC_023631", "NC_023632", "NC_023636", "NC_023674", "NC_023675", "NC_024297", "NC_024472", "NC_024498", "NC_024701", "NC_025346", "NC_025379", "NC_026814", "NC_027711", "NC_030922", "NC_033792", "NC_033821", "NC_034974", "NC_036583", "NC_037655")
 treedat$accession_num[treedat$accession_num=="F"] <- c("OQ606244")
 
 #names(treedat)[names(treedat)=="tip_name"] <- "beast_name"
@@ -108,8 +108,8 @@ colz2 = c('yes' =  "yellow", 'no' = "white")
 
 p3 <-ggtree(tree, mrsd=mrsd.dat, size=.8) %<+% dat.sub +
   geom_tippoint(aes(color=clade), size=4) +
-  scale_color_manual(values=c('Bat AstV' = "#0CB702", 'Bovine AstV' = "#00BFC4", 'Feline AstV' = "#C77CFF", 'Human AstV' = "#ED68ED", 'Mink AstV' = "#CD9600", 'Murine AstV' = "#ABA300", 'Porcine AstV' = "#7CAE00", 'Canine AstV' = "#C77CFF", 'Marmot AstV' = "#C77CFF", 'Rabbit AstV' = "#C77CFF", 'Camel AstV' = "#C77CFF")) +
-  scale_fill_manual(values=c('Bat AstV' = "#0CB702", 'Bovine AstV' = "#00BFC4", 'Feline AstV' = "#C77CFF", 'Human AstV' = "#ED68ED", 'Mink AstV' = "#CD9600", 'Murine AstV' = "#ABA300", 'Porcine AstV' = "#7CAE00", 'Canine AstV' = "#C77CFF", 'Marmot AstV' = "#C77CFF", 'Rabbit AstV' = "#C77CFF", 'Camel AstV' = "#C77CFF")) +
+  scale_color_manual(values=c('Bat AstV' = "#0CB702", 'Bovine AstV' = "#00BFC4", 'Camel AstV' = "#00A9FF", 'Canine AstV' = "#8494FF", 'Feline AstV' = "#C77CFF", 'Human AstV' = "#ED68ED", 'Leporine AstV' = "#FF68A1", 'Marmot AstV' = "#E68613", 'Mink AstV' = "#CD9600", 'Murine AstV' = "#ABA300", 'Porcine AstV' = "#7CAE00")) +
+  scale_fill_manual(values=c('Bat AstV' = "#0CB702", 'Bovine AstV' = "#00BFC4", 'Camel AstV' = "#00A9FF", 'Canine AstV' = "#8494FF", 'Feline AstV' = "#C77CFF", 'Human AstV' = "#ED68ED", 'Leporine AstV' = "#FF68A1", 'Marmot AstV' = "#E68613", 'Mink AstV' = "#CD9600", 'Murine AstV' = "#ABA300", 'Porcine AstV' = "#7CAE00")) +
   #geom_nodelab(size=2.5,nudge_x = -21, nudge_y = .7) +
  # geom_nodelab(aes(label=new.nodel.lab), size=4,nudge_x = -55, nudge_y = -1,  color="firebrick", fontface=2, geom="label", fill="white") +
   #geom_nodelab(size=1.8,nudge_x = -.05, nudge_y = .7) +
@@ -124,8 +124,7 @@ p3 <-ggtree(tree, mrsd=mrsd.dat, size=.8) %<+% dat.sub +
    #                  labels=c(400, 300, 200, 100, 0)) +
   xlab("years to MRCA") +
 ggnewscale::new_scale_fill() +
-  geom_tiplab(aes(fill = novel), geom = "label", label.size = 0, 
-              alpha=.3,  show.legend=F, size=3) + scale_fill_manual(values=colz2) 
+  geom_tiplab(aes(fill = novel), geom = "label", label.size = 0, alpha=.3,  show.legend=F, size=3) + scale_fill_manual(values=colz2) 
   #xlim(c(0,6))
 
 p3
