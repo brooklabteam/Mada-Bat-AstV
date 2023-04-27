@@ -115,13 +115,13 @@ p3 <-ggtree(tree, mrsd=mrsd.dat, size=.8) %<+% dat.sub +
   #geom_nodelab(size=1.8,nudge_x = -.05, nudge_y = .7) +
   #geom_treescale(fontsize=2.5) + 
   theme_tree2() +
-  theme(legend.position = c(.07,.7), plot.margin = unit(c(.2,24,3,3), "lines"), legend.title = element_blank()) +
+  theme(legend.position = c(.01,.7), plot.margin = unit(c(.2,24,3,3), "lines"), legend.title = element_blank()) +
   coord_cartesian(clip = "off") + 
   geom_nodepoint(aes(fill=posterior), shape=21, color="black", size=3, stroke=.1) +
   scale_fill_continuous(low="yellow", high="red") +
   guides(fill_continuous = guide_legend(order = 2),col = guide_legend(order = 1)) +
-  #scale_x_continuous(breaks=c(1620, 1720, 1820, 1920, 2020),
-   #                  labels=c(400, 300, 200, 100, 0)) +
+  scale_x_continuous(breaks=c(1620, 1720, 1820, 1920, 2020),
+                     labels=c(400, 300, 200, 100, 0)) +
   xlab("years to MRCA") +
 ggnewscale::new_scale_fill() +
   geom_tiplab(aes(fill = novel), geom = "label", label.size = 0, alpha=.3,  show.legend=F, size=3) + scale_fill_manual(values=colz2) 
@@ -143,7 +143,7 @@ ggsave(file = paste0(homewd, "/final-figures/Fig4.png"),
 #calculate how long ago Rousettus split from Eidolon
 orig.date <- round(node.sub$nodetime[33],0)
 
-nodeRous <- MRCA(tree, which(tree@phylo$tip.label =="F_MIZ141_1  |  Bat astrovirus  |  Rousettus madagascariensis  |  Madagascar  |  2018"), which(tree@phylo$tip.label =="MG693176  |  Bat astrovirus  |  Eidolon helvum  |  Cameroon  |  2013"))
+nodeRous <- MRCA(tree, which(tree@phylo$tip.label =="OQ606244  |  Bat astrovirus  |  Rousettus madagascariensis  |  Madagascar  |  2018"), which(tree@phylo$tip.label =="MG693176  |  Bat astrovirus  |  Eidolon helvum  |  Cameroon  |  2013"))
 Rous.date <- round(node.sub$nodetime[nodeRous],0)
 
 Rous.date <- Rous.date - 2018
