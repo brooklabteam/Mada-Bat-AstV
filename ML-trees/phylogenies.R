@@ -16,7 +16,7 @@ library(dplyr)
 library("ggsci")
 
 
-homewd= "/Users/sophiahorigan/Documents/GitHub/Mada-Bat-Astro/"
+homewd= "/Users/shorigan/Documents/GitHub/Mada-Bat-Astro/"
 
 setwd(paste0(homewd, "/ML-trees"))
 
@@ -340,7 +340,7 @@ pC_suborder <- ggtree(rooted.tree.C) %<+% tree.datC + geom_tippoint(aes(color=su
   new_scale_fill() +
   geom_tiplab(aes(fill=novel, color=suborder), geom = "label", label.size = 0, alpha=.3, size=1.8, show.legend=F) +
   scale_fill_manual(values=colz2) + 
-  scale_color_manual(values=c(Yangochiroptera = "#39B600", Yinpterochiroptera = "#00ABFD")) +
+  scale_color_manual(values=c(Yangochiroptera = "darkslategray4", Yinpterochiroptera = "orangered3")) +
   #scale_color_manual(values=c(Hipposideridae = "#F8766D", Rhinonycteridae = "#E68613", Pteropodidae = "#CD9600", Vespertilionidae = "#00BFC4", Nycteridae = "#00B8E7", Molossidae = "#00A9FF", Miniopteridae = "#00C19A", Phasianidae = "azure4")) +
   theme(legend.position = c(.1,.6), legend.title = element_blank()) +
   geom_treescale(x= 2.15, y= .05, fontsize=1.5) + 
