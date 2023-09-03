@@ -3,7 +3,7 @@ rm(list=ls())
 #time to make Fig3A
 #install.packages('ggplot2')
 library(ggplot2)
-#nstall.packages('ggtree')
+#install.packages('ggtree')
 library(ggtree)
 library(ape)
 #install.packages('ape')
@@ -16,7 +16,7 @@ library(dplyr)
 library("ggsci")
 
 
-homewd= "/Users/shorigan/Documents/GitHub/Mada-Bat-Astro/"
+homewd= "/Users/sophiahorigan/Documents/GitHub/Mada-Bat-Astro/"
 
 setwd(paste0(homewd, "/ML-trees"))
 
@@ -204,7 +204,7 @@ p1_common
 
 
 ggsave(file = paste0(homewd, "final-figures/Fig2.png"),
-       plot = p_order2,
+       plot = p1_order,
        units="mm",  
        width=150, 
        height=100, 
