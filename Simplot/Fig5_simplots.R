@@ -6,16 +6,17 @@ library(ggplot2)
 library(reshape2)
 library(cowplot)
 library(gggenes)
-library(LaCroixColoR)
+library(RColorBrewer)
 library("ggsci")
 
-homewd="/Users/sophiahorigan/Documents/Github/Mada-Bat-Astro/"
-setwd(paste0(homewd, "/Fig5/"))
+homewd="/Users/shorigan/Documents/Github/Mada-Bat-Astro/"
+setwd(paste0(homewd, "/Simplot/"))
 
 #########################################
 ##  Gene plot ##
 ###################################
 genes <- read.csv(file = "gene.csv", header = T, stringsAsFactors = F)
+genes <- as.data.frame(genes)
 
 gene_plot <- ggplot(genes, aes(xmin = start, xmax = end, y=molecule, fill = gene, label=gene)) +
   geom_gene_arrow(arrowhead_height = unit(6, "mm"), arrowhead_width = unit(2, "mm"), arrow_body_height = unit(6, "mm"), show.legend = FALSE) + 
@@ -25,10 +26,11 @@ gene_plot <- ggplot(genes, aes(xmin = start, xmax = end, y=molecule, fill = gene
         strip.background = element_rect(fill="white"), legend.position = "none",
         axis.text = element_text(size=20), axis.title = element_text(size=14)) +
   theme_genes() +
-  scale_fill_npg()
+  scale_fill_brewer(palette = "Greys")
 # scale_color_manual(values = lacroix_palette("PeachPear", n=3, type = "discrete"))
 
 gene_plot
+
 
 #########################################
 ##  All bats ##
@@ -99,12 +101,13 @@ genome.df.aa$gene <- factor(genome.df.aa$gene, levels = unique(genome.df.aa$gene
 
 
 colz2= c("Eidolon helvum"="blue", "Myotis daubentonii 1" = "deepskyblue4", "Myotis daubentonii 2" = "deepskyblue3","Myotis daubentonii 3" = "deepskyblue2","Myotis yumanensis" = "deepskyblue")
+
 lacolz = lacroix_palette("PeachPear", n=5, type = "discrete")
 
 ## animo acid
 allbat_aa <- ggplot(long.sim2) + geom_line(aes(x=pointer, y=value*100, color=host), size=1) +
   #geom_ribbon(data=genome.df.aa, aes(x=position, ymin=-.1, ymax=-.05,  fill=gene), color="black") +
-  theme_bw() + xlab("") + ylab("% aa similarity") + ylim(0,100) +
+  theme_bw() + xlab("") + ylab("% aa pairwise identity") + ylim(0,100) +
   theme(panel.grid = element_blank(), strip.text = element_text(face="italic", size=14),
         strip.background = element_rect(fill="white"), 
         legend.position = "none", legend.direction = "horizontal",legend.box = "vertical",
@@ -123,7 +126,7 @@ allbat_nc <- ggplot(long.sim) + geom_line(aes(x=pointer, y=value*100, color=host
   #geom_ribbon(data=genome.df.nc, aes(x=position, ymin=-.1, ymax= -4,  fill=gene), color="black") +
   theme_bw() + xlab("") + 
   geom_hline(yintercept= mean(long.sim$value*100),linetype=2) + #this doesn't seem right
-  ylab("% nt similarity") + ylim(0,100) +
+  ylab("% nt pairwise identity") + ylim(0,100) +
   theme(panel.grid = element_blank(), strip.text = element_text(face="italic", size=14),
         strip.background = element_rect(fill="white"), 
         legend.position = "bottom", legend.direction = "horizontal", #legend.box = "vertical",
@@ -138,7 +141,7 @@ allbat_nc
 
 
 #####coverage
-datcovg <- read.csv(file = paste0(homewd, "/Fig5/cov.csv"), header = T, stringsAsFactors = F)
+datcovg <- read.csv(file = paste0(homewd, "/Simplot/cov.csv"), header = T, stringsAsFactors = F)
 
 datcovg$Coverage <- datcovg$Coverage/100
 
@@ -157,7 +160,7 @@ covp <- ggplot(datcovg) + geom_area(aes(x=Position, y=Coverage), fill="gray70") 
 
 
 plot_grid(
-  gene_plot, allbat_aa, allbat_nc, covp,
+  covp, allbat_aa, allbat_nc, gene_plot,
   labels = NULL, ncol = 1, rel_heights = c(1,1,1.25,1)
 )
 

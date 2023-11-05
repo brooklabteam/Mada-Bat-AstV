@@ -14,7 +14,7 @@ library(treeio)
 
 #first, read in the tree
 
-homewd= "/Users/sophiahorigan/Documents/GitHub/Mada-Bat-Astro/"
+homewd= "/Users/shorigan/Documents/GitHub/Mada-Bat-Astro/"
 
 setwd(paste0(homewd, "/Bayesian-trees"))
 
@@ -84,15 +84,8 @@ dat.plot <- merge(treedat, dat, by="accession_num", all.x = T, sort=F)
 head(dat.plot)
 dat.plot$new_label = NA
 dat.plot$new_label[!is.na(dat.plot$strain)] <- paste(dat.plot$accession_num[!is.na(dat.plot$strain)], " | ", 
-                                                     dat.plot$strain[!is.na(dat.plot$strain)], " | ", 
-                                                     dat.plot$host[!is.na(dat.plot$strain)], " | ",
                                                      dat.plot$country[!is.na(dat.plot$strain)], " | ",
                                                      dat.plot$collection_year[!is.na(dat.plot$strain)])
-
-dat.plot$new_label[is.na(dat.plot$strain)] <- paste(dat.plot$accession_num[is.na(dat.plot$strain)], " | ", 
-                                                    dat.plot$host[is.na(dat.plot$strain)], " | ",
-                                                    dat.plot$country[is.na(dat.plot$strain)], " | ",
-                                                    dat.plot$collection_year[is.na(dat.plot$strain)])
 
 
 tree@phylo$tip.label <- dat.plot$new_label
@@ -107,7 +100,7 @@ dat.sub$novel[dat.sub$country=="Madagascar"] <- "yes"
 colz2 = c('yes' =  "yellow", 'no' = "white")
 
 p3 <-ggtree(tree, mrsd=mrsd.dat, size=.8) %<+% dat.sub +
-  geom_tippoint(aes(color=clade), size=4) +
+  geom_tippoint(aes(color=clade), size=3.8) +
   scale_color_manual(values=c('Bat AstV' = "#0CB702", 'Bovine AstV' = "#00BFC4", 'Camel AstV' = "#00A9FF", 'Canine AstV' = "#8494FF", 'Feline AstV' = "#C77CFF", 'Human AstV' = "#ED68ED", 'Leporine AstV' = "#FF68A1", 'Marmot AstV' = "#E68613", 'Mink AstV' = "#CD9600", 'Murine AstV' = "#ABA300", 'Porcine AstV' = "#7CAE00")) +
   scale_fill_manual(values=c('Bat AstV' = "#0CB702", 'Bovine AstV' = "#00BFC4", 'Camel AstV' = "#00A9FF", 'Canine AstV' = "#8494FF", 'Feline AstV' = "#C77CFF", 'Human AstV' = "#ED68ED", 'Leporine AstV' = "#FF68A1", 'Marmot AstV' = "#E68613", 'Mink AstV' = "#CD9600", 'Murine AstV' = "#ABA300", 'Porcine AstV' = "#7CAE00")) +
   #geom_nodelab(size=2.5,nudge_x = -21, nudge_y = .7) +
@@ -124,7 +117,7 @@ p3 <-ggtree(tree, mrsd=mrsd.dat, size=.8) %<+% dat.sub +
                      labels=c(400, 300, 200, 100, 0)) +
   xlab("years to MRCA") +
 ggnewscale::new_scale_fill() +
-  geom_tiplab(aes(fill = novel), geom = "label", label.size = 0, alpha=.3,  show.legend=F, size=3) + scale_fill_manual(values=colz2) 
+  geom_tiplab(aes(fill = novel), geom = "label", label.size = 0, alpha=.3,  show.legend=F, size=5) + scale_fill_manual(values=colz2) 
   #xlim(c(0,6))
 
 p3

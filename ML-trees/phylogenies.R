@@ -62,9 +62,13 @@ p #why are some of the tips grey?
 #now get new tip labels
 dat$old_tip_label <- dat$Accession
 dat$new_label <- NA
+#dat$new_label[!is.na(dat$Strain)] <- paste(dat$Accession[!is.na(dat$Strain)], " | ", 
+                                           #dat$Strain[!is.na(dat$Strain)], " | ", 
+                                          # dat$Host[!is.na(dat$Strain)], " | ",
+                                          # dat$Geo_Location[!is.na(dat$Strain)], " | ",
+                                          # dat$Year[!is.na(dat$Strain)])
+
 dat$new_label[!is.na(dat$Strain)] <- paste(dat$Accession[!is.na(dat$Strain)], " | ", 
-                                           dat$Strain[!is.na(dat$Strain)], " | ", 
-                                           dat$Host[!is.na(dat$Strain)], " | ",
                                            dat$Geo_Location[!is.na(dat$Strain)], " | ",
                                            dat$Year[!is.na(dat$Strain)])
 
@@ -156,24 +160,78 @@ p1_family
 
 ## color tip by order, shape by chiroptera, color by novelty
 ## CURRENT
-p1_order <- ggtree(rooted.tree.A, size=.8) %<+% tree.dat + geom_tippoint(aes(color=Clade, fill=Clade), size=2.8) +
-  #new_scale_fill() +
+p1_order <- ggtree(rooted.tree.A, size=.8) %<+% tree.dat +
+  geom_tippoint(aes(color=Clade, fill=Clade), size=3.8) +
   scale_color_manual(values=c(AvastV = "azure4", 'Bat AstV' = "#0CB702", 'Bovine AstV' = "#00BFC4", 'Camel AstV' = "#00A9FF", 'Canine AstV' = "#8494FF", 'Feline AstV' = "#C77CFF", 'Human AstV' = "#ED68ED", 'Leporine AstV' = "#FF68A1", 'Marmot AstV' = "#E68613", 'Mink AstV' = "#CD9600", 'Murine AstV' = "#ABA300", 'Porcine AstV' = "#7CAE00")) +
   scale_fill_manual(values=c(AvastV = "azure4", 'Bat AstV' = "#0CB702", 'Bovine AstV' = "#00BFC4", 'Camel AstV' = "#00A9FF", 'Canine AstV' = "#8494FF", 'Feline AstV' = "#C77CFF", 'Human AstV' = "#ED68ED", 'Leporine AstV' = "#FF68A1", 'Marmot AstV' = "#E68613", 'Mink AstV' = "#CD9600", 'Murine AstV' = "#ABA300", 'Porcine AstV' = "#7CAE00")) +
   #scale_fill_npg() +
   #scale_color_npg() +
-  geom_nodelab(size=1.8,nudge_x = -.05, nudge_y = .7) +
-  geom_treescale(fontsize=2.5) + 
+  #geom_nodelab(size=3,nudge_x = -.064, nudge_y = .6) +
+  geom_treescale(fontsize=3) + 
   #scale_color_manual(values=colz) + 
   #scale_fill_manual(values=colz) +
-  new_scale_fill() +
-  geom_tiplab(aes(fill=novel), geom = "label", label.size = 0, alpha=.3, size=3, show.legend=F) +
+  ggnewscale::new_scale_fill() +
+  geom_tiplab(aes(fill=novel), geom = "label", label.size = 0, alpha=.3, size=5, show.legend=F) +
   scale_fill_manual(values=colz2) + 
   theme(legend.position = c(.8,.6), legend.title = element_blank()) +
   xlim(c(0,6))
 
 #quartz()
 p1_order
+
+p12.dat <- p1_order$data
+p12.dat$Bootstrap <- NA
+Bootstrap<-p12.dat$Bootstrap[(length(tree.dat$tip_label)+1):length(p12.dat$label)] <- as.numeric(p12.dat$label[(length(tree.dat$tip_label)+1):length(p12.dat$label)])#fill with label
+
+ppp <- p1_order %<+% p12.dat +
+  ggnewscale::new_scale_fill() + 
+  geom_nodepoint(aes(fill=Bootstrap, show.legend = F), shape=21, stroke=0, size=2.5)+
+  scale_fill_continuous(low="yellow", high="red", limits=c(0,100))
+
+ppp
+
+
+
+
+
+
+p1 <- ggtree(rooted.tree) %<+% tree.dat + geom_tippoint(aes(color=Genus, shape=Host), size=3,stroke=0,show.legend = T) +
+  scale_fill_manual(values=colz) +
+  scale_color_manual(values=colz)+
+  scale_shape_manual(values=shapez) +
+  new_scale_fill() +
+  geom_tiplab(aes(fill = novel, show.legend=F), geom = "label", family="Helvetica", label.size = 0, label.padding = unit(0, "lines"), alpha=.4, size=2, nudge_x=0.05) +
+  guides(fill="none")+#
+  scale_fill_manual(values=colz2) +
+  geom_treescale(fontsize=4, x=0,y=-3, linesize = .5) +
+  theme(legend.position = "none", 
+        legend.direction = "vertical",
+        legend.text = element_text(size=7), 
+        legend.key.size = unit(0.2, "cm")) +
+  xlim(c(0,14))
+
+p1
+
+#add node shapes to represent bootstrap values
+p0<-ggtree(rooted.tree)
+p0.dat <- p0$data
+p0.dat$Bootstrap <- NA
+Bootstrap<-p0.dat$Bootstrap[(length(tree.dat$tip_label)+1):length(p0.dat$label)] <- as.numeric(p0.dat$label[(length(tree.dat$tip_label)+1):length(p0.dat$label)])#fill with label
+
+#add bootstrap values to original plot
+p1.1 <- p1  %<+% p0.dat + 
+  ggnewscale::new_scale_fill() + 
+  geom_nodepoint(aes(fill=Bootstrap, show.legend = T), shape=21, stroke=0)+
+  scale_fill_continuous(low="yellow", high="red", limits=c(0,100))+
+  #guides(fill_continuous = guide_legend(order = 2),col = guide_legend(order = 1))+
+  theme(legend.position = "left",
+        legend.direction = "vertical",
+        legend.text = element_text(size=8),
+        legend.title = element_text(size=8),
+        legend.key.size = unit(0.3, "cm"))
+p1.1
+
+
 
 
 ##nodes to collapose
@@ -266,9 +324,12 @@ p3 #why are some of the tips grey?
 #now get new tip labels
 datC$old_tip_label <- datC$Accession
 datC$new_label <- NA
-datC$new_label[!is.na(datC$Strain)] <- paste(datC$Accession[!is.na(datC$Strain)], " | ", 
-                                             datC$Family[!is.na(datC$Strain)], "|" ,
-                                             datC$Host[!is.na(datC$Strain)])
+datC$new_label[!is.na(datC$Strain)] <- paste(datC$Accession[!is.na(datC$Strain)])
+
+
+#datC$new_label[!is.na(datC$Strain)] <- paste(datC$Accession[!is.na(datC$Strain)], " | ", 
+#                                             datC$Family[!is.na(datC$Strain)], "|" ,
+#                                             datC$Host[!is.na(datC$Strain)])
 
 #dat$new_label[is.na(dat$strain)] <- paste(dat$accession_num[is.na(dat$strain)], " | ", 
 #                                         dat$host[is.na(dat$strain)], " | ",
@@ -347,6 +408,7 @@ pC_suborder <- ggtree(rooted.tree.C) %<+% tree.datC + geom_tippoint(aes(color=su
   xlim(c(0,5.6))
 pC_suborder
 
+
 ## rotate clades
 MRCA(pC_suborder, 'KY575655  |  Vespertilionidae | Myotis goudoti', 'MH013985  |  Rhinonycteridae | Triaenops afer')
 pR <- ggtree::rotate(pC_suborder, 176)
@@ -354,6 +416,15 @@ pR2 <- ggtree::rotate(pR, 206)
 pR3 <- ggtree::rotate(pR2, 207)
 pR4 <- ggtree::rotate(pR3, 208)
 pR4
+
+
+#collapse nodes
+node1 = MRCA(pC_suborder, 'KY575657', 'KY575658')
+p1 <- pC_suborder %>% collapse(node=node1)
+p1
+
+
+
 
 ## color by location, shape by suborder
 pC_suborder2 <- ggtree(rooted.tree.C) %<+% tree.datC + geom_tippoint(aes(color=Geo_Location, fill=Geo_Location, shape=suborder)) +
