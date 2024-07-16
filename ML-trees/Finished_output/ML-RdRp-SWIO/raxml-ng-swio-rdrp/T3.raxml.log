@@ -1,0 +1,53 @@
+
+RAxML-NG v. 1.1.0-master released on 22.06.2022 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+System: Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz, 28 cores, 251 GB RAM
+
+RAxML-NG was called at 15-Jul-2024 08:45:19 as follows:
+
+raxml-ng-mpi --bsconverge --bs-trees T3.raxml.bootstraps --prefix T3 --seed 2 --threads 1
+
+Analysis options:
+  run mode: A posteriori bootstrap convergence test
+  start tree(s): 
+  random seed: 2
+  SIMD kernels: AVX2
+  parallelization: coarse-grained (auto), NONE/sequential
+
+Reading bootstrap trees from file: T3.raxml.bootstraps
+Loaded 800 trees with 125 taxa.
+
+Performing bootstrap convergence assessment using autoMRE criterion
+
+ # trees        avg WRF       avg WRF in %       # perms: wrf <= 3.00 %     converged?  
+      50        514.767              8.647                            0        NO
+     100        725.210              6.093                            0        NO
+     150        919.157              5.154                            0        NO
+     200       1165.319              4.865                            0        NO
+     250       1196.721              3.978                           15        NO
+     300       1314.701              3.630                           85        NO
+     350       1447.907              3.415                          153        NO
+     400       1568.005              3.231                          284        NO
+     450       1631.180              2.989                          519        NO
+     500       1716.445              2.829                          657        NO
+     550       1879.901              2.819                          658        NO
+     600       1944.104              2.669                          768        NO
+     650       2025.667              2.567                          835        NO
+     700       2239.876              2.635                          812        NO
+     750       2397.675              2.630                          838        NO
+     800       2434.342              2.505                          921        NO
+Bootstopping test did not converge after 800 trees
+
+
+Execution log saved to: /home/shorigan/raxml-ng-swio-rdrp/T3.raxml.log
+
+Analysis started: 15-Jul-2024 08:45:19 / finished: 15-Jul-2024 08:48:00
+
+Elapsed time: 161.648 seconds
+
+Consumed energy: 6.652 Wh
+

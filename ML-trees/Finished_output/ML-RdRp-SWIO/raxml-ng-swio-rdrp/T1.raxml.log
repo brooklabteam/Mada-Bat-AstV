@@ -1,0 +1,59 @@
+
+RAxML-NG v. 1.1.0-master released on 22.06.2022 by The Exelixis Lab.
+Developed by: Alexey M. Kozlov and Alexandros Stamatakis.
+Contributors: Diego Darriba, Tomas Flouri, Benoit Morel, Sarah Lutteropp, Ben Bettisworth.
+Latest version: https://github.com/amkozlov/raxml-ng
+Questions/problems/suggestions? Please visit: https://groups.google.com/forum/#!forum/raxml
+
+System: Intel(R) Xeon(R) CPU E5-2680 v4 @ 2.40GHz, 28 cores, 251 GB RAM
+
+RAxML-NG was called at 17-Jun-2024 15:11:11 as follows:
+
+raxml-ng-mpi --check --msa SWIO_RdRp_aligned_trimmed.phy --model TVM+I+G4 --prefix T1
+
+Analysis options:
+  run mode: Alignment validation
+  start tree(s): 
+  random seed: 1718655071
+  SIMD kernels: AVX2
+  parallelization: coarse-grained (auto), PTHREADS (auto)
+
+[00:00:00] Reading alignment from file: SWIO_RdRp_aligned_trimmed.phy
+[00:00:00] Loaded alignment with 125 taxa and 371 sites
+
+WARNING: Sequences KY575646 and KY575674 are exactly identical!
+WARNING: Sequences KY575647 and KY575651 are exactly identical!
+WARNING: Sequences MH013985 and MH013992 are exactly identical!
+WARNING: Sequences MH013966 and MH013967 are exactly identical!
+WARNING: Sequences MH013966 and MH013972 are exactly identical!
+WARNING: Sequences MK966915 and MK966916 are exactly identical!
+WARNING: Sequences MK966915 and MK966917 are exactly identical!
+WARNING: Sequences MZ274082 and MZ274083 are exactly identical!
+WARNING: Sequences MZ274082 and MZ274084 are exactly identical!
+WARNING: Sequences MZ274076 and MZ274077 are exactly identical!
+WARNING: Sequences MZ274076 and MZ274078 are exactly identical!
+WARNING: Sequences MK966905 and MK966906 are exactly identical!
+WARNING: Duplicate sequences found: 12
+
+NOTE: Reduced alignment (with duplicates and gap-only sites/taxa removed) 
+NOTE: was saved to: /home/shorigan/raxml-ng-swio-rdrp/T1.raxml.reduced.phy
+
+Alignment comprises 1 partitions and 371 sites
+
+Partition 0: noname
+Model: TVM+FO+I+G4m
+Alignment sites: 371
+Gaps: 3.61 %
+Invariant sites: 16.98 %
+
+
+
+Alignment can be successfully read by RAxML-NG.
+
+
+Execution log saved to: /home/shorigan/raxml-ng-swio-rdrp/T1.raxml.log
+
+Analysis started: 17-Jun-2024 15:11:11 / finished: 17-Jun-2024 15:11:11
+
+Elapsed time: 0.339 seconds
+

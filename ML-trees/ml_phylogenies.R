@@ -3,7 +3,7 @@ rm(list=ls())
 #time to make Fig3A
 #install.packages('ggplot2')
 library(ggplot2)
-#nstall.packages('ggtree')
+install.packages('ggtree')
 library(ggtree)
 library(ape)
 #install.packages('ape')
@@ -198,7 +198,7 @@ ggsave(file = paste0(homewd, "final-figures/Fig2.png"),
 
 ##Madabat tree
 #load the fig3a tree
-treeC <-  read.tree(file = paste0(homewd, "ML-trees/RdRp-SWIO-ML-tree-FPB"))
+treeC <-  read.tree(file = paste0(homewd, "ML-trees/raxml-ng-swio-rdrp/T3.raxml.supportFPB"))
 
 #remove quotes
 treeC$tip.label <- gsub("'", '', treeC$tip.label)

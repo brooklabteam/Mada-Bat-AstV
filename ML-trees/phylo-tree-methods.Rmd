@@ -127,13 +127,17 @@ tree is T10.raxml.support
 ############################################
 Goal: make an ML tree including RdRp seqs from SWIO area to start investigating some biogeographical patterns 
 
-GATHER SEQUENCES
-1. To the file containing the Madagascar RdRp seqs from the previous tree (plus our two novel seqs), I added SWIO seqs that I found as a result of a lit search. I located seqs from Reunion Island and Mozambique. Altogether, there are now 125 sequences.
+GATHER SEQUENCES - 126
+1. Mozambique - (31)
+2. Reunion Island - (27)
+3. Madagascar - not us (64)
+4. Madagacsar - us (3)
+5. Outgroup - (1)
 
 ALIGNMENT
-1. In Geneious Prime, I aligned the RdRp sequences using default settings. (same turkey avastrovirus outgroup as other trees)
+1. I aligned the RdRp sequences using MAFFT online (not on geneious anymore), exported as a .fasta
 
-2. Didn't even need to trim becuase all of the sequences were basically the same length, woohoo!
+2. I uploaded the alignment back into Geneious prime to trim - final seq length 371
 
 MODEL TEST
 1. export alignment as a .fasta for model test
@@ -143,13 +147,14 @@ MODEL TEST
 3. move directory to midway and run
 
 output: 
-
-                         Model         Score        Weight
+                               Model         Score        Weight
 ----------------------------------------------------------
-       BIC           TIM2+I+G4    43121.0091        0.9989
-       AIC           TIM2+I+G4    42120.1822        0.9919
-      AICc           TIM2+I+G4    43093.1822        0.9164
-
+       BIC            TVM+I+G4    43446.7014        0.8874
+       AIC            TVM+I+G4    42444.1537        0.9975
+      AICc         TPM2uf+I+G4    43572.1156        0.5909
+      
+      
+Model: TVM+I+G4
 
 
 ML TREE
@@ -160,18 +165,31 @@ ML TREE
 3. load raxml-ng
 
 8. make sure it will work with your specific model and alignment
-`raxml-ng-mpi --check --msa alignment_trimmed.phy --model TIM2+I+G4 --prefix T1`
+`raxml-ng-mpi --check --msa SWIO_RdRp_aligned_trimmed.phy --model TVM+I+G4 --prefix T1`
 
 9. check for number of recommended threads
-`raxml-ng-mpi --parse --msa alignment_trimmed.phy --model TIM2+I+G4 --prefix T2`
+`raxml-ng-mpi --parse --msa SWIO_RdRp_aligned_trimmed.phy --model TVM+I+G4 --prefix T2`
 threads = 1
 
 
+10. Run sbatch script starting with 800 trees
+
 See if it converged.
 `raxml-ng-mpi --bsconverge --bs-trees T3.raxml.bootstraps --prefix T3 --seed 2 --threads 1`
-Yay! Did after 700 trees.
 
-Moving everything off of Midway. success!
+Did not converge - add more bootstraps with diff random seed
+`raxml-ng --bootstrap -- msa SWIO_RdRp_aligned_trimmed.phy --model TVM+I+G4 --prefix T4 --seed 666 --threads 1 --bs-trees 400`
+
+Concatenate bootstaps and check convergence now
+`cat T3.raxml.bootstraps T4.raxml.bootstraps > allbootstraps`
+`raxml-ng-mpi --bsconverge --bs-trees allbootstraps --prefix T5 --seed 4 --threads 1`
+
+Converged after 950 bootstraps. 
+
+Attached bootstraps to best tree
+`raxml-ng-mpi --support --tree T3.raxml.bestTree --bs-trees allbootstraps --prefix T6 --threads 2`
+
+Moving everything off of midway for figure making in R using T6.raxml.supports
 
 
 
@@ -179,7 +197,7 @@ Moving everything off of Midway. success!
 ### Bayesian full genome tree
 ############################################
 
-*goal : make a bayesian full genome tree to infer timing of MRCA of our new genomes
+*goal : make a bayesian full genome tree to infer timing of MRCA of our new genome
 
 Following Fig4 directions from brooklabteam/Mada-Bat-CoV
 

@@ -3,7 +3,7 @@ rm(list=ls())
 #time to make Fig3A
 #install.packages('ggplot2')
 library(ggplot2)
-#install.packages('ggtree')
+#install.packages('ggtree', dependencies = TRUE)
 library(ggtree)
 library(ape)
 #install.packages('ape')
@@ -16,7 +16,7 @@ library(dplyr)
 library("ggsci")
 
 
-homewd= "/Users/sophiahorigan/Documents/GitHub/Mada-Bat-Astro/"
+homewd= "/Users/shorigan/Documents/GitHub/Mada-Bat-Astro/"
 
 setwd(paste0(homewd, "/ML-trees"))
 
@@ -280,7 +280,7 @@ ggsave(file = paste0(homewd, "final-figures/Fig2.png"),
 
 ##Madabat tree
 #load the fig3a tree
-treeC <-  read.tree(file = paste0(homewd, "ML-trees/RdRp-SWIO-ML-tree-FPB"))
+treeC <-  read.tree(file = paste0(homewd, "ML-trees/ML-tree-SWIO"))
 
 #remove quotes
 treeC$tip.label <- gsub("'", '', treeC$tip.label)
@@ -288,7 +288,7 @@ treeC$tip.label <- gsub("'", '', treeC$tip.label)
 #root it
 #double rooting bc of bat avastrovirus
 #1. get the node number so we can root by node
-rooted.tree.C <- root(treeC, which(treeC$tip.label == "NC_002470"))
+rooted.tree.C <- root(treeC, which(treeC$tip.label == "OR852658"))
 
 #take a quick look in base R
 plot(rooted.tree.C)
@@ -327,9 +327,9 @@ datC$new_label <- NA
 datC$new_label[!is.na(datC$Strain)] <- paste(datC$Accession[!is.na(datC$Strain)])
 
 
-#datC$new_label[!is.na(datC$Strain)] <- paste(datC$Accession[!is.na(datC$Strain)], " | ", 
-#                                             datC$Family[!is.na(datC$Strain)], "|" ,
-#                                             datC$Host[!is.na(datC$Strain)])
+datC$new_label[!is.na(datC$Strain)] <- paste(datC$Accession[!is.na(datC$Strain)], " | ", 
+                                             datC$Family[!is.na(datC$Strain)], "|" ,
+                                             datC$Host[!is.na(datC$Strain)])
 
 #dat$new_label[is.na(dat$strain)] <- paste(dat$accession_num[is.na(dat$strain)], " | ", 
 #                                         dat$host[is.na(dat$strain)], " | ",

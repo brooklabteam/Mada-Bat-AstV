@@ -1,0 +1,180 @@
+--------------------------------------------------------------------------------
+ModelTest-NG v0.1.7
+
+Input data:
+  MSA:        SWIO_RdRp_aligned_trimmed.fasta
+  Tree:       Maximum likelihood
+    file:           -
+  #taxa:            125
+  #sites:           371
+  #patterns:        318
+  Max. thread mem:  19 MB
+
+Output:
+  Log:           SWIO_RdRp_aligned_trimmed.fasta.log
+  Starting tree: SWIO_RdRp_aligned_trimmed.fasta.tree
+  Results:       SWIO_RdRp_aligned_trimmed.fasta.out
+
+Selection options:
+  # dna schemes:      11
+  # dna models:       88
+  include model parameters:
+    Uniform:         true
+    p-inv (+I):      true
+    gamma (+G):      true
+    both (+I+G):     true
+    free rates (+R): false
+    fixed freqs:     true
+    estimated freqs: true
+    #categories:     4
+  gamma rates mode:   mean
+  asc bias:           none
+  epsilon (opt):      0.01
+  epsilon (par):      0.05
+  keep branches:      false
+
+Additional options:
+  verbosity:        very low
+  threads:          8/14
+  RNG seed:         12345
+  subtree repeats:  enabled
+--------------------------------------------------------------------------------
+
+BIC       model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  TVM+I+G4           9    -20966.0768     43446.7014         0.0000    0.8874
+       2  TPM2uf+I+G4        7    -20974.0578     43450.8309         4.1295    0.1126
+       3  GTR+I+G4          10    -20980.0411     43480.5461        33.8447    0.0000
+       4  TIM2+I+G4          8    -20987.3774     43483.3863        36.6849    0.0000
+       5  TPM3uf+I+G4        7    -20993.1690     43489.0533        42.3519    0.0000
+       6  TPM2+I+G4          4    -21003.9257     43492.8181        46.1167    0.0000
+       7  TIM2ef+I+G4        5    -21003.8536     43498.5902        51.8888    0.0000
+       8  SYM+I+G4           7    -20997.9938     43498.7030        52.0016    0.0000
+       9  TrN+I+G4           7    -20998.3644     43499.4442        52.7428    0.0000
+      10  HKY+I+G4           6    -21002.0486     43500.8964        54.1950    0.0000
+--------------------------------------------------------------------------------
+Best model according to BIC
+---------------------------
+Model:              TVM+I+G4
+lnL:                -20966.0768
+Frequencies:        0.2717 0.2112 0.2168 0.3003
+Subst. Rates:       2.0409 4.0418 1.5539 0.9435 4.0418 1.0000 
+Inv. sites prop:    0.1509
+Gamma shape:        0.8100
+Score:              43446.7014
+Weight:             0.8874
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              0.0000
+Gamma-Inv:          1.0000
+Frequencies:        1.0000
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              0.5350
+Alpha-P.Inv:        0.8146
+P.Inv-Alpha:        0.1509
+Frequencies:        0.2716 0.2117 0.2176 0.2991 
+
+Commands:
+  > phyml  -i SWIO_RdRp_aligned_trimmed.fasta -m 012314 -f m -v e -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s SWIO_RdRp_aligned_trimmed.fasta -m GTRGAMMAIX -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa SWIO_RdRp_aligned_trimmed.fasta --model TVM+I+G4
+  > paup -s SWIO_RdRp_aligned_trimmed.fasta
+  > iqtree -s SWIO_RdRp_aligned_trimmed.fasta -m TVM+I+G4
+
+AIC       model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  TVM+I+G4           9    -20966.0768     42444.1537         0.0000    0.9975
+       2  TPM2uf+I+G4        7    -20974.0578     42456.1156        11.9619    0.0025
+       3  GTR+I+G4          10    -20980.0411     42474.0822        29.9285    0.0000
+       4  TIM2+I+G4          8    -20987.3774     42484.7548        40.6011    0.0000
+       5  TPM3uf+I+G4        7    -20993.1690     42494.3380        50.1843    0.0000
+       6  SYM+I+G4           7    -20997.9938     42503.9876        59.8340    0.0000
+       7  TrN+I+G4           7    -20998.3644     42504.7289        60.5752    0.0000
+       8  TIM1+I+G4          8    -20997.7354     42505.4709        61.3172    0.0000
+       9  TPM2+I+G4          4    -21003.9257     42509.8514        65.6977    0.0000
+      10  HKY+I+G4           6    -21002.0486     42510.0973        65.9436    0.0000
+--------------------------------------------------------------------------------
+Best model according to AIC
+---------------------------
+Model:              TVM+I+G4
+lnL:                -20966.0768
+Frequencies:        0.2717 0.2112 0.2168 0.3003
+Subst. Rates:       2.0409 4.0418 1.5539 0.9435 4.0418 1.0000 
+Inv. sites prop:    0.1509
+Gamma shape:        0.8100
+Score:              42444.1537
+Weight:             0.9975
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              0.0000
+Gamma-Inv:          1.0000
+Frequencies:        1.0000
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              0.5350
+Alpha-P.Inv:        0.8101
+P.Inv-Alpha:        0.1509
+Frequencies:        0.2717 0.2112 0.2168 0.3003 
+
+Commands:
+  > phyml  -i SWIO_RdRp_aligned_trimmed.fasta -m 012314 -f m -v e -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s SWIO_RdRp_aligned_trimmed.fasta -m GTRGAMMAIX -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa SWIO_RdRp_aligned_trimmed.fasta --model TVM+I+G4
+  > paup -s SWIO_RdRp_aligned_trimmed.fasta
+  > iqtree -s SWIO_RdRp_aligned_trimmed.fasta -m TVM+I+G4
+
+AICc      model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  TPM2uf+I+G4        7    -20974.0578     43572.1156         0.0000    0.5909
+       2  TPM2+I+G4          4    -21003.9257     43572.8514         0.7358    0.4090
+       3  TIM2ef+I+G4        5    -21003.8536     43591.7073        19.5917    0.0000
+       4  TVM+I+G4           9    -20966.0768     43598.1537        26.0381    0.0000
+       5  HKY+I+G4           6    -21002.0486     43608.0973        35.9817    0.0000
+       6  TPM3uf+I+G4        7    -20993.1690     43610.3380        38.2224    0.0000
+       7  TVMef+I+G4         6    -21004.2401     43612.4802        40.3647    0.0000
+       8  TIM2+I+G4          8    -20987.3774     43619.7548        47.6393    0.0000
+       9  SYM+I+G4           7    -20997.9938     43619.9876        47.8721    0.0000
+      10  TrN+I+G4           7    -20998.3644     43620.7289        48.6133    0.0000
+--------------------------------------------------------------------------------
+Best model according to AICc
+---------------------------
+Model:              TPM2uf+I+G4
+lnL:                -20974.0578
+Frequencies:        0.2707 0.2158 0.2240 0.2895
+Subst. Rates:       1.8966 4.2325 1.8966 1.0000 4.2325 1.0000 
+Inv. sites prop:    0.1507
+Gamma shape:        0.8505
+Score:              43572.1156
+Weight:             0.5909
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              0.0000
+Gamma-Inv:          1.0000
+Frequencies:        0.5909
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              0.5348
+Alpha-P.Inv:        0.8523
+P.Inv-Alpha:        0.1495
+Frequencies:        0.2707 0.2158 0.2240 0.2895 
+
+Commands:
+  > phyml  -i SWIO_RdRp_aligned_trimmed.fasta -m 010212 -f m -v e -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s SWIO_RdRp_aligned_trimmed.fasta -m GTRGAMMAIX -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa SWIO_RdRp_aligned_trimmed.fasta --model TPM2uf+I+G4
+  > paup -s SWIO_RdRp_aligned_trimmed.fasta
+  > iqtree -s SWIO_RdRp_aligned_trimmed.fasta -m TPM2uf+I+G4
+Done
